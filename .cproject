@@ -23,11 +23,25 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2019635929" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug">
 								<option id="gnu.cpp.compiler.exe.debug.option.optimization.level.22812826" name="Optimization Level" superClass="gnu.cpp.compiler.exe.debug.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 								<option defaultValue="gnu.cpp.compiler.debugging.level.max" id="gnu.cpp.compiler.exe.debug.option.debugging.level.104071803" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1462261655" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/errormessages}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/view}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.799536725" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.885060581" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug">
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.exe.debug.option.optimization.level.2757767" name="Optimization Level" superClass="gnu.c.compiler.exe.debug.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option defaultValue="gnu.c.debugging.level.max" id="gnu.c.compiler.exe.debug.option.debugging.level.750923597" name="Debug Level" superClass="gnu.c.compiler.exe.debug.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.715503138" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/errormessages}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/view}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1442127931" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.1723948671" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug"/>
@@ -45,6 +59,13 @@
 								</inputType>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.1297925078" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.both.asm.option.include.paths.1835835283" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/errormessages}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/view}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.95081071" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
@@ -78,11 +99,25 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.712578842" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
 								<option id="gnu.cpp.compiler.exe.release.option.optimization.level.1498964520" name="Optimization Level" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.exe.release.option.debugging.level.1549977862" name="Debug Level" superClass="gnu.cpp.compiler.exe.release.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.672721746" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/errormessages}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/view}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.595079989" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.1424914973" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release">
 								<option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.exe.release.option.optimization.level.823669935" name="Optimization Level" superClass="gnu.c.compiler.exe.release.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.exe.release.option.debugging.level.274643721" name="Debug Level" superClass="gnu.c.compiler.exe.release.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.975875650" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/errormessages}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/view}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1103258975" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.1304287243" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release"/>
@@ -93,6 +128,13 @@
 								</inputType>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.exe.release.1639274842" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.release">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.both.asm.option.include.paths.725857392" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/errormessages}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/view}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.108928403" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
@@ -124,6 +166,13 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/TeamFConnect64"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/TeamFConnect64"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
