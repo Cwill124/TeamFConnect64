@@ -53,7 +53,7 @@ bool GameWindow::checkOtherInputValues(Fl_Widget *widget) {
 }
 void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	Fl_Input *input = (Fl_Input*) widget;
-	GameWindow *window = (GameWindow*) data;
+	//GameWindow *window = (GameWindow*) data;
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
 	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
