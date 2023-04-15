@@ -22,9 +22,10 @@ class MainWindow: public Fl_Window {
 private:
 	Fl_Button *quitButton;
 	Fl_Button *showNewWindowButton;
+	Fl_Button* resumePuzzleButton;
 	Fl_Choice *puzzleSelector;
 	static void cb_show(Fl_Widget*, void*);
-
+	static void cb_resumePuzzle(Fl_Widget*, void*);
 	static void cb_data(Fl_Widget*, void*);
 	static void cb_quit(Fl_Widget*, void*);
 	inline void cb_quit_i();

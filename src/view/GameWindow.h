@@ -9,6 +9,7 @@
 #define VIEW_GAMEWINDOW_H_
 #include <Fl/Fl_Input.H>
 #include <Fl/Fl_Box.H>
+#include <Fl/Fl_Button.H>
 #include "OKCancelWindow.h"
 #include "MainWindow.h"
 #include <vector>
@@ -21,9 +22,11 @@ class GameWindow: public OKCancelWindow {
 private:
 	vector<Fl_Input*> inputBoxes;
 	Fl_Box* puzzleLevel;
-	static void cb_getValue(Fl_Widget*, void*);
+	Fl_Button* resetButton;
+	static void cb_getValue(Fl_Widget*, void* data);
 	void createBoxes();
 	bool checkOtherInputValues(Fl_Widget* widget );
+	static void cb_resetBoard(Fl_Widget* widget, void* data);
 
 public:
 	GameWindow();

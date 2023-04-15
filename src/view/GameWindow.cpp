@@ -12,8 +12,10 @@ namespace view {
 GameWindow::GameWindow() :
 		OKCancelWindow(350, 350, "") {
 	begin();
-	this->setOKLocation(75, 300);
-	this->setCancelLocation(205, 300);
+	this->setOKLocation(45, 300);
+	this->setCancelLocation(145, 300);
+	this->resetButton = new Fl_Button(245,300,70,30,"Reset");
+	this->resetButton->callback(cb_resetBoard,this);
 	this->createBoxes();
 	end();
 	this->resizable(this);
@@ -40,7 +42,7 @@ void GameWindow::createBoxes() {
 bool GameWindow::checkOtherInputValues(Fl_Widget *widget) {
 	Fl_Input *input = (Fl_Input*) widget;
 	const char *iValue = input->value();
-	for (int i = 0; i < this->inputBoxes.size(); i++) {
+	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
 		Fl_Input *currentInput = this->inputBoxes[i];
 		const char *value = currentInput->value();
 		if (currentInput != input) {
@@ -59,9 +61,14 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
 	if (!regex_match(value, pattern) || !regex_match(value, patternNumbers)) {
 		input->value("");
-		cout << "T" << endl;
 	}
 	printf("Input value: %s\n", value);
+}
+void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data){
+	GameWindow* window = (GameWindow*) data;
+	for(vector<Fl_Input*>::size_type i = 0; i <window->inputBoxes.size(); i++){
+		window->inputBoxes[i]->value("");
+	}
 }
 void GameWindow::cancelHandler() {
 	this->hide();
