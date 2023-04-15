@@ -10,6 +10,7 @@
 #include <Fl/Fl_Input.H>
 #include <Fl/Fl_Box.H>
 #include "OKCancelWindow.h"
+#include "MainWindow.h"
 #include <vector>
 #include <iostream>
 #include <regex>
@@ -22,11 +23,10 @@ private:
 	Fl_Box* puzzleLevel;
 	static void cb_getValue(Fl_Widget*, void*);
 	void createBoxes();
-	bool checkOtherInputValues();
+	bool checkOtherInputValues(Fl_Widget* widget );
 
 public:
 	GameWindow();
-	GameWindow(void*);
 	void okHandler();
 	void cancelHandler();
 	virtual ~GameWindow();

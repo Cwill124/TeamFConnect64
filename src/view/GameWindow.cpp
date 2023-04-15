@@ -10,10 +10,8 @@
 namespace view {
 
 GameWindow::GameWindow() :
-		OKCancelWindow(350, 350, "Movie to add") {
-
+		OKCancelWindow(350, 350, "") {
 	begin();
-	this->puzzleLevel = new Fl_Box(100, 10, 70, 30, "nothing");
 	this->setOKLocation(75, 300);
 	this->setCancelLocation(205, 300);
 	this->createBoxes();
@@ -33,20 +31,33 @@ void GameWindow::createBoxes() {
 			Fl_Input *input = new Fl_Input(xShift + (X + 30), yShift + (Y + 30),
 					30, 30);
 			input->when(FL_WHEN_CHANGED);
-			input->callback(cb_getValue);
+			input->callback(cb_getValue, this);
 			this->inputBoxes.push_back(input);
 		}
 	}
 
 }
-bool GameWindow::checkOtherInputValues(){
-
+bool GameWindow::checkOtherInputValues(Fl_Widget *widget) {
+	Fl_Input *input = (Fl_Input*) widget;
+	const char *iValue = input->value();
+	for (int i = 0; i < this->inputBoxes.size(); i++) {
+		Fl_Input *currentInput = this->inputBoxes[i];
+		const char *value = currentInput->value();
+		if (currentInput != input) {
+			if (strcmp(iValue, value) == 0) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
 void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	Fl_Input *input = (Fl_Input*) widget;
+	GameWindow *window = (GameWindow*) data;
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
-	if (!regex_match(value, pattern)) {
+	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
+	if (!regex_match(value, pattern) || !regex_match(value, patternNumbers)) {
 		input->value("");
 		cout << "T" << endl;
 	}
