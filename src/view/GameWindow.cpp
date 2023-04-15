@@ -25,13 +25,14 @@ GameWindow::GameWindow() :
 void GameWindow::createBoxes() {
 	int xShift = -5;
 	int yShift = -20;
+	int tileSize = 30;
 	for (int i = 1; i < 9; i++) {
-		int Y = (i * 30);
+		int Y = (i * tileSize);
 		for (int j = 1; j < 9; j++) {
-			int X = (j * 30);
+			int X = (j * tileSize);
 
-			Fl_Input *input = new Fl_Input(xShift + (X + 30), yShift + (Y + 30),
-					30, 30);
+			Fl_Input *input = new Fl_Input(xShift + (X + tileSize), yShift + (Y + tileSize),
+					tileSize, tileSize);
 			input->when(FL_WHEN_CHANGED);
 			input->callback(cb_getValue, this);
 			this->inputBoxes.push_back(input);
