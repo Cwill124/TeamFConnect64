@@ -11,15 +11,16 @@ namespace view {
 
 MainWindow::MainWindow(int width, int height, const char *title) :
 		Fl_Window(width, height, title) {
-	// TODO Auto-generated constructor stub
 	this->begin();
-	this->label = new Fl_Box(125, 60, 70, 30, "nothing");
+
+	this->showNewWindowButton = new Fl_Button(125, 110, 70, 30, "Start");
+	this->showNewWindowButton->callback(cb_show, this);
+	this->resumePuzzleButton = new Fl_Button(125, 70, 70, 30, "Resume");
+	this->resumePuzzleButton->callback(cb_resumePuzzle,this);
 	this->quitButton = new Fl_Button(125, 150, 70, 30, "Quit");
 	this->quitButton->callback(cb_quit, this);
-
-	this->showNewWindowButton = new Fl_Button(125, 100, 70, 30, "Show");
-	this->showNewWindowButton->callback(cb_show, this);
-
+	this->puzzleSelector = new Fl_Choice(150, 20, 50, 20, "Select Puzzle");
+	this->addLevelOptions();
 	this->end();
 	this->resizable(this);
 	this->show();
@@ -27,11 +28,30 @@ MainWindow::MainWindow(int width, int height, const char *title) :
 }
 
 MainWindow::~MainWindow() {
-	// TODO Auto-generated destructor stub
+
+}
+void MainWindow::addLevelOptions() {
+	for (int i = 1; i <= 4; i++) {
+		string level = to_string(i);
+		const char *level_cstr = level.c_str();
+		this->puzzleSelector->add(level_cstr);
+	}
+	this->puzzleSelector->value(0);
+
 }
 void MainWindow::cb_show(Fl_Widget *o, void *data) {
-	cout << "button worked" << endl;
+	//MainWindow *window = (MainWindow*) data;
+	GameWindow gameWindow;
+	gameWindow.set_modal();
+	gameWindow.show();
+	while (gameWindow.shown()) {
+		Fl::wait();
+	}
 
+}
+
+void MainWindow::cb_resumePuzzle(Fl_Widget*, void*) {
+	cout << "resume button" << endl;
 }
 
 void MainWindow::cb_quit(Fl_Widget*, void *data) {
