@@ -23,7 +23,7 @@ public:
 	/**
 	 * The maximum high scores
 	 */
-	static constexpr int MaximumHighScores = 4;
+	static constexpr int MaximumHighScores = 10;
 	/**
 	 * The current puzzle file name
 	 */
