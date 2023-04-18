@@ -24,6 +24,10 @@ public:
 	 */
 	virtual ~ErrorMessages();
 	/**
+	 * The error message for the id being negative
+	 */
+	const static string IdCannotBeNegative;
+	/**
 	 * The error message for the value being negative
 	 */
 	const static string ValueCannotBeNegative;
@@ -55,6 +59,26 @@ public:
 	 * The error message for replacing a null node
 	 */
 	const static string CannotReplaceNullNode;
+	/**
+	 * The error message for a null player name
+	 */
+	const static string PlayerNameCannotBeNull;
+	/**
+	 * The error message for an empty player name
+	 */
+	const static string PlayerNameCannotBeEmpty;
+	/**
+	 * The error message for the time being negative
+	 */
+	const static string TimeCannotBeNegative;
+	/**
+	 * The error message for the puzzle number being negative
+	 */
+	const static string PuzzleNumberCannotBeNegative;
+	/**
+	 * The error message for the manager being null
+	 */
+	const static string ManagerCannotBeNull;
 };
 }
 
