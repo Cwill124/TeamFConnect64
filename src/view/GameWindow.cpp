@@ -14,9 +14,10 @@ GameWindow::GameWindow() :
 	begin();
 	this->setOKLocation(45, 300);
 	this->setCancelLocation(145, 300);
-	this->resetButton = new Fl_Button(245,300,70,30,"Reset");
-	this->resetButton->callback(cb_resetBoard,this);
+	this->resetButton = new Fl_Button(245, 300, 70, 30, "Reset");
+	this->resetButton->callback(cb_resetBoard, this);
 	this->createBoxes();
+	this->loadGameBoard();
 	end();
 	this->resizable(this);
 
@@ -31,8 +32,8 @@ void GameWindow::createBoxes() {
 		for (int j = 1; j < 9; j++) {
 			int X = (j * tileSize);
 
-			Fl_Input *input = new Fl_Input(xShift + (X + tileSize), yShift + (Y + tileSize),
-					tileSize, tileSize);
+			Fl_Input *input = new Fl_Input(xShift + (X + tileSize),
+					yShift + (Y + tileSize), tileSize, tileSize);
 			input->when(FL_WHEN_CHANGED);
 			input->callback(cb_getValue, this);
 			this->inputBoxes.push_back(input);
@@ -65,9 +66,10 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	}
 	printf("Input value: %s\n", value);
 }
-void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data){
-	GameWindow* window = (GameWindow*) data;
-	for(vector<Fl_Input*>::size_type i = 0; i <window->inputBoxes.size(); i++){
+void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data) {
+	GameWindow *window = (GameWindow*) data;
+	for (vector<Fl_Input*>::size_type i = 0; i < window->inputBoxes.size();
+			i++) {
 		window->inputBoxes[i]->value("");
 	}
 }
@@ -75,11 +77,27 @@ void GameWindow::cancelHandler() {
 	this->hide();
 }
 void GameWindow::okHandler() {
-	for (size_t i = 0; i < this->inputBoxes.size(); i++) {
-		const char *value = this->inputBoxes[i]->value();
-		printf("Input %lu value: %s\n", i, value);
-	}
 
+
+}
+void GameWindow::loadGameBoard() {
+	this->puzzleNodeManager.loadNodes(Settings::CurrentPuzzleFileName);
+	for (vector<PuzzleNode*>::size_type i = 0;
+			i < this->puzzleNodeManager.getPuzzleNodes().size(); i++) {
+		PuzzleNode *currentPuzzleNode =
+				this->puzzleNodeManager.getPuzzleNodes()[i];
+
+		if (currentPuzzleNode != nullptr) {
+			int value = currentPuzzleNode->getValue();
+			const char *newInputValue = to_string(value).c_str();
+			this->inputBoxes[i]->value(newInputValue);
+			if (currentPuzzleNode->getIsStarting()) {
+				this->inputBoxes[i]->type(FL_NORMAL_INPUT);
+				this->inputBoxes[i]->deactivate();
+			}
+		}
+
+	}
 }
 GameWindow::~GameWindow() {
 

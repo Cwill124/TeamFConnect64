@@ -15,11 +15,11 @@ public:
 	/**
 	 * The number of puzzle nodes
 	 */
-	static constexpr int NumberOfPuzzleNodes = 9;
+	static constexpr int NumberOfPuzzleNodes = 64;
 	/**
 	 * The maximum row amount
 	 */
-	static constexpr int MaximumRowAmount = 3;
+	static constexpr int MaximumRowAmount = 8;
 	/**
 	 * The current puzzle file name
 	 */

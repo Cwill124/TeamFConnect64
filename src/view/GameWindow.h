@@ -12,6 +12,9 @@
 #include <Fl/Fl_Button.H>
 #include "OKCancelWindow.h"
 #include "MainWindow.h"
+#include "PuzzleNodeManager.h"
+#include "Settings.h"
+#include "PuzzleNode.h"
 #include <vector>
 #include <iostream>
 #include <regex>
@@ -23,10 +26,12 @@ private:
 	vector<Fl_Input*> inputBoxes;
 	Fl_Box* puzzleLevel;
 	Fl_Button* resetButton;
+	PuzzleNodeManager puzzleNodeManager;
 	static void cb_getValue(Fl_Widget*, void* data);
 	void createBoxes();
 	bool checkOtherInputValues(Fl_Widget* widget );
 	static void cb_resetBoard(Fl_Widget* widget, void* data);
+	void loadGameBoard();
 
 public:
 	GameWindow();
