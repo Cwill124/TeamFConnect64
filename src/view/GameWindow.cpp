@@ -116,7 +116,6 @@ void GameWindow::okHandler() {
 			Fl::wait();
 		}
 	} else {
-
 		this->gameOutputText->label(ErrorMessages::IncorrectSolution);
 	}
 }
@@ -150,8 +149,16 @@ int GameWindow::getInputBoxIndex(Fl_Input *inputBox) {
 	return -1;
 }
 
+void GameWindow::deleteInputBoxes() {
+	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
+		this->inputBoxes[i] = nullptr;
+		delete this->inputBoxes[i];
+	}
+}
+
 GameWindow::~GameWindow() {
 	this->puzzleNodeManager.resetBoard();
+	this->deleteInputBoxes();
 }
 
 } /* namespace view */

@@ -25,7 +25,10 @@ void AlertWindow::closeWindow() {
 	this->hide();
 }
 AlertWindow::~AlertWindow() {
-	// TODO Auto-generated destructor stub
+	this->messege = nullptr;
+	delete this->messege;
+	this->closeAlertButton = nullptr;
+	delete this->closeAlertButton;
 }
 
 } /* namespace view */

@@ -36,6 +36,7 @@ private:
 	void loadGameBoard();
 	int getInputBoxIndex(Fl_Input* inputBox);
 	void setNewNodeValues();
+	void deleteInputBoxes();
 
 public:
 	GameWindow();
