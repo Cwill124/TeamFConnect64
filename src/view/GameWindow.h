@@ -15,16 +15,18 @@
 #include "PuzzleNodeManager.h"
 #include "Settings.h"
 #include "PuzzleNode.h"
+#include "ErrorMessages.h"
 #include <vector>
 #include <iostream>
 #include <regex>
+#include "AlertWindow.h"
 using namespace std;
 namespace view {
 
 class GameWindow: public OKCancelWindow {
 private:
 	vector<Fl_Input*> inputBoxes;
-	Fl_Box* puzzleLevel;
+	Fl_Box* gameOutputText;
 	Fl_Button* resetButton;
 	PuzzleNodeManager puzzleNodeManager;
 	static void cb_getValue(Fl_Widget*, void* data);

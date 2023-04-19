@@ -6,7 +6,7 @@
  */
 
 #include "GameWindow.h"
-
+using namespace errormessages;
 namespace view {
 
 GameWindow::GameWindow() :
@@ -18,6 +18,7 @@ GameWindow::GameWindow() :
 	this->resetButton->callback(cb_resetBoard, this);
 	this->createBoxes();
 	this->loadGameBoard();
+	this->gameOutputText = new Fl_Box(70, 10, 200, 30);
 	end();
 	this->resizable(this);
 
@@ -57,13 +58,17 @@ bool GameWindow::checkOtherInputValues(Fl_Widget *widget) {
 }
 void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	Fl_Input *input = (Fl_Input*) widget;
+	GameWindow *window = (GameWindow*) data;
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
 	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
 	if (!regex_match(value, pattern) || !regex_match(value, patternNumbers)) {
 		input->value("");
+
+		window->gameOutputText->label(ErrorMessages::InvalidInputValue);
 		return;
 	}
+	window->gameOutputText->label("");
 	printf("Input value: %s\n", value);
 }
 void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data) {
@@ -101,12 +106,18 @@ void GameWindow::setNewNodeValues() {
 
 void GameWindow::okHandler() {
 	setNewNodeValues();
-	cout << "_---------------------_" << endl;
 	cout << this->puzzleNodeManager.toString() << endl;
 	if (this->puzzleNodeManager.isCompleted()) {
-		cout << "completed" << endl;
+		this->gameOutputText->label("");
+		AlertWindow winningWindow("Solution Correct");
+		winningWindow.set_modal();
+		winningWindow.show();
+		while (winningWindow.shown()) {
+			Fl::wait();
+		}
 	} else {
-		cout << "incorrect" << endl;
+
+		this->gameOutputText->label(ErrorMessages::IncorrectSolution);
 	}
 }
 void GameWindow::loadGameBoard() {
