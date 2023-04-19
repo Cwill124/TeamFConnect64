@@ -33,6 +33,7 @@ private:
 	static void cb_resetBoard(Fl_Widget* widget, void* data);
 	void loadGameBoard();
 	int getInputBoxIndex(Fl_Input* inputBox);
+	void setNewNodeValues();
 
 public:
 	GameWindow();
