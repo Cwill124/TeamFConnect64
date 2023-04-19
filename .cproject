@@ -30,6 +30,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model/scores}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/utils}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.799536725" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -43,6 +44,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model/scores}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/utils}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1442127931" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -68,6 +70,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model/scores}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/utils}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.95081071" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
@@ -109,6 +112,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model/scores}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/utils}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.595079989" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -122,6 +126,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model/scores}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/utils}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1103258975" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -140,6 +145,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/settings}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/fileio}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/model/scores}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TeamFConnect64/src/utils}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.108928403" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>

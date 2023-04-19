@@ -8,10 +8,12 @@
 #include "view/MainWindow.h"
 #include <PuzzleNodeManager.h>
 #include <ScoreManager.h>
+#include <Utils.h>
 
 using namespace view;
 using namespace model;
 using namespace scores;
+using namespace utils;
 
 int main() {
 	PuzzleNodeManager manager = PuzzleNodeManager();
@@ -69,14 +71,14 @@ int main() {
 	vector<Score*> sorted5 = scoreManager.getScoresSortedByPuzzleNumber();
 	vector<Score*> sorted6 = scoreManager.getScoresSortedByTime();
 
-	scoreManager.resetScores();
+	scoreManager.loadScores();
 
 	vector<Score*> scores4 = scoreManager.getScores();
 	vector<Score*> sorted7 = scoreManager.getScoresSortedByPuzzleNumber();
 	vector<Score*> sorted8 = scoreManager.getScoresSortedByTime();
 
 	for (Score* score : scores4) {
-		cout << score->getPlayerName() << " " << score->getPuzzleNumber() << " " << score->getTime() << endl;
+		cout << score->getPlayerName() << " " << score->getPuzzleNumber() << " " << Utils::convertIntegerToTimeString(score->getTime()) << endl;
 	}
 
 	cout << endl;
