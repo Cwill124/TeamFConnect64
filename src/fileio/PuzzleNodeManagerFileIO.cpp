@@ -39,9 +39,7 @@ void PuzzleNodeManagerFileIO::loadPuzzleNodes(const string& filename, PuzzleNode
 }
 
 void PuzzleNodeManagerFileIO::savePuzzleNodes(const string& filename, PuzzleNodeManager& manager, vector<PuzzleNode*> nodes) {
-	string x = "";
     std::ofstream outputFile(filename);
-    x += manager.getCurrentPuzzleIndex() + "\n";
     outputFile << manager.getCurrentPuzzleIndex() << endl;
 
     for (int i = 0; i < Settings::NumberOfPuzzleNodes; i++) {
@@ -50,7 +48,6 @@ void PuzzleNodeManagerFileIO::savePuzzleNodes(const string& filename, PuzzleNode
             int value = nodes[i]->getValue();
             int isStarting = nodes[i]->getIsStarting();
             outputFile << index << "," << value << "," << isStarting << endl;
-               x += std::to_string(index) + "," + std::to_string(value) + "," + std::to_string(isStarting) + "\n";
     	}
     }
 
