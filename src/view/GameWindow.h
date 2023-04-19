@@ -32,6 +32,7 @@ private:
 	bool checkOtherInputValues(Fl_Widget* widget );
 	static void cb_resetBoard(Fl_Widget* widget, void* data);
 	void loadGameBoard();
+	int getInputBoxIndex(Fl_Input* inputBox);
 
 public:
 	GameWindow();

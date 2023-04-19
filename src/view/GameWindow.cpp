@@ -57,7 +57,7 @@ bool GameWindow::checkOtherInputValues(Fl_Widget *widget) {
 }
 void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	Fl_Input *input = (Fl_Input*) widget;
-	//GameWindow *window = (GameWindow*) data;
+	GameWindow *window = (GameWindow*) data;
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
 	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
@@ -73,6 +73,7 @@ void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data) {
 			i++) {
 		if (!window->inputBoxes[i]->readonly()) {
 			window->inputBoxes[i]->value("");
+			//window->puzzleNodeManager.deletePuzzleNode(i);
 		}
 	}
 }
@@ -80,6 +81,22 @@ void GameWindow::cancelHandler() {
 	this->hide();
 }
 void GameWindow::okHandler() {
+	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
+		const char *value = this->inputBoxes[i]->value();
+		PuzzleNode *node = this->puzzleNodeManager.getPuzzleNodes()[i];
+		if (strlen(value) != 0 || value == nullptr) {
+			if (node == nullptr) {
+				cout << "null" << endl;
+				this->puzzleNodeManager.addPuzzleNode(i, stoi(value), false);
+			} else {
+				cout << "setting value" << endl;
+				node->setValue(stoi(value));
+			}
+		}
+
+	}
+	cout << "_---------------------_" << endl;
+	cout << this->puzzleNodeManager.toString() << endl;
 	if (this->puzzleNodeManager.isCompleted()) {
 		cout << "completed" << endl;
 	} else {
@@ -105,8 +122,19 @@ void GameWindow::loadGameBoard() {
 
 	}
 }
-GameWindow::~GameWindow() {
 
+int GameWindow::getInputBoxIndex(Fl_Input *inputBox) {
+	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
+		if (inputBox == this->inputBoxes[i]) {
+			cout << i << endl;
+			return i;
+		}
+	}
+	return -1;
+}
+
+GameWindow::~GameWindow() {
+	this->puzzleNodeManager.resetBoard();
 }
 
 } /* namespace view */
