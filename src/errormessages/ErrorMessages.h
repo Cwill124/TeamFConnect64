@@ -63,6 +63,10 @@ public:
 	 * The error message for the solution being incorrect
 	 */
 	const static char *IncorrectSolution;
+	/**
+	 * The error message for the input being a duplicate
+	 */
+	const static char *DuplicateInput;
 };
 }
 

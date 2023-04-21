@@ -67,6 +67,10 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 
 		window->gameOutputText->label(ErrorMessages::InvalidInputValue);
 		return;
+	}else if(window->checkOtherInputValues(input)){
+		input->value("");
+		window->gameOutputText->label(ErrorMessages::DuplicateInput);
+		return;
 	}
 	window->gameOutputText->label("");
 	printf("Input value: %s\n", value);
@@ -107,7 +111,7 @@ void GameWindow::setNewNodeValues() {
 void GameWindow::okHandler() {
 	setNewNodeValues();
 	cout << this->puzzleNodeManager.toString() << endl;
-	if (this->puzzleNodeManager.isCompleted()) {
+	if (this->puzzleNodeManager.isSolved()) {
 		this->gameOutputText->label("");
 		AlertWindow winningWindow("Solution Correct");
 		winningWindow.set_modal();

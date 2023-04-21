@@ -32,4 +32,5 @@ const string ErrorMessages::CannotDeleteNullNode = "The node to delete is null";
 const string ErrorMessages::CannotReplaceNullNode = "The node to replace is null";
 const char* ErrorMessages::InvalidInputValue = "The value must be 1-64";
 const char* ErrorMessages::IncorrectSolution = "The solution is incorrect";
+const char* ErrorMessages::DuplicateInput = "Cannot contain duplicates";
 }
