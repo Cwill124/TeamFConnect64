@@ -89,7 +89,8 @@ void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data) {
 	}
 }
 void GameWindow::cancelHandler() {
-	this->puzzleNodeManager.saveNodes("testsave.txt");
+
+	this->puzzleNodeManager.saveNodes("current"+this->puzzle);
 	this->hide();
 }
 
