@@ -20,6 +20,8 @@ MainWindow::MainWindow(int width, int height, const char *title) :
 	this->quitButton = new Fl_Button(125, 150, 70, 30, "Quit");
 	this->quitButton->callback(cb_quit, this);
 	this->puzzleSelector = new Fl_Choice(150, 20, 50, 20, "Select Puzzle");
+	this->errorMessage = new Fl_Box(50, 40, 200, 30);
+	this->errorMessage->labelcolor(FL_RED);
 	this->addLevelOptions();
 	this->end();
 	this->resizable(this);
@@ -45,7 +47,8 @@ void MainWindow::cb_show(Fl_Widget *o, void *data) {
 	cout << window->puzzleSelector->value() << endl;
 	cout << Settings::PuzzleFileNames[window->puzzleSelector->value()] << endl;
 	string puzzle = Settings::PuzzleFileNames[window->puzzleSelector->value()];
-	GameWindow gameWindow(puzzle);
+	int puzzleNumber = window->puzzleSelector->value() + 1;
+	GameWindow gameWindow(puzzle, puzzleNumber);
 	gameWindow.set_modal();
 	gameWindow.show();
 	while (gameWindow.shown()) {
@@ -61,11 +64,17 @@ void MainWindow::cb_resumePuzzle(Fl_Widget*, void *data) {
 	cout << Settings::PuzzleFileNames[window->puzzleSelector->value()] << endl;
 	string puzzle = Settings::PuzzleFileNames[window->puzzleSelector->value()];
 	puzzle = "current" + puzzle;
-	GameWindow gameWindow(puzzle);
-	gameWindow.set_modal();
-	gameWindow.show();
-	while (gameWindow.shown()) {
-		Fl::wait();
+	ifstream file(puzzle);
+	if (file.good()) {
+		int puzzleNumber = window->puzzleSelector->value() + 1;
+		GameWindow gameWindow(puzzle, puzzleNumber);
+		gameWindow.set_modal();
+		gameWindow.show();
+		while (gameWindow.shown()) {
+			Fl::wait();
+		}
+	} else {
+		window->errorMessage->label(ErrorMessages::PuzzleCouldNotBeFound);
 	}
 
 }

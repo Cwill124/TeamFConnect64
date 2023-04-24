@@ -26,23 +26,22 @@ namespace view {
 class GameWindow: public OKCancelWindow {
 private:
 	vector<Fl_Input*> inputBoxes;
-	Fl_Box* gameOutcomeLabel;
-	Fl_Box* errorMessageBox;
-	Fl_Box* puzzleLevelDisplay;
-	Fl_Button* resetButton;
+	Fl_Box *gameOutcomeLabel;
+	Fl_Box *errorMessageBox;
+	Fl_Button *resetButton;
+	Fl_Button *saveButton;
 	string puzzle;
 	PuzzleNodeManager puzzleNodeManager;
-	static void cb_getValue(Fl_Widget*, void* data);
+	static void cb_getValue(Fl_Widget*, void *data);
 	void createBoxes();
-	bool checkOtherInputValues(Fl_Widget* widget );
-	static void cb_resetBoard(Fl_Widget* widget, void* data);
+	static void cb_resetBoard(Fl_Widget *widget, void *data);
+	static void cb_savePuzzle(Fl_Widget *widget, void *data);
 	void loadGameBoard();
-	int getInputBoxIndex(Fl_Input* inputBox);
 	void setNewNodeValues();
 	void deleteInputBoxes();
 
 public:
-	GameWindow(const string puzzle);
+	GameWindow(const string puzzle, int puzzleNumber);
 	void okHandler();
 	void cancelHandler();
 	virtual ~GameWindow();

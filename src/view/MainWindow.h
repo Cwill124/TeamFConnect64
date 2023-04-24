@@ -14,7 +14,12 @@
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Box.H>
 #include <iostream>
+#include <fstream>
+#include "ErrorMessages.h"
+
+
 #include "GameWindow.h"
+using namespace errormessages;
 using namespace std;
 namespace view {
 
@@ -22,8 +27,9 @@ class MainWindow: public Fl_Window {
 private:
 	Fl_Button *quitButton;
 	Fl_Button *showNewWindowButton;
-	Fl_Button* resumePuzzleButton;
+	Fl_Button *resumePuzzleButton;
 	Fl_Choice *puzzleSelector;
+	Fl_Box *errorMessage;
 	static void cb_show(Fl_Widget*, void*);
 	static void cb_resumePuzzle(Fl_Widget*, void*);
 	static void cb_data(Fl_Widget*, void*);

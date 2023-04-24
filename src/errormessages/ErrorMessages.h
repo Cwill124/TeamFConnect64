@@ -74,8 +74,10 @@ public:
 	 */
 	const static char *DuplicateInput;
 
+	const static char *BoardIncomplete;
 
-	 /* The error message for a null player name
+	const static char *PuzzleCouldNotBeFound;
+	/* The error message for a null player name
 	 */
 	const static string PlayerNameCannotBeNull;
 	/**
@@ -94,7 +96,6 @@ public:
 	 * The error message for the manager being null
 	 */
 	const static string ManagerCannotBeNull;
-
 
 };
 }

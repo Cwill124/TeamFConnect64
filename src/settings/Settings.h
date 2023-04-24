@@ -36,6 +36,7 @@ public:
 	 * The file names for the puzzles
 	 */
 	static const char* PuzzleFileNames[];
+
 };
 }
 
