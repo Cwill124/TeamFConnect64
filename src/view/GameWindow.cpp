@@ -18,7 +18,9 @@ GameWindow::GameWindow() :
 	this->resetButton->callback(cb_resetBoard, this);
 	this->createBoxes();
 	this->loadGameBoard();
-	this->gameOutputText = new Fl_Box(70, 10, 200, 30);
+	this->gameOutcomeLabel = new Fl_Box(70, 10, 200, 30);
+	this->errorMessageBox = new Fl_Box(70, -5, 200, 30);
+	this->errorMessageBox->labelcolor(FL_RED);
 	end();
 	this->resizable(this);
 
@@ -65,14 +67,10 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	if (!regex_match(value, pattern) || !regex_match(value, patternNumbers)) {
 		input->value("");
 
-		window->gameOutputText->label(ErrorMessages::InvalidInputValue);
-		return;
-	}else if(window->checkOtherInputValues(input)){
-		input->value("");
-		window->gameOutputText->label(ErrorMessages::DuplicateInput);
+		window->errorMessageBox->label(ErrorMessages::InvalidInputValue);
 		return;
 	}
-	window->gameOutputText->label("");
+	window->errorMessageBox->label("");
 	printf("Input value: %s\n", value);
 }
 void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data) {
@@ -99,10 +97,21 @@ void GameWindow::setNewNodeValues() {
 		if (strlen(value) != 0 || value == nullptr) {
 			if (node == nullptr) {
 				cout << "null" << endl;
-				this->puzzleNodeManager.addPuzzleNode(i, stoi(value), false);
+				if (this->puzzleNodeManager.containsValue(stoi(value))) {
+					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
+
+				} else {
+					this->puzzleNodeManager.addPuzzleNode(i, stoi(value),
+							false);
+				}
 			} else {
 				cout << "setting value" << endl;
-				node->setValue(stoi(value));
+				if (this->puzzleNodeManager.containsValue(stoi(value))) {
+					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
+				} else {
+					node->setValue(stoi(value));
+				}
+
 			}
 		}
 	}
@@ -111,17 +120,23 @@ void GameWindow::setNewNodeValues() {
 void GameWindow::okHandler() {
 	setNewNodeValues();
 	cout << this->puzzleNodeManager.toString() << endl;
-	if (this->puzzleNodeManager.isSolved()) {
-		this->gameOutputText->label("");
-		AlertWindow winningWindow("Solution Correct");
-		winningWindow.set_modal();
-		winningWindow.show();
-		while (winningWindow.shown()) {
-			Fl::wait();
+	if (this->puzzleNodeManager.isCompleted()) {
+
+		if (this->puzzleNodeManager.isSolved()) {
+			this->gameOutcomeLabel->label("");
+			AlertWindow winningWindow("Solution Correct");
+			winningWindow.set_modal();
+			winningWindow.show();
+			while (winningWindow.shown()) {
+				Fl::wait();
+			}
+		} else {
+			this->gameOutcomeLabel->label(ErrorMessages::IncorrectSolution);
 		}
 	} else {
-		this->gameOutputText->label(ErrorMessages::IncorrectSolution);
+		this->gameOutcomeLabel->label("not completed");
 	}
+
 }
 void GameWindow::loadGameBoard() {
 	this->puzzleNodeManager.loadNodes(Settings::CurrentPuzzleFileName);

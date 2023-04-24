@@ -24,10 +24,12 @@ private:
 	PuzzleNode* getTopPuzzleNode(int index);
 	PuzzleNode* getBottomPuzzleNode(int index);
 
-	bool containsValue(int value);
+
 	bool isSolved(PuzzleNode& node, vector<PuzzleNode*>& visitedNodes);
 	bool isValidNextPath(int neighborNodeValueToCheck, int currentNodeValueToCheck);
 public:
+	void resetNonStartingNodes();
+	bool containsValue(int value);
 	/**
 	 * The constructor for the puzzle node manager
 	 *

@@ -26,7 +26,8 @@ namespace view {
 class GameWindow: public OKCancelWindow {
 private:
 	vector<Fl_Input*> inputBoxes;
-	Fl_Box* gameOutputText;
+	Fl_Box* gameOutcomeLabel;
+	Fl_Box* errorMessageBox;
 	Fl_Button* resetButton;
 	PuzzleNodeManager puzzleNodeManager;
 	static void cb_getValue(Fl_Widget*, void* data);
