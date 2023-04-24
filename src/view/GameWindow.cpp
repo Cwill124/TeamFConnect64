@@ -135,6 +135,7 @@ void GameWindow::okHandler() {
 	}
 
 }
+
 void GameWindow::loadGameBoard() {
 	this->puzzleNodeManager.loadNodes(this->puzzle);
 	for (vector<PuzzleNode*>::size_type i = 0;

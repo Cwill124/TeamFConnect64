@@ -6,6 +6,7 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 #include "view/MainWindow.h"
+#include "view/HighScoreWindow.h"
 #include <PuzzleNodeManager.h>
 #include <ScoreManager.h>
 #include <Utils.h>
@@ -16,8 +17,6 @@ using namespace scores;
 using namespace utils;
 
 int main() {
-
-
 	//TODO Only here for demo purposes for the high score.
 	ScoreManager scoreManager = ScoreManager();
 
@@ -74,6 +73,7 @@ int main() {
 	}
 
 	MainWindow window(325, 200, "Connect 64");
+	HighScoreWindow window1(325, 200, "High Scores");
 
 	return (Fl::run());
 }
