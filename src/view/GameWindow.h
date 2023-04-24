@@ -28,8 +28,9 @@ private:
 	vector<Fl_Input*> inputBoxes;
 	Fl_Box* gameOutcomeLabel;
 	Fl_Box* errorMessageBox;
+	Fl_Box* puzzleLevelDisplay;
 	Fl_Button* resetButton;
-
+	string puzzle;
 	PuzzleNodeManager puzzleNodeManager;
 	static void cb_getValue(Fl_Widget*, void* data);
 	void createBoxes();
@@ -41,7 +42,7 @@ private:
 	void deleteInputBoxes();
 
 public:
-	GameWindow();
+	GameWindow(const string puzzle);
 	void okHandler();
 	void cancelHandler();
 	virtual ~GameWindow();

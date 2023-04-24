@@ -44,8 +44,8 @@ void MainWindow::cb_show(Fl_Widget *o, void *data) {
 
 	cout << window->puzzleSelector->value() << endl;
 	cout << Settings::PuzzleFileNames[window->puzzleSelector->value() ]<<endl;
-	Settings::puzzleSelected = window->puzzleSelector->value();
-	GameWindow gameWindow;
+	string puzzle =  Settings::PuzzleFileNames[window->puzzleSelector->value() ];
+	GameWindow gameWindow(puzzle);
 	gameWindow.set_modal();
 	gameWindow.show();
 	while (gameWindow.shown()) {

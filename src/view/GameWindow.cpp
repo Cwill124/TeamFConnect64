@@ -9,13 +9,15 @@
 using namespace errormessages;
 namespace view {
 
-GameWindow::GameWindow() :
+GameWindow::GameWindow(const string puzzle) :
 		OKCancelWindow(350, 350, "") {
 	begin();
 	this->setOKLocation(45, 300);
 	this->setCancelLocation(145, 300);
 	this->resetButton = new Fl_Button(245, 300, 70, 30, "Reset");
 	this->resetButton->callback(cb_resetBoard, this);
+	this->puzzle = puzzle;
+	this->puzzleLevelDisplay = new Fl_Box(-60, 10, 200, 30,this->puzzle.c_str());
 	this->createBoxes();
 	this->loadGameBoard();
 	this->gameOutcomeLabel = new Fl_Box(70, 10, 200, 30);
@@ -87,6 +89,7 @@ void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data) {
 	}
 }
 void GameWindow::cancelHandler() {
+	this->puzzleNodeManager.saveNodes("testsave.txt");
 	this->hide();
 }
 
@@ -139,7 +142,7 @@ void GameWindow::okHandler() {
 
 }
 void GameWindow::loadGameBoard() {
-	this->puzzleNodeManager.loadNodes(Settings::PuzzleFileNames[Settings::puzzleSelected]);
+	this->puzzleNodeManager.loadNodes(this->puzzle);
 	for (vector<PuzzleNode*>::size_type i = 0;
 			i < this->puzzleNodeManager.getPuzzleNodes().size(); i++) {
 		PuzzleNode *currentPuzzleNode =
