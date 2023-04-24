@@ -85,23 +85,23 @@ void GameWindow::setNewNodeValues() {
 		const char *value = this->inputBoxes[i]->value();
 		PuzzleNode *node = this->puzzleNodeManager.getPuzzleNodes()[i];
 		if (strlen(value) != 0 || value == nullptr) {
+			cout << "VALUE:" << endl;
+			cout << value << endl;
 			if (node == nullptr) {
 				cout << "null" << endl;
-				if (this->puzzleNodeManager.containsValue(stoi(value))) {
+				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
 					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
 
 				} else {
 					this->puzzleNodeManager.addPuzzleNode(i, stoi(value),
 							false);
-					this->errorMessageBox->label("");
 				}
 			} else {
 				cout << "setting value" << endl;
-				if (this->puzzleNodeManager.containsValue(stoi(value))) {
+				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
 					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
 				} else {
 					node->setValue(stoi(value));
-					this->errorMessageBox->label("");
 				}
 
 			}

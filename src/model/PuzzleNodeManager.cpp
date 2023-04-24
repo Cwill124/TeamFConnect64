@@ -217,6 +217,17 @@ void PuzzleNodeManager::loadNewPuzzle() {
 	this->currentPuzzleIndex++;
 }
 
+bool PuzzleNodeManager::containsValue(int value, PuzzleNode *puzzleNode) {
+	for (PuzzleNode *node : this->nodes) {
+		if ((node != nullptr && node->getValue() == value)
+				&& puzzleNode != node) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 //TODO This is temporary and for testing
 string PuzzleNodeManager::toString() {
 	string managerString = "A puzzle with completed being: "
