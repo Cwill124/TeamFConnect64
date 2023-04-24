@@ -139,7 +139,7 @@ void GameWindow::okHandler() {
 
 }
 void GameWindow::loadGameBoard() {
-	this->puzzleNodeManager.loadNodes(Settings::CurrentPuzzleFileName);
+	this->puzzleNodeManager.loadNodes(Settings::PuzzleFileNames[Settings::puzzleSelected]);
 	for (vector<PuzzleNode*>::size_type i = 0;
 			i < this->puzzleNodeManager.getPuzzleNodes().size(); i++) {
 		PuzzleNode *currentPuzzleNode =

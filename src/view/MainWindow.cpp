@@ -40,7 +40,11 @@ void MainWindow::addLevelOptions() {
 
 }
 void MainWindow::cb_show(Fl_Widget *o, void *data) {
-	//MainWindow *window = (MainWindow*) data;
+	MainWindow *window = (MainWindow*) data;
+
+	cout << window->puzzleSelector->value() << endl;
+	cout << Settings::PuzzleFileNames[window->puzzleSelector->value() ]<<endl;
+	Settings::puzzleSelected = window->puzzleSelector->value();
 	GameWindow gameWindow;
 	gameWindow.set_modal();
 	gameWindow.show();

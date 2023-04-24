@@ -29,6 +29,7 @@ private:
 	Fl_Box* gameOutcomeLabel;
 	Fl_Box* errorMessageBox;
 	Fl_Button* resetButton;
+
 	PuzzleNodeManager puzzleNodeManager;
 	static void cb_getValue(Fl_Widget*, void* data);
 	void createBoxes();
