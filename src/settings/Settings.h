@@ -15,11 +15,11 @@ public:
 	/**
 	 * The number of puzzle nodes
 	 */
-	static constexpr int NumberOfPuzzleNodes = 9;
+	static constexpr int NumberOfPuzzleNodes = 64;
 	/**
 	 * The maximum row amount
 	 */
-	static constexpr int MaximumRowAmount = 3;
+	static constexpr int MaximumRowAmount = 8;
 	/**
 	 * The maximum high scores
 	 */
@@ -36,6 +36,7 @@ public:
 	 * The file names for the puzzles
 	 */
 	static const char* PuzzleFileNames[];
+
 };
 }
 

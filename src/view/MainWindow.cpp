@@ -16,10 +16,12 @@ MainWindow::MainWindow(int width, int height, const char *title) :
 	this->showNewWindowButton = new Fl_Button(125, 110, 70, 30, "Start");
 	this->showNewWindowButton->callback(cb_show, this);
 	this->resumePuzzleButton = new Fl_Button(125, 70, 70, 30, "Resume");
-	this->resumePuzzleButton->callback(cb_resumePuzzle,this);
+	this->resumePuzzleButton->callback(cb_resumePuzzle, this);
 	this->quitButton = new Fl_Button(125, 150, 70, 30, "Quit");
 	this->quitButton->callback(cb_quit, this);
 	this->puzzleSelector = new Fl_Choice(150, 20, 50, 20, "Select Puzzle");
+	this->errorMessage = new Fl_Box(50, 40, 200, 30);
+	this->errorMessage->labelcolor(FL_RED);
 	this->addLevelOptions();
 	this->end();
 	this->resizable(this);
@@ -40,8 +42,12 @@ void MainWindow::addLevelOptions() {
 
 }
 void MainWindow::cb_show(Fl_Widget *o, void *data) {
-	//MainWindow *window = (MainWindow*) data;
-	GameWindow gameWindow;
+	MainWindow *window = (MainWindow*) data;
+
+	cout << window->puzzleSelector->value() << endl;
+	cout << Settings::PuzzleFileNames[window->puzzleSelector->value()] << endl;
+	string puzzle = Settings::PuzzleFileNames[window->puzzleSelector->value()];
+	GameWindow gameWindow(puzzle);
 	gameWindow.set_modal();
 	gameWindow.show();
 	while (gameWindow.shown()) {
@@ -50,8 +56,25 @@ void MainWindow::cb_show(Fl_Widget *o, void *data) {
 
 }
 
-void MainWindow::cb_resumePuzzle(Fl_Widget*, void*) {
-	cout << "resume button" << endl;
+void MainWindow::cb_resumePuzzle(Fl_Widget*, void *data) {
+	MainWindow *window = (MainWindow*) data;
+
+	cout << window->puzzleSelector->value() << endl;
+	cout << Settings::PuzzleFileNames[window->puzzleSelector->value()] << endl;
+	string puzzle = Settings::PuzzleFileNames[window->puzzleSelector->value()];
+	puzzle = "current" + puzzle;
+	ifstream file(puzzle);
+	if (file.good()) {
+		GameWindow gameWindow(puzzle);
+		gameWindow.set_modal();
+		gameWindow.show();
+		while (gameWindow.shown()) {
+			Fl::wait();
+		}
+	} else {
+		window->errorMessage->label(ErrorMessages::PuzzleCouldNotBeFound);
+	}
+
 }
 
 void MainWindow::cb_quit(Fl_Widget*, void *data) {

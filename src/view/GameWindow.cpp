@@ -6,17 +6,25 @@
  */
 
 #include "GameWindow.h"
-
+using namespace errormessages;
 namespace view {
 
-GameWindow::GameWindow() :
+GameWindow::GameWindow(const string puzzle) :
 		OKCancelWindow(350, 350, "") {
 	begin();
-	this->setOKLocation(45, 300);
-	this->setCancelLocation(145, 300);
-	this->resetButton = new Fl_Button(245,300,70,30,"Reset");
-	this->resetButton->callback(cb_resetBoard,this);
+	this->setOKLocation(10, 300);
+	this->setCancelLocation(90, 300);
+	this->resetButton = new Fl_Button(170, 300, 70, 30, "Reset");
+	this->saveButton = new Fl_Button(250, 300, 70, 30, "Save");
+	this->resetButton->callback(cb_resetBoard, this);
+	this->saveButton->callback(cb_savePuzzle, this);
+	this->puzzle = puzzle;
+	this->label(this->puzzle.c_str());
 	this->createBoxes();
+	this->loadGameBoard();
+	this->gameOutcomeLabel = new Fl_Box(70, 10, 200, 30);
+	this->errorMessageBox = new Fl_Box(70, -5, 200, 30);
+	this->errorMessageBox->labelcolor(FL_RED);
 	end();
 	this->resizable(this);
 
@@ -31,58 +39,143 @@ void GameWindow::createBoxes() {
 		for (int j = 1; j < 9; j++) {
 			int X = (j * tileSize);
 
-			Fl_Input *input = new Fl_Input(xShift + (X + tileSize), yShift + (Y + tileSize),
-					tileSize, tileSize);
-			input->when(FL_WHEN_CHANGED);
+			Fl_Input *input = new Fl_Input(xShift + (X + tileSize),
+					yShift + (Y + tileSize), tileSize, tileSize);
 			input->callback(cb_getValue, this);
 			this->inputBoxes.push_back(input);
 		}
 	}
 
 }
-bool GameWindow::checkOtherInputValues(Fl_Widget *widget) {
-	Fl_Input *input = (Fl_Input*) widget;
-	const char *iValue = input->value();
-	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
-		Fl_Input *currentInput = this->inputBoxes[i];
-		const char *value = currentInput->value();
-		if (currentInput != input) {
-			if (strcmp(iValue, value) == 0) {
-				return true;
-			}
-		}
-	}
-	return false;
-}
+
 void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	Fl_Input *input = (Fl_Input*) widget;
-	//GameWindow *window = (GameWindow*) data;
+	GameWindow *window = (GameWindow*) data;
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
 	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
 	if (!regex_match(value, pattern) || !regex_match(value, patternNumbers)) {
 		input->value("");
+
+		window->errorMessageBox->label(ErrorMessages::InvalidInputValue);
+		return;
 	}
-	printf("Input value: %s\n", value);
+	if (!window->setNewNodeValues()) {
+		input->value("");
+		return;
+	}
+	window->errorMessageBox->label("");
 }
-void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data){
-	GameWindow* window = (GameWindow*) data;
-	for(vector<Fl_Input*>::size_type i = 0; i <window->inputBoxes.size(); i++){
-		window->inputBoxes[i]->value("");
+void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data) {
+	GameWindow *window = (GameWindow*) data;
+	for (vector<Fl_Input*>::size_type i = 0; i < window->inputBoxes.size();
+			i++) {
+		PuzzleNode *node = window->puzzleNodeManager.getPuzzleNodes()[i];
+		if (!window->inputBoxes[i]->readonly()) {
+			window->inputBoxes[i]->value("");
+			if (node != nullptr) {
+				window->puzzleNodeManager.deletePuzzleNode(i);
+			}
+		}
 	}
 }
 void GameWindow::cancelHandler() {
 	this->hide();
 }
-void GameWindow::okHandler() {
-	for (size_t i = 0; i < this->inputBoxes.size(); i++) {
+
+bool GameWindow::setNewNodeValues() {
+	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
 		const char *value = this->inputBoxes[i]->value();
-		printf("Input %lu value: %s\n", i, value);
+		PuzzleNode *node = this->puzzleNodeManager.getPuzzleNodes()[i];
+		if (strlen(value) != 0 || value == nullptr) {
+			cout << "VALUE:" << endl;
+			cout << value << endl;
+			if (node == nullptr) {
+				cout << "null" << endl;
+				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
+					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
+					return false;
+				} else {
+					this->puzzleNodeManager.addPuzzleNode(i, stoi(value),
+							false);
+				}
+			} else {
+				cout << "setting value" << endl;
+				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
+					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
+					this->puzzleNodeManager.deletePuzzleNode(i);
+					return false;
+				} else {
+					node->setValue(stoi(value));
+				}
+
+			}
+		}
+	}
+	return true;
+}
+
+void GameWindow::okHandler() {
+	cout << this->puzzleNodeManager.toString() << endl;
+	if (this->puzzleNodeManager.isCompleted()) {
+
+		if (this->puzzleNodeManager.isSolved()) {
+			this->gameOutcomeLabel->label("");
+			AlertWindow winningWindow("Solution Correct");
+			winningWindow.set_modal();
+			winningWindow.show();
+			while (winningWindow.shown()) {
+				Fl::wait();
+			}
+		} else {
+			this->gameOutcomeLabel->label(ErrorMessages::IncorrectSolution);
+		}
+	} else {
+		this->gameOutcomeLabel->label(ErrorMessages::BoardIncomplete);
 	}
 
 }
-GameWindow::~GameWindow() {
+void GameWindow::loadGameBoard() {
+	this->puzzleNodeManager.loadNodes(this->puzzle);
+	for (vector<PuzzleNode*>::size_type i = 0;
+			i < this->puzzleNodeManager.getPuzzleNodes().size(); i++) {
+		PuzzleNode *currentPuzzleNode =
+				this->puzzleNodeManager.getPuzzleNodes()[i];
 
+		if (currentPuzzleNode != nullptr) {
+			int value = currentPuzzleNode->getValue();
+			const char *newInputValue = to_string(value).c_str();
+			this->inputBoxes[i]->value(newInputValue);
+			if (currentPuzzleNode->getIsStarting()) {
+				this->inputBoxes[i]->readonly(true);
+				this->inputBoxes[i]->deactivate();
+			}
+		}
+
+	}
+}
+
+void GameWindow::deleteInputBoxes() {
+	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
+		this->inputBoxes[i] = nullptr;
+		delete this->inputBoxes[i];
+	}
+}
+
+void GameWindow::cb_savePuzzle(Fl_Widget *widget, void *data) {
+	GameWindow *window = (GameWindow*) data;
+	window->setNewNodeValues();
+	if (window->puzzle.find("current") != string::npos) {
+		window->puzzleNodeManager.saveNodes(window->puzzle);
+	} else {
+		window->puzzleNodeManager.saveNodes("current" + window->puzzle);
+	}
+
+}
+
+GameWindow::~GameWindow() {
+	this->puzzleNodeManager.resetBoard();
+	this->deleteInputBoxes();
 }
 
 } /* namespace view */

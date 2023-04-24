@@ -12,26 +12,57 @@
 #include <Fl/Fl_Button.H>
 #include "OKCancelWindow.h"
 #include "MainWindow.h"
+#include "PuzzleNodeManager.h"
+#include "Settings.h"
+#include "PuzzleNode.h"
+#include "ErrorMessages.h"
 #include <vector>
 #include <iostream>
 #include <regex>
+#include "AlertWindow.h"
 using namespace std;
 namespace view {
-
+/**
+ * creates a gamewindow with a 8x8 grid
+ */
 class GameWindow: public OKCancelWindow {
 private:
 	vector<Fl_Input*> inputBoxes;
-	Fl_Box* puzzleLevel;
-	Fl_Button* resetButton;
-	static void cb_getValue(Fl_Widget*, void* data);
+	Fl_Box *gameOutcomeLabel;
+	Fl_Box *errorMessageBox;
+	Fl_Button *resetButton;
+	Fl_Button *saveButton;
+	string puzzle;
+	PuzzleNodeManager puzzleNodeManager;
+	static void cb_getValue(Fl_Widget*, void *data);
 	void createBoxes();
-	bool checkOtherInputValues(Fl_Widget* widget );
-	static void cb_resetBoard(Fl_Widget* widget, void* data);
+	static void cb_resetBoard(Fl_Widget *widget, void *data);
+	static void cb_savePuzzle(Fl_Widget *widget, void *data);
+	void loadGameBoard();
+	bool setNewNodeValues();
+	void deleteInputBoxes();
 
 public:
-	GameWindow();
+	/**
+	 * GameWindow that is a 8x8 grid that loads in a puzzle
+	 *
+	 * @param puzzle the filename of the puzzle to be loaded
+	 *
+	 *
+	 *
+	 */
+	GameWindow(const string puzzle);
+	/**
+	 * handles the check button inherited from OKCancelWindow
+	 */
 	void okHandler();
+	/**
+	 * handles the quit button inherited from OKCancelWindow
+	 */
 	void cancelHandler();
+	/**
+	 * deconstructor for gamewindow deletes all nodes and labels
+	 */
 	virtual ~GameWindow();
 };
 

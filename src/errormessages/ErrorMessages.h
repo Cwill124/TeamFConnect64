@@ -60,7 +60,28 @@ public:
 	 */
 	const static string CannotReplaceNullNode;
 	/**
-	 * The error message for a null player name
+
+	 * The error message for inserting a invalid value in inputbox
+	 */
+	const static char *InvalidInputValue;
+	/**
+	 * The error message for the solution being incorrect
+	 */
+	const static char *IncorrectSolution;
+
+	/**
+	 * The error message for the input being a duplicate
+	 */
+	const static char *DuplicateInput;
+	/**
+	 * The error message for the board being incomplete
+	 */
+	const static char *BoardIncomplete;
+	/**
+	 * The error message for puzzle trying to be loaded is not found
+	 */
+	const static char *PuzzleCouldNotBeFound;
+	/* The error message for a null player name
 	 */
 	const static string PlayerNameCannotBeNull;
 	/**
@@ -79,6 +100,10 @@ public:
 	 * The error message for the manager being null
 	 */
 	const static string ManagerCannotBeNull;
+	/**
+	 * The error message for the Puzzle being null
+	 */
+	const static string PuzzleNameCannotBeNull;
 };
 }
 

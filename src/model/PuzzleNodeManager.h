@@ -24,9 +24,10 @@ private:
 	PuzzleNode* getTopPuzzleNode(int index);
 	PuzzleNode* getBottomPuzzleNode(int index);
 
+	bool isSolved(PuzzleNode &node, vector<PuzzleNode*> &visitedNodes);
+	bool isValidNextPath(int neighborNodeValueToCheck,
+			int currentNodeValueToCheck);
 	bool containsValue(int value);
-	bool isSolved(PuzzleNode& node, vector<PuzzleNode*>& visitedNodes);
-	bool isValidNextPath(int neighborNodeValueToCheck, int currentNodeValueToCheck);
 public:
 	/**
 	 * The constructor for the puzzle node manager
@@ -144,7 +145,7 @@ public:
 	 *
 	 * Param fileToSaveTo the file to save to
 	 */
-	void saveNodes(const string& fileToSaveTo);
+	void saveNodes(const string &fileToSaveTo);
 	/**
 	 * Loads the nodes of the board
 	 *
@@ -153,7 +154,7 @@ public:
 	 *
 	 * Param: fileToLoadFrom the file to load from
 	 */
-	void loadNodes(const string& fileToLoadFrom);
+	void loadNodes(const string &fileToLoadFrom);
 	/**
 	 * Loads the next puzzle
 	 *
@@ -161,6 +162,19 @@ public:
 	 * Postcondition: The puzzle is equal to the puzzle data from a file
 	 */
 	void loadNewPuzzle();
+	/**
+	 *	Checks to see if the value exists the nodes besides the inputed node
+	 *	used for checking for dupes
+	 *
+	 *	@param value the value that is being searched for
+	 *	@param node the node that contains the value already and is ignored
+	 *
+	 *	@precondition none
+	 *	@postcondition none
+	 *
+	 *	@return true if a different node is found with value, false otherwise
+	 */
+	bool containsValue(int value, PuzzleNode *node);
 	/**
 	 * The to string method
 	 *
