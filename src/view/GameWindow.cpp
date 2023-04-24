@@ -41,7 +41,6 @@ void GameWindow::createBoxes() {
 
 			Fl_Input *input = new Fl_Input(xShift + (X + tileSize),
 					yShift + (Y + tileSize), tileSize, tileSize);
-			input->when(FL_WHEN_CHANGED);
 			input->callback(cb_getValue, this);
 			this->inputBoxes.push_back(input);
 		}
@@ -59,6 +58,10 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 		input->value("");
 
 		window->errorMessageBox->label(ErrorMessages::InvalidInputValue);
+		return;
+	}
+	if (!window->setNewNodeValues()) {
+		input->value("");
 		return;
 	}
 	window->errorMessageBox->label("");
@@ -80,7 +83,7 @@ void GameWindow::cancelHandler() {
 	this->hide();
 }
 
-void GameWindow::setNewNodeValues() {
+bool GameWindow::setNewNodeValues() {
 	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
 		const char *value = this->inputBoxes[i]->value();
 		PuzzleNode *node = this->puzzleNodeManager.getPuzzleNodes()[i];
@@ -91,7 +94,7 @@ void GameWindow::setNewNodeValues() {
 				cout << "null" << endl;
 				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
 					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
-
+					return false;
 				} else {
 					this->puzzleNodeManager.addPuzzleNode(i, stoi(value),
 							false);
@@ -100,6 +103,8 @@ void GameWindow::setNewNodeValues() {
 				cout << "setting value" << endl;
 				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
 					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
+					this->puzzleNodeManager.deletePuzzleNode(i);
+					return false;
 				} else {
 					node->setValue(stoi(value));
 				}
@@ -107,10 +112,10 @@ void GameWindow::setNewNodeValues() {
 			}
 		}
 	}
+	return true;
 }
 
 void GameWindow::okHandler() {
-	setNewNodeValues();
 	cout << this->puzzleNodeManager.toString() << endl;
 	if (this->puzzleNodeManager.isCompleted()) {
 

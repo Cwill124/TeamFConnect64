@@ -39,7 +39,7 @@ private:
 	static void cb_resetBoard(Fl_Widget *widget, void *data);
 	static void cb_savePuzzle(Fl_Widget *widget, void *data);
 	void loadGameBoard();
-	void setNewNodeValues();
+	bool setNewNodeValues();
 	void deleteInputBoxes();
 
 public:
