@@ -21,9 +21,17 @@ public:
 	 */
 	static constexpr int MaximumRowAmount = 8;
 	/**
+	 * The maximum high scores
+	 */
+	static constexpr int MaximumHighScores = 10;
+	/**
 	 * The current puzzle file name
 	 */
 	static const string CurrentPuzzleFileName;
+	/**
+	 * The high scores file name
+	 */
+	static const string HighScoresFileName;
 	/**
 	 * The file names for the puzzles
 	 */
