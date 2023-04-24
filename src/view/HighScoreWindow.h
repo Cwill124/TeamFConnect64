@@ -21,6 +21,7 @@ using namespace scores;
 
 class HighScoreWindow : public Fl_Window {
 private:
+	vector<string> sortMethods = { "Sort by Time", "Sort by Number" };
 	std::vector<Score> highScores;
 	Fl_Button* resetButton;
 	Fl_Button* backButton;
