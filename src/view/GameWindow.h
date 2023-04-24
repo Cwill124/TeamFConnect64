@@ -48,9 +48,8 @@ public:
 	 *
 	 * @param puzzle the filename of the puzzle to be loaded
 	 *
-	 *@precondition the puzzle != null
 	 *
-
+	 *
 	 */
 	GameWindow(const string puzzle);
 	/**
