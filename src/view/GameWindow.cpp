@@ -9,9 +9,12 @@
 using namespace errormessages;
 namespace view {
 
-GameWindow::GameWindow(const string puzzle, int puzzleNumber) :
+GameWindow::GameWindow(const string puzzle) :
 		OKCancelWindow(350, 350, "") {
 	begin();
+	if (puzzle == nullptr) {
+		throw invalid_argument(ErrorMessages::PuzzleNameCannotBeNull);
+	}
 	this->setOKLocation(10, 300);
 	this->setCancelLocation(90, 300);
 	this->resetButton = new Fl_Button(170, 300, 70, 30, "Reset");

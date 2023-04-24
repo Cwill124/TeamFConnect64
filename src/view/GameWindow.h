@@ -22,7 +22,9 @@
 #include "AlertWindow.h"
 using namespace std;
 namespace view {
-
+/**
+ * creates a gamewindow with a 8x8 grid
+ */
 class GameWindow: public OKCancelWindow {
 private:
 	vector<Fl_Input*> inputBoxes;
@@ -41,9 +43,27 @@ private:
 	void deleteInputBoxes();
 
 public:
-	GameWindow(const string puzzle, int puzzleNumber);
+	/**
+	 * GameWindow that is a 8x8 grid that loads in a puzzle
+	 *
+	 * @param puzzle the filename of the puzzle to be loaded
+	 *
+	 *@precondition the puzzle != null
+	 *
+
+	 */
+	GameWindow(const string puzzle);
+	/**
+	 * handles the check button inherited from OKCancelWindow
+	 */
 	void okHandler();
+	/**
+	 * handles the quit button inherited from OKCancelWindow
+	 */
 	void cancelHandler();
+	/**
+	 * deconstructor for gamewindow deletes all nodes and labels
+	 */
 	virtual ~GameWindow();
 };
 

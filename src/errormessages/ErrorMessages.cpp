@@ -52,5 +52,6 @@ const string ErrorMessages::TimeCannotBeNegative = "The time cannot be negative"
 const string ErrorMessages::PuzzleNumberCannotBeNegative =
 		"The puzzle number cannot be negative";
 const string ErrorMessages::ManagerCannotBeNull = "The manager cannot be null";
+const string ErrorMessages::PuzzleNameCannotBeNull = "Puzzle cannot be null";
 
 }

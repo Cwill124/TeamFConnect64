@@ -47,8 +47,7 @@ void MainWindow::cb_show(Fl_Widget *o, void *data) {
 	cout << window->puzzleSelector->value() << endl;
 	cout << Settings::PuzzleFileNames[window->puzzleSelector->value()] << endl;
 	string puzzle = Settings::PuzzleFileNames[window->puzzleSelector->value()];
-	int puzzleNumber = window->puzzleSelector->value() + 1;
-	GameWindow gameWindow(puzzle, puzzleNumber);
+	GameWindow gameWindow(puzzle);
 	gameWindow.set_modal();
 	gameWindow.show();
 	while (gameWindow.shown()) {
@@ -66,8 +65,7 @@ void MainWindow::cb_resumePuzzle(Fl_Widget*, void *data) {
 	puzzle = "current" + puzzle;
 	ifstream file(puzzle);
 	if (file.good()) {
-		int puzzleNumber = window->puzzleSelector->value() + 1;
-		GameWindow gameWindow(puzzle, puzzleNumber);
+		GameWindow gameWindow(puzzle);
 		gameWindow.set_modal();
 		gameWindow.show();
 		while (gameWindow.shown()) {

@@ -17,12 +17,13 @@
 #include <fstream>
 #include "ErrorMessages.h"
 
-
 #include "GameWindow.h"
 using namespace errormessages;
 using namespace std;
 namespace view {
-
+/**
+ * creates a MainWindow
+ */
 class MainWindow: public Fl_Window {
 private:
 	Fl_Button *quitButton;
@@ -37,6 +38,13 @@ private:
 	inline void cb_quit_i();
 	void addLevelOptions();
 public:
+	/**
+	 * A mainwindow that allows user to select a puzzle and resume or play
+	 *
+	 * @param width the width of the window
+	 * @param height the height of the window
+	 * @param title the title of the window
+	 */
 	MainWindow(int width, int height, const char *title);
 	virtual ~MainWindow();
 };

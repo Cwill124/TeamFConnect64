@@ -73,9 +73,13 @@ public:
 	 * The error message for the input being a duplicate
 	 */
 	const static char *DuplicateInput;
-
+	/**
+	 * The error message for the board being incomplete
+	 */
 	const static char *BoardIncomplete;
-
+	/**
+	 * The error message for puzzle trying to be loaded is not found
+	 */
 	const static char *PuzzleCouldNotBeFound;
 	/* The error message for a null player name
 	 */
@@ -96,7 +100,10 @@ public:
 	 * The error message for the manager being null
 	 */
 	const static string ManagerCannotBeNull;
-
+	/**
+	 * The error message for the Puzzle being null
+	 */
+	const static string PuzzleNameCannotBeNull;
 };
 }
 
