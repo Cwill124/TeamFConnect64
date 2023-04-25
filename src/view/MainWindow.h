@@ -27,6 +27,7 @@ namespace view {
 class MainWindow: public Fl_Window {
 private:
 	Fl_Button *quitButton;
+	Fl_Button *highScoresButton;
 	Fl_Button *showNewWindowButton;
 	Fl_Button *resumePuzzleButton;
 	Fl_Choice *puzzleSelector;
@@ -35,6 +36,7 @@ private:
 	static void cb_resumePuzzle(Fl_Widget*, void*);
 	static void cb_data(Fl_Widget*, void*);
 	static void cb_quit(Fl_Widget*, void*);
+	static void cb_high_scores(Fl_Widget*, void*);
 	inline void cb_quit_i();
 	void addLevelOptions();
 public:
