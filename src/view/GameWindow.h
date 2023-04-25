@@ -19,7 +19,7 @@
 #include <vector>
 #include <iostream>
 #include <regex>
-#include "AlertWindow.h"
+#include "InputAlertWindow.h"
 using namespace std;
 namespace view {
 /**
@@ -33,6 +33,7 @@ private:
 	Fl_Button *resetButton;
 	Fl_Button *saveButton;
 	string puzzle;
+	int puzzleNumber;
 	PuzzleNodeManager puzzleNodeManager;
 	static void cb_getValue(Fl_Widget*, void *data);
 	void createBoxes();
@@ -47,11 +48,11 @@ public:
 	 * GameWindow that is a 8x8 grid that loads in a puzzle
 	 *
 	 * @param puzzle the filename of the puzzle to be loaded
-	 *
+	 * @param puzzleNumber the number of the puzzle to be loaded
 	 *
 	 *
 	 */
-	GameWindow(const string puzzle);
+	GameWindow(const string puzzle, int puzzleNumber);
 	/**
 	 * handles the check button inherited from OKCancelWindow
 	 */

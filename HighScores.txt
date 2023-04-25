@@ -3,3 +3,5 @@ Tommy,60,1
 Alex,12000,2
 Sally,100,3
 John,90,1
+@;rUUU,1,0
+My anme,1,0

@@ -114,6 +114,10 @@ void HighScoreWindow::loadScoresSortedByNumber(ScoreManager manager) {
 }
 
 HighScoreWindow::~HighScoreWindow() {
-	// TODO Auto-generated destructor stub
+	this->summaryOutputTextBuffer = 0;
+	delete this->summaryOutputTextBuffer;
+
+	this->backButton = 0;
+	delete this->backButton;
 }
 

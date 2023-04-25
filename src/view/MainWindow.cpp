@@ -8,6 +8,8 @@
 #include "MainWindow.h"
 #include "HighScoreWindow.h"
 
+using namespace std;
+
 namespace view {
 
 MainWindow::MainWindow(int width, int height, const char *title) :
@@ -36,6 +38,7 @@ MainWindow::~MainWindow() {
 
 }
 void MainWindow::addLevelOptions() {
+	//TODO This needs to be cleaned up
 	for (int i = 1; i <= 4; i++) {
 		string level = to_string(i);
 		const char *level_cstr = level.c_str();
@@ -50,7 +53,7 @@ void MainWindow::cb_show(Fl_Widget *o, void *data) {
 	cout << window->puzzleSelector->value() << endl;
 	cout << Settings::PuzzleFileNames[window->puzzleSelector->value()] << endl;
 	string puzzle = Settings::PuzzleFileNames[window->puzzleSelector->value()];
-	GameWindow gameWindow(puzzle);
+	GameWindow gameWindow(puzzle, window->puzzleSelector->value());
 	gameWindow.set_modal();
 	gameWindow.show();
 	while (gameWindow.shown()) {
@@ -68,7 +71,7 @@ void MainWindow::cb_resumePuzzle(Fl_Widget*, void *data) {
 	puzzle = "current" + puzzle;
 	ifstream file(puzzle);
 	if (file.good()) {
-		GameWindow gameWindow(puzzle);
+		GameWindow gameWindow(puzzle, window->puzzleSelector->value());
 		gameWindow.set_modal();
 		gameWindow.show();
 		while (gameWindow.shown()) {
