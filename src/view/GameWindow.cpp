@@ -54,9 +54,13 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
 	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
+	if(strlen(value) == 0){
+		if(!window->setNewNodeValues()){
+			return;
+		}
+	}
 	if (!regex_match(value, pattern) || !regex_match(value, patternNumbers)) {
 		input->value("");
-
 		window->errorMessageBox->label(ErrorMessages::InvalidInputValue);
 		return;
 	}
@@ -110,12 +114,22 @@ bool GameWindow::setNewNodeValues() {
 				}
 
 			}
+		} else {
+			try {
+				this->puzzleNodeManager.deletePuzzleNode(i);
+				return false;
+			} catch (...) {
+				cout << "ERROR" << endl;
+			}
+
 		}
+
 	}
 	return true;
 }
 
 void GameWindow::okHandler() {
+	this->setNewNodeValues();
 	cout << this->puzzleNodeManager.toString() << endl;
 	if (this->puzzleNodeManager.isCompleted()) {
 
