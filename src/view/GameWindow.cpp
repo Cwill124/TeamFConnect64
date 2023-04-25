@@ -116,7 +116,6 @@ bool GameWindow::setNewNodeValues() {
 			}
 		} else {
 			try {
-				this->errorMessageBox->label(ErrorMessages::DuplicateInput);
 				this->puzzleNodeManager.deletePuzzleNode(i);
 				return false;
 			} catch (...) {
@@ -130,6 +129,7 @@ bool GameWindow::setNewNodeValues() {
 }
 
 void GameWindow::okHandler() {
+	this->setNewNodeValues();
 	cout << this->puzzleNodeManager.toString() << endl;
 	if (this->puzzleNodeManager.isCompleted()) {
 
