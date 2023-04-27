@@ -6,10 +6,12 @@
  */
 
 #include "GameWindow.h"
+#include "ScoreManager.h"
 using namespace errormessages;
+using namespace scores;
 namespace view {
 
-GameWindow::GameWindow(const string puzzle) :
+GameWindow::GameWindow(const string puzzle, int puzzleNumber) :
 		OKCancelWindow(350, 350, "") {
 	begin();
 	this->setOKLocation(10, 300);
@@ -19,6 +21,7 @@ GameWindow::GameWindow(const string puzzle) :
 	this->resetButton->callback(cb_resetBoard, this);
 	this->saveButton->callback(cb_savePuzzle, this);
 	this->puzzle = puzzle;
+	this->puzzleNumber = puzzleNumber;
 	this->label(this->puzzle.c_str());
 	this->createBoxes();
 	this->loadGameBoard();
@@ -134,12 +137,28 @@ void GameWindow::okHandler() {
 	if (this->puzzleNodeManager.isCompleted()) {
 
 		if (this->puzzleNodeManager.isSolved()) {
-			this->gameOutcomeLabel->label("");
-			AlertWindow winningWindow("Solution Correct");
-			winningWindow.set_modal();
-			winningWindow.show();
-			while (winningWindow.shown()) {
-				Fl::wait();
+			try {
+				this->gameOutcomeLabel->label("");
+
+				InputAlertWindow winningWindow("Solution Correct");
+				winningWindow.set_modal();
+				winningWindow.show();
+				while (winningWindow.shown()) {
+					Fl::wait();
+				}
+
+				string name = winningWindow.getPlayerName();
+				winningWindow.hide();
+				this->show();
+
+				ScoreManager scoreManager = ScoreManager();
+				scoreManager.loadScores();
+				scoreManager.addScore(name, 1, this->puzzleNumber);
+				scoreManager.saveScores();
+			} catch (std::invalid_argument& e) {
+				#ifdef DIAGNOSTIC_OUTPUT
+					cout << e << endl;
+				#endif
 			}
 		} else {
 			this->gameOutcomeLabel->label(ErrorMessages::IncorrectSolution);
@@ -149,6 +168,7 @@ void GameWindow::okHandler() {
 	}
 
 }
+
 void GameWindow::loadGameBoard() {
 	this->puzzleNodeManager.loadNodes(this->puzzle);
 	for (vector<PuzzleNode*>::size_type i = 0;
