@@ -16,10 +16,15 @@ GameWindow::GameWindow(const string puzzle, int puzzleNumber) :
 	begin();
 	this->setOKLocation(10, 300);
 	this->setCancelLocation(90, 300);
+	this->isPaused = false;
 	this->resetButton = new Fl_Button(170, 300, 70, 30, "Reset");
 	this->saveButton = new Fl_Button(250, 300, 70, 30, "Save");
+	this->pauseButton = new Fl_Button(90, 5, 70, 30, "Pause");
+	this->pauseButton->callback(cb_pause, this);
 	this->resetButton->callback(cb_resetBoard, this);
 	this->saveButton->callback(cb_savePuzzle, this);
+	this->timer = new Fl_Output(10, 5, 70, 30);
+	Fl::add_timeout(1.0, cb_timer, this);
 	this->puzzle = puzzle;
 	this->puzzleNumber = puzzleNumber;
 	this->label(this->puzzle.c_str());
@@ -33,15 +38,43 @@ GameWindow::GameWindow(const string puzzle, int puzzleNumber) :
 
 }
 
+void GameWindow::cb_timer(void* data)
+{
+    GameWindow* gameWindow = static_cast<GameWindow*>(data);
+    if (!gameWindow->isPaused) {
+        gameWindow->puzzleNodeManager.incrementTime();
+        string text = Utils::convertIntegerToTimeString(gameWindow->puzzleNodeManager.getTime());
+        gameWindow->timer->value(text.c_str());
+        Fl::repeat_timeout(1.0, cb_timer, data);
+    } else {
+    	Fl::repeat_timeout(1.0, cb_timer, data);
+    }
+}
+
+void GameWindow::cb_pause(Fl_Widget *widget, void *data) {
+	GameWindow* gameWindow = static_cast<GameWindow*>(data);
+	gameWindow->isPaused = !gameWindow->isPaused;
+
+	if (gameWindow->isPaused) {
+		for (Fl_Input* input : gameWindow->inputBoxes) {
+			input->hide();
+		}
+	} else {
+		for (Fl_Input* input : gameWindow->inputBoxes) {
+			input->show();
+		}
+	}
+}
+
 void GameWindow::createBoxes() {
 	int xShift = -5;
 	int yShift = -20;
 	int tileSize = 30;
+	//TODO Magic ints
 	for (int i = 1; i < 9; i++) {
 		int Y = (i * tileSize);
 		for (int j = 1; j < 9; j++) {
 			int X = (j * tileSize);
-
 			Fl_Input *input = new Fl_Input(xShift + (X + tileSize),
 					yShift + (Y + tileSize), tileSize, tileSize);
 			input->callback(cb_getValue, this);
@@ -75,6 +108,7 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 }
 void GameWindow::cb_resetBoard(Fl_Widget *widget, void *data) {
 	GameWindow *window = (GameWindow*) data;
+	window->puzzleNodeManager.setTime(0);
 	for (vector<Fl_Input*>::size_type i = 0; i < window->inputBoxes.size();
 			i++) {
 		PuzzleNode *node = window->puzzleNodeManager.getPuzzleNodes()[i];
@@ -153,7 +187,7 @@ void GameWindow::okHandler() {
 
 				ScoreManager scoreManager = ScoreManager();
 				scoreManager.loadScores();
-				scoreManager.addScore(name, 1, this->puzzleNumber);
+				scoreManager.addScore(name, this->puzzleNodeManager.getTime(), this->puzzleNumber);
 				scoreManager.saveScores();
 			} catch (std::invalid_argument& e) {
 				#ifdef DIAGNOSTIC_OUTPUT
@@ -199,16 +233,31 @@ void GameWindow::deleteInputBoxes() {
 void GameWindow::cb_savePuzzle(Fl_Widget *widget, void *data) {
 	GameWindow *window = (GameWindow*) data;
 	window->setNewNodeValues();
-	if (window->puzzle.find("current") != string::npos) {
-		window->puzzleNodeManager.saveNodes(window->puzzle);
-	} else {
-		window->puzzleNodeManager.saveNodes("current" + window->puzzle);
-	}
-
+	window->puzzleNodeManager.saveNodes(Settings::CurrentPuzzleFileName);
 }
 
 GameWindow::~GameWindow() {
+	Fl::remove_timeout(cb_timer, this);
 	this->puzzleNodeManager.resetBoard();
+
+	this->timer = nullptr;
+	delete this->timer;
+
+	this->gameOutcomeLabel = nullptr;
+	delete this->gameOutcomeLabel;
+
+	this->errorMessageBox = nullptr;
+	delete this->errorMessageBox;
+
+	this->resetButton = nullptr;
+	delete this->resetButton;
+
+	this->saveButton = nullptr;
+	delete this->saveButton;
+
+	this->pauseButton = nullptr;
+	delete this->pauseButton;
+
 	this->deleteInputBoxes();
 }
 

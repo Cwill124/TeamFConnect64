@@ -27,9 +27,11 @@ void PuzzleNodeManagerFileIO::loadPuzzleNodes(const string& filename, PuzzleNode
 		string value;
 		string isStarting;
 		string puzzleIndex;
+		string time;
 
-		if (lineIndex == 0 && std::getline(stream, puzzleIndex)) {
+		if (lineIndex == 0 && std::getline(stream, puzzleIndex, ',') && std::getline(stream, time)) {
 			manager.setCurrentPuzzleIndex(std::stoi(puzzleIndex));
+			manager.setTime(std::stoi(time));
 		} else if (std::getline(stream, index, ',') && std::getline(stream, value, ',') && std::getline(stream, isStarting)) {
 			manager.addPuzzleNode(std::stoi(index), std::stoi(value), std::stoi(isStarting));
 		}
@@ -40,7 +42,7 @@ void PuzzleNodeManagerFileIO::loadPuzzleNodes(const string& filename, PuzzleNode
 
 void PuzzleNodeManagerFileIO::savePuzzleNodes(const string& filename, PuzzleNodeManager& manager, vector<PuzzleNode*> nodes) {
     std::ofstream outputFile(filename);
-    outputFile << manager.getCurrentPuzzleIndex() << endl;
+    outputFile << manager.getCurrentPuzzleIndex() << "," << manager.getTime() << endl;
 
     for (int i = 0; i < Settings::NumberOfPuzzleNodes; i++) {
     	if (nodes[i] != nullptr) {
