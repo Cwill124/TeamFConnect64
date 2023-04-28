@@ -45,6 +45,7 @@ void GameWindow::createBoxes() {
 			Fl_Input *input = new Fl_Input(xShift + (X + tileSize),
 					yShift + (Y + tileSize), tileSize, tileSize);
 			input->callback(cb_getValue, this);
+			input->textfont(FL_BOLD);
 			this->inputBoxes.push_back(input);
 		}
 	}
@@ -57,8 +58,8 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
 	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
-	if(strlen(value) == 0){
-		if(!window->setNewNodeValues()){
+	if (strlen(value) == 0) {
+		if (!window->setNewNodeValues()) {
 			return;
 		}
 	}
@@ -122,7 +123,7 @@ bool GameWindow::setNewNodeValues() {
 				this->puzzleNodeManager.deletePuzzleNode(i);
 				return false;
 			} catch (...) {
-				cout << "ERROR" << endl;
+				cout << "" << endl;
 			}
 
 		}
@@ -133,7 +134,6 @@ bool GameWindow::setNewNodeValues() {
 
 void GameWindow::okHandler() {
 	this->setNewNodeValues();
-	cout << this->puzzleNodeManager.toString() << endl;
 	if (this->puzzleNodeManager.isCompleted()) {
 
 		if (this->puzzleNodeManager.isSolved()) {
@@ -155,8 +155,9 @@ void GameWindow::okHandler() {
 				scoreManager.loadScores();
 				scoreManager.addScore(name, 1, this->puzzleNumber);
 				scoreManager.saveScores();
-			} catch (std::invalid_argument& e) {
-				#ifdef DIAGNOSTIC_OUTPUT
+				this->loadNextPuzzle();
+			} catch (std::invalid_argument &e) {
+#ifdef DIAGNOSTIC_OUTPUT
 					cout << e << endl;
 				#endif
 			}
@@ -199,12 +200,42 @@ void GameWindow::deleteInputBoxes() {
 void GameWindow::cb_savePuzzle(Fl_Widget *widget, void *data) {
 	GameWindow *window = (GameWindow*) data;
 	window->setNewNodeValues();
-	if (window->puzzle.find("current") != string::npos) {
-		window->puzzleNodeManager.saveNodes(window->puzzle);
-	} else {
-		window->puzzleNodeManager.saveNodes("current" + window->puzzle);
+	try {
+		window->puzzleNodeManager.saveNodes(Settings::CurrentPuzzleFileName);
+	} catch (...) {
+		cout << "Error with saving puzzle" << endl;
 	}
 
+}
+
+void GameWindow::loadNextPuzzle() {
+	cout << "In load method" << endl;
+	try {
+		cout << to_string(this->puzzleNumber) << endl;
+		if (this->puzzleNumber < Settings::NumberOfPuzzles - 1) {
+			this->puzzleNumber += 1;
+			this->puzzle = Settings::PuzzleFileNames[this->puzzleNumber];
+			cout << this->puzzle << endl;
+			this->label(this->puzzle.c_str());
+			this->puzzleNodeManager.resetBoard();
+			this->resetInputBoxes();
+			this->loadGameBoard();
+			cout << this->puzzleNodeManager.toString() << endl;
+		} else {
+			this->hide();
+		}
+	} catch (...) {
+		cout << "error was thorwn in load puzzle" << endl;
+	}
+
+}
+
+void GameWindow::resetInputBoxes() {
+	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
+		this->inputBoxes[i]->value("");
+		this->inputBoxes[i]->readonly(false);
+		this->inputBoxes[i]->activate();
+	}
 }
 
 GameWindow::~GameWindow() {

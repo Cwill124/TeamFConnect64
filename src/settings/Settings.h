@@ -36,6 +36,10 @@ public:
 	 * The file names for the puzzles
 	 */
 	static const char* PuzzleFileNames[];
+	/**
+	 * The number of Puzzles
+	 */
+	static constexpr int NumberOfPuzzles = 12;
 
 };
 }

@@ -42,6 +42,8 @@ private:
 	void loadGameBoard();
 	bool setNewNodeValues();
 	void deleteInputBoxes();
+	void resetInputBoxes();
+	void loadNextPuzzle();
 
 public:
 	/**
