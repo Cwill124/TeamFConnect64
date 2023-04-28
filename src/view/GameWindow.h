@@ -10,17 +10,21 @@
 #include <Fl/Fl_Input.H>
 #include <Fl/Fl_Box.H>
 #include <Fl/Fl_Button.H>
+#include <Fl/Fl_Timer.H>
+#include <Fl/Fl_Output.H>
 #include "OKCancelWindow.h"
 #include "MainWindow.h"
 #include "PuzzleNodeManager.h"
 #include "Settings.h"
 #include "PuzzleNode.h"
 #include "ErrorMessages.h"
+#include "Utils.h"
 #include <vector>
 #include <iostream>
 #include <regex>
 #include "InputAlertWindow.h"
 using namespace std;
+using namespace utils;
 namespace view {
 /**
  * creates a gamewindow with a 8x8 grid
@@ -32,6 +36,9 @@ private:
 	Fl_Box *errorMessageBox;
 	Fl_Button *resetButton;
 	Fl_Button *saveButton;
+	Fl_Button *pauseButton;
+	Fl_Output *timer;
+	bool isPaused;
 	string puzzle;
 	int puzzleNumber;
 	PuzzleNodeManager puzzleNodeManager;
@@ -39,10 +46,11 @@ private:
 	void createBoxes();
 	static void cb_resetBoard(Fl_Widget *widget, void *data);
 	static void cb_savePuzzle(Fl_Widget *widget, void *data);
+	static void cb_pause(Fl_Widget *widget, void *data);
+	static void cb_timer(void* data);
 	void loadGameBoard();
 	bool setNewNodeValues();
 	void deleteInputBoxes();
-
 public:
 	/**
 	 * GameWindow that is a 8x8 grid that loads in a puzzle
