@@ -12,6 +12,7 @@
 #include <Fl/Fl_Button.H>
 #include <Fl/Fl_Timer.H>
 #include <Fl/Fl_Output.H>
+#include <FL/Fl_Scroll.H>
 #include "OKCancelWindow.h"
 #include "MainWindow.h"
 #include "PuzzleNodeManager.h"
@@ -23,6 +24,8 @@
 #include <iostream>
 #include <regex>
 #include "InputAlertWindow.h"
+#include "ScrollableAlertWindow.h"
+#include "AlertWindow.h"
 using namespace std;
 using namespace utils;
 namespace view {
@@ -37,6 +40,7 @@ private:
 	Fl_Button *resetButton;
 	Fl_Button *saveButton;
 	Fl_Button *pauseButton;
+	Fl_Button *hintButton;
 	Fl_Output *timer;
 	bool isPaused;
 	string puzzle;
@@ -47,6 +51,7 @@ private:
 	static void cb_resetBoard(Fl_Widget *widget, void *data);
 	static void cb_savePuzzle(Fl_Widget *widget, void *data);
 	static void cb_pause(Fl_Widget *widget, void *data);
+	static void cb_hint(Fl_Widget *widget, void *data);
 	static void cb_timer(void* data);
 	void loadGameBoard();
 	bool setNewNodeValues();

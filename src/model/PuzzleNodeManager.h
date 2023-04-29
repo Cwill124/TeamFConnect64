@@ -118,6 +118,15 @@ public:
 	 */
 	void setCurrentPuzzleIndex(int index);
 	/**
+	 * Gets the remaining node names
+	 *
+	 * Precondition: None
+	 * Postcondition: None
+	 *
+	 * Return: The remaining node names
+	 */
+	vector<string> getRemainingNodeNames();
+	/**
 	 * Deletes a puzzle node
 	 *
 	 * Precondition: Precondition: node at index is not null && node at index is not starting && index >= 0
