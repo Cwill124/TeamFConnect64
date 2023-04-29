@@ -40,6 +40,14 @@ public:
 	 * The file names for the puzzles
 	 */
 	static const char* PuzzleFileNames[];
+	/**
+	 * The number of Puzzles
+	 */
+	static constexpr int NumberOfPuzzles = 12;
+	/**
+	 * The size of the board
+	 */
+	static constexpr int SizeOfBoard = 8;
 
 };
 }

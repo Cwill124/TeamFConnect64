@@ -38,8 +38,7 @@ MainWindow::~MainWindow() {
 
 }
 void MainWindow::addLevelOptions() {
-	//TODO This needs to be cleaned up
-	for (int i = 1; i <= 4; i++) {
+	for (int i = 1; i <= Settings::NumberOfPuzzles; i++) {
 		string level = to_string(i);
 		const char *level_cstr = level.c_str();
 		this->puzzleSelector->add(level_cstr);

@@ -40,33 +40,36 @@ GameWindow::GameWindow(const string puzzle, int puzzleNumber) :
 
 }
 
-void GameWindow::cb_timer(void* data)
-{
-    GameWindow* gameWindow = static_cast<GameWindow*>(data);
-    if (!gameWindow->isPaused) {
-        gameWindow->puzzleNodeManager.incrementTime();
-        string text = Utils::convertIntegerToTimeString(gameWindow->puzzleNodeManager.getTime());
-        gameWindow->timer->value(text.c_str());
-        Fl::repeat_timeout(1.0, cb_timer, data);
-    } else {
-    	Fl::repeat_timeout(1.0, cb_timer, data);
-    }
+void GameWindow::cb_timer(void *data) {
+	GameWindow *gameWindow = static_cast<GameWindow*>(data);
+	if (!gameWindow->isPaused) {
+		gameWindow->puzzleNodeManager.incrementTime();
+		string text = Utils::convertIntegerToTimeString(
+				gameWindow->puzzleNodeManager.getTime());
+		gameWindow->timer->value(text.c_str());
+		Fl::repeat_timeout(1.0, cb_timer, data);
+	} else {
+		Fl::repeat_timeout(1.0, cb_timer, data);
+	}
 }
 
 void GameWindow::cb_hint(Fl_Widget *widget, void *data) {
 	string hintWindowTitle = "Hints";
-	GameWindow* gameWindow = static_cast<GameWindow*>(data);
-	int newPuzzleTime = gameWindow->puzzleNodeManager.getTime() + Settings::HintTimeIncrement;
+	GameWindow *gameWindow = static_cast<GameWindow*>(data);
+	int newPuzzleTime = gameWindow->puzzleNodeManager.getTime()
+			+ Settings::HintTimeIncrement;
 	gameWindow->puzzleNodeManager.setTime(newPuzzleTime);
 
-	vector<string> remainingValues = gameWindow->puzzleNodeManager.getRemainingNodeNames();
+	vector<string> remainingValues =
+			gameWindow->puzzleNodeManager.getRemainingNodeNames();
 	string remainingValuesMessage = "Remaining Values: \n";
 
 	for (string value : remainingValues) {
 		remainingValuesMessage += "  " + value + "\n";
 	}
 
-	ScrollableAlertWindow winningWindow(remainingValuesMessage.c_str(), hintWindowTitle.c_str());
+	ScrollableAlertWindow winningWindow(remainingValuesMessage.c_str(),
+			hintWindowTitle.c_str());
 	winningWindow.set_modal();
 	winningWindow.show();
 	while (winningWindow.shown()) {
@@ -75,15 +78,15 @@ void GameWindow::cb_hint(Fl_Widget *widget, void *data) {
 }
 
 void GameWindow::cb_pause(Fl_Widget *widget, void *data) {
-	GameWindow* gameWindow = static_cast<GameWindow*>(data);
+	GameWindow *gameWindow = static_cast<GameWindow*>(data);
 	gameWindow->isPaused = !gameWindow->isPaused;
 
 	if (gameWindow->isPaused) {
-		for (Fl_Input* input : gameWindow->inputBoxes) {
+		for (Fl_Input *input : gameWindow->inputBoxes) {
 			input->hide();
 		}
 	} else {
-		for (Fl_Input* input : gameWindow->inputBoxes) {
+		for (Fl_Input *input : gameWindow->inputBoxes) {
 			input->show();
 		}
 	}
@@ -93,14 +96,14 @@ void GameWindow::createBoxes() {
 	int xShift = -5;
 	int yShift = -20;
 	int tileSize = 30;
-	//TODO Magic ints
-	for (int i = 1; i < 9; i++) {
+	for (int i = 1; i <= Settings::SizeOfBoard; i++) {
 		int Y = (i * tileSize);
-		for (int j = 1; j < 9; j++) {
+		for (int j = 1; j <= Settings::SizeOfBoard; j++) {
 			int X = (j * tileSize);
 			Fl_Input *input = new Fl_Input(xShift + (X + tileSize),
 					yShift + (Y + tileSize), tileSize, tileSize);
 			input->callback(cb_getValue, this);
+			input->textfont(FL_BOLD);
 			this->inputBoxes.push_back(input);
 		}
 	}
@@ -113,8 +116,8 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
 	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
-	if(strlen(value) == 0){
-		if(!window->setNewNodeValues()){
+	if (strlen(value) == 0) {
+		if (!window->setNewNodeValues()) {
 			return;
 		}
 	}
@@ -152,10 +155,7 @@ bool GameWindow::setNewNodeValues() {
 		const char *value = this->inputBoxes[i]->value();
 		PuzzleNode *node = this->puzzleNodeManager.getPuzzleNodes()[i];
 		if (strlen(value) != 0 || value == nullptr) {
-			cout << "VALUE:" << endl;
-			cout << value << endl;
 			if (node == nullptr) {
-				cout << "null" << endl;
 				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
 					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
 					return false;
@@ -164,7 +164,6 @@ bool GameWindow::setNewNodeValues() {
 							false);
 				}
 			} else {
-				cout << "setting value" << endl;
 				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
 					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
 					this->puzzleNodeManager.deletePuzzleNode(i);
@@ -179,7 +178,7 @@ bool GameWindow::setNewNodeValues() {
 				this->puzzleNodeManager.deletePuzzleNode(i);
 				return false;
 			} catch (...) {
-				cout << "ERROR" << endl;
+				cout << "" << endl;
 			}
 
 		}
@@ -190,7 +189,6 @@ bool GameWindow::setNewNodeValues() {
 
 void GameWindow::okHandler() {
 	this->setNewNodeValues();
-	cout << this->puzzleNodeManager.toString() << endl;
 	if (this->puzzleNodeManager.isCompleted()) {
 
 		if (this->puzzleNodeManager.isSolved()) {
@@ -210,10 +208,12 @@ void GameWindow::okHandler() {
 
 				ScoreManager scoreManager = ScoreManager();
 				scoreManager.loadScores();
-				scoreManager.addScore(name, this->puzzleNodeManager.getTime(), this->puzzleNumber);
+				scoreManager.addScore(name, this->puzzleNodeManager.getTime(),
+						this->puzzleNumber);
 				scoreManager.saveScores();
-			} catch (std::invalid_argument& e) {
-				#ifdef DIAGNOSTIC_OUTPUT
+				this->loadNextPuzzle();
+			} catch (std::invalid_argument &e) {
+#ifdef DIAGNOSTIC_OUTPUT
 					cout << e << endl;
 				#endif
 			}
@@ -244,6 +244,10 @@ void GameWindow::loadGameBoard() {
 		}
 
 	}
+	if (this->puzzle.find(Settings::CurrentPuzzleFileName) != string::npos) {
+		this->puzzleNumber = this->puzzleNodeManager.getCurrentPuzzleIndex();
+	}
+
 }
 
 void GameWindow::deleteInputBoxes() {
@@ -256,7 +260,37 @@ void GameWindow::deleteInputBoxes() {
 void GameWindow::cb_savePuzzle(Fl_Widget *widget, void *data) {
 	GameWindow *window = (GameWindow*) data;
 	window->setNewNodeValues();
+	window->puzzleNodeManager.setCurrentPuzzleIndex(window->puzzleNumber);
 	window->puzzleNodeManager.saveNodes(Settings::CurrentPuzzleFileName);
+
+}
+
+void GameWindow::loadNextPuzzle() {
+	try {
+		if (this->puzzleNumber < Settings::NumberOfPuzzles - 1) {
+			this->puzzleNumber += 1;
+			this->puzzle = Settings::PuzzleFileNames[this->puzzleNumber];
+			this->label(this->puzzle.c_str());
+			this->puzzleNodeManager.resetBoard();
+			this->resetInputBoxes();
+			this->loadGameBoard();
+		} else {
+			this->hide();
+		}
+	} catch (...) {
+#ifdef DIAGNOSTIC_OUTPUT
+		cout << ErrorMessages::PuzzleCouldNotBeFound << endl;
+#endif
+	}
+
+}
+
+void GameWindow::resetInputBoxes() {
+	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
+		this->inputBoxes[i]->value("");
+		this->inputBoxes[i]->readonly(false);
+		this->inputBoxes[i]->activate();
+	}
 }
 
 GameWindow::~GameWindow() {
