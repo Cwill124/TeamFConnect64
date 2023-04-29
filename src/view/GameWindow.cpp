@@ -200,11 +200,7 @@ void GameWindow::deleteInputBoxes() {
 void GameWindow::cb_savePuzzle(Fl_Widget *widget, void *data) {
 	GameWindow *window = (GameWindow*) data;
 	window->setNewNodeValues();
-	try {
-		window->puzzleNodeManager.saveNodes(Settings::CurrentPuzzleFileName);
-	} catch (...) {
-		cout << "Error with saving puzzle" << endl;
-	}
+	window->puzzleNodeManager.saveNodes(Settings::CurrentPuzzleFileName);
 
 }
 
