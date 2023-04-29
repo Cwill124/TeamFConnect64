@@ -188,6 +188,11 @@ void GameWindow::loadGameBoard() {
 		}
 
 	}
+	if (this->puzzle.find(Settings::CurrentPuzzleFileName) != string::npos) {
+		this->puzzleNumber = this->puzzleNodeManager.getCurrentPuzzleIndex();
+		cout << "IN LOADGAMEBOARD RESUME " + to_string(this->puzzleNumber)
+				<< endl;
+	}
 
 }
 
@@ -207,10 +212,7 @@ void GameWindow::cb_savePuzzle(Fl_Widget *widget, void *data) {
 }
 
 void GameWindow::loadNextPuzzle() {
-	cout << "In load method" << endl;
 	try {
-		cout << to_string(this->puzzleNodeManager.getCurrentPuzzleIndex()) <<  endl;
-		cout << to_string(this->puzzleNumber) << endl;
 		if (this->puzzleNumber < Settings::NumberOfPuzzles - 1) {
 			this->puzzleNumber += 1;
 			this->puzzle = Settings::PuzzleFileNames[this->puzzleNumber];
@@ -222,7 +224,7 @@ void GameWindow::loadNextPuzzle() {
 			this->hide();
 		}
 	} catch (...) {
-		cout << "error was thorwn in load puzzle" << endl;
+		cout << ErrorMessages::PuzzleCouldNotBeFound << endl;
 	}
 
 }

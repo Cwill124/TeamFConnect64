@@ -67,8 +67,7 @@ void MainWindow::cb_resumePuzzle(Fl_Widget*, void *data) {
 
 	cout << window->puzzleSelector->value() << endl;
 	cout << Settings::PuzzleFileNames[window->puzzleSelector->value()] << endl;
-	string puzzle = Settings::PuzzleFileNames[window->puzzleSelector->value()];
-	puzzle = Settings::CurrentPuzzleFileName;
+	string puzzle = Settings::CurrentPuzzleFileName;
 	ifstream file(puzzle);
 	if (file.good()) {
 		GameWindow gameWindow(puzzle, window->puzzleSelector->value());
