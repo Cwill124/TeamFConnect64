@@ -60,7 +60,6 @@ public:
 	 */
 	const static string CannotReplaceNullNode;
 	/**
-
 	 * The error message for inserting a invalid value in inputbox
 	 */
 	const static char *InvalidInputValue;

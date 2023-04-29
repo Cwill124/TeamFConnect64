@@ -9,6 +9,7 @@ using namespace errormessages;
 using namespace fileio;
 
 PuzzleNodeManager::PuzzleNodeManager() {
+	this->time = 0;
 	this->currentPuzzleIndex = 0;
 	for (int i = 0; i < Settings::NumberOfPuzzleNodes; i++) {
 		nodes.push_back(nullptr);
@@ -21,6 +22,22 @@ PuzzleNodeManager::~PuzzleNodeManager() {
 
 vector<PuzzleNode*> PuzzleNodeManager::getPuzzleNodes() {
 	return this->nodes;
+}
+
+void PuzzleNodeManager::incrementTime() {
+	this->time++;
+}
+
+void PuzzleNodeManager::setTime(int time) {
+	if (time < 0) {
+		throw new invalid_argument(ErrorMessages::TimeCannotBeNegative);
+	}
+
+	this->time = time;
+}
+
+int PuzzleNodeManager::getTime() {
+	return this->time;
 }
 
 bool PuzzleNodeManager::isValidNextPath(int neighborNodeValueToCheck,
@@ -65,6 +82,17 @@ void PuzzleNodeManager::setCurrentPuzzleIndex(int index) {
 	this->currentPuzzleIndex = index;
 }
 
+vector<string> PuzzleNodeManager::getRemainingNodeNames() {
+	vector<string> remainingNodes;
+	for (int i = 1; i <= Settings::NumberOfPuzzleNodes; i++) {
+		if (!this->containsValue(i)) {
+			remainingNodes.push_back(std::to_string(i));
+		}
+	}
+
+	return remainingNodes;
+}
+
 void PuzzleNodeManager::replacePuzzleNode(int index, int value) {
 	if (nodes[index] == nullptr) {
 		throw invalid_argument(ErrorMessages::CannotReplaceNullNode);
@@ -97,6 +125,7 @@ void PuzzleNodeManager::deletePuzzleNode(int index) {
 }
 
 void PuzzleNodeManager::resetBoard() {
+	this->time = 0;
 	for (int i = 0; i < Settings::NumberOfPuzzleNodes; i++) {
 		nodes[i] = nullptr;
 		delete nodes[i];

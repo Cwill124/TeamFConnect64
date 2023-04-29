@@ -17,7 +17,9 @@
 #include <Fl/Fl_Round_Button.H>
 #include <ScoreManager.h>
 #include <SortSelection.h>
+#include <Utils.h>
 
+using namespace utils;
 using namespace enums;
 using namespace std;
 using namespace scores;

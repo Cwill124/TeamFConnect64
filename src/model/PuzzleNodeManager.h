@@ -17,6 +17,7 @@ using namespace settings;
 class PuzzleNodeManager final {
 private:
 	int currentPuzzleIndex;
+	int time;
 	vector<PuzzleNode*> nodes;
 
 	PuzzleNode* getLeftPuzzleNode(int index);
@@ -53,6 +54,29 @@ public:
 	 * Returns: The puzzle nodes
 	 */
 	vector<PuzzleNode*> getPuzzleNodes();
+	/**
+	 * Increments the puzzle time
+	 *
+	 * Precondition: None
+	 * Postcondition: getPuzzleTIme() == getPuzzleTIme()@prev + 1
+	 */
+	void incrementTime();
+	/**
+	 * Sets the puzzle time
+	 *
+	 * Precondition: time >= 0
+	 * Postcondition: getPuzzleTIme() == time
+	 */
+	void setTime(int time);
+	/**
+	 * Gets the puzzle time
+	 *
+	 * Precondition: None
+	 * Postcondition: None
+	 *
+	 * Returns: The puzzle time
+	 */
+	int getTime();
 	/**
 	 * Adds a puzzle node
 	 *
@@ -93,6 +117,15 @@ public:
 	 * Param: index the index to set
 	 */
 	void setCurrentPuzzleIndex(int index);
+	/**
+	 * Gets the remaining node names
+	 *
+	 * Precondition: None
+	 * Postcondition: None
+	 *
+	 * Return: The remaining node names
+	 */
+	vector<string> getRemainingNodeNames();
 	/**
 	 * Deletes a puzzle node
 	 *
