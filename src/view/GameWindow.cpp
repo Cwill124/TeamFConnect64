@@ -12,28 +12,28 @@ using namespace scores;
 namespace view {
 
 GameWindow::GameWindow(const string puzzle, int puzzleNumber) :
-		OKCancelWindow(350, 350, "") {
+		OKCancelWindow(330, 375, "") {
 	begin();
-	this->setOKLocation(10, 300);
-	this->setCancelLocation(90, 300);
+	this->setOKLocation(10, 325);
+	this->setCancelLocation(90, 325);
 	this->isPaused = false;
-	this->resetButton = new Fl_Button(170, 300, 70, 30, "Reset");
-	this->saveButton = new Fl_Button(250, 300, 70, 30, "Save");
-	this->pauseButton = new Fl_Button(90, 5, 70, 30, "Pause");
-	this->hintButton = new Fl_Button(250, 5, 70, 30, "Hint");
+	this->resetButton = new Fl_Button(170, 325, 70, 30, "Reset");
+	this->saveButton = new Fl_Button(250, 325, 70, 30, "Save");
+	this->pauseButton = new Fl_Button(90, 25, 70, 30, "Pause");
+	this->hintButton = new Fl_Button(250, 25, 70, 30, "Hint");
 	this->pauseButton->callback(cb_pause, this);
 	this->resetButton->callback(cb_resetBoard, this);
 	this->saveButton->callback(cb_savePuzzle, this);
 	this->hintButton->callback(cb_hint, this);
-	this->timer = new Fl_Output(10, 5, 70, 30);
+	this->timer = new Fl_Output(10, 25, 70, 30);
 	Fl::add_timeout(1.0, cb_timer, this);
 	this->puzzle = puzzle;
 	this->puzzleNumber = puzzleNumber;
 	this->label(this->puzzle.c_str());
 	this->createBoxes();
 	this->loadGameBoard();
-	this->gameOutcomeLabel = new Fl_Box(70, 10, 200, 30);
-	this->errorMessageBox = new Fl_Box(70, -5, 200, 30);
+	this->gameOutcomeLabel = new Fl_Box(0, -5, 325, 30);
+	this->errorMessageBox = new Fl_Box(0, -5, 325, 30);
 	this->errorMessageBox->labelcolor(FL_RED);
 	end();
 	this->resizable(this);
@@ -94,7 +94,7 @@ void GameWindow::cb_pause(Fl_Widget *widget, void *data) {
 
 void GameWindow::createBoxes() {
 	int xShift = -5;
-	int yShift = -20;
+	int yShift = 10;
 	int tileSize = 30;
 	for (int i = 1; i <= Settings::SizeOfBoard; i++) {
 		int Y = (i * tileSize);
@@ -115,7 +115,7 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	GameWindow *window = (GameWindow*) data;
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
-	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
+	regex patternNumbers("([1-5]?[1-9]|6[0-4])");
 	if (strlen(value) == 0) {
 		if (!window->setNewNodeValues()) {
 			return;
@@ -151,40 +151,37 @@ void GameWindow::cancelHandler() {
 }
 
 bool GameWindow::setNewNodeValues() {
-	for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
-		const char *value = this->inputBoxes[i]->value();
-		PuzzleNode *node = this->puzzleNodeManager.getPuzzleNodes()[i];
-		if (strlen(value) != 0 || value == nullptr) {
-			if (node == nullptr) {
-				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
-					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
-					return false;
-				} else {
+	try {
+		this->errorMessageBox->label("");
+		this->gameOutcomeLabel->label("");
+		for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
+			const char *value = this->inputBoxes[i]->value();
+			PuzzleNode *node = this->puzzleNodeManager.getPuzzleNodes()[i];
+			if (strlen(value) != 0 || value == nullptr) {
+				if (node == nullptr) {
 					this->puzzleNodeManager.addPuzzleNode(i, stoi(value),
-							false);
-				}
-			} else {
-				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
-					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
-					this->puzzleNodeManager.deletePuzzleNode(i);
-					return false;
+								false);
 				} else {
 					node->setValue(stoi(value));
 				}
-
+			} else {
+				try {
+					this->puzzleNodeManager.deletePuzzleNode(i);
+					return false;
+				} catch (...) {
+					#ifdef DIAGNOSTIC_OUTPUT
+					cout << "" << endl;
+					#endif
+				}
 			}
-		} else {
-			try {
-				this->puzzleNodeManager.deletePuzzleNode(i);
-				return false;
-			} catch (...) {
-				cout << "" << endl;
-			}
-
 		}
-
+		return true;
+	} catch (const std::invalid_argument& e) {
+		this->gameOutcomeLabel->label("");
+		this->errorMessageBox->label(e.what());
 	}
-	return true;
+
+	return false;
 }
 
 void GameWindow::okHandler() {
@@ -193,6 +190,7 @@ void GameWindow::okHandler() {
 
 		if (this->puzzleNodeManager.isSolved()) {
 			try {
+				this->errorMessageBox->label("");
 				this->gameOutcomeLabel->label("");
 
 				InputAlertWindow winningWindow("Solution Correct");
@@ -213,14 +211,16 @@ void GameWindow::okHandler() {
 				scoreManager.saveScores();
 				this->loadNextPuzzle();
 			} catch (std::invalid_argument &e) {
-#ifdef DIAGNOSTIC_OUTPUT
+				#ifdef DIAGNOSTIC_OUTPUT
 					cout << e << endl;
 				#endif
 			}
 		} else {
+			this->errorMessageBox->label("");
 			this->gameOutcomeLabel->label(ErrorMessages::IncorrectSolution);
 		}
 	} else {
+		this->errorMessageBox->label("");
 		this->gameOutcomeLabel->label(ErrorMessages::BoardIncomplete);
 	}
 

@@ -14,8 +14,8 @@ PuzzleNode::PuzzleNode(int index, int value, bool isStarting) {
 	if (index < 0) {
 		throw invalid_argument(ErrorMessages::IndexCannotBeNegative);
 	}
-	if (value < 0) {
-		throw invalid_argument(ErrorMessages::ValueCannotBeNegative);
+	if (value < 1) {
+		throw invalid_argument(ErrorMessages::ValueCannotBeNegativeOrZero);
 	}
 	if (value > Settings::NumberOfPuzzleNodes) {
 		throw invalid_argument(ErrorMessages::ValueCannotBeAboveMaximum);
@@ -39,7 +39,7 @@ bool PuzzleNode::getIsStarting() {
 
 void PuzzleNode::setValue(int value) {
 	if (value < 1) {
-		throw invalid_argument(ErrorMessages::ValueCannotBeNegative);
+		throw invalid_argument(ErrorMessages::ValueCannotBeNegativeOrZero);
 	}
 	this->value = value;
 }

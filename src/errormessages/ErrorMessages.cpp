@@ -23,8 +23,8 @@ ErrorMessages::~ErrorMessages() {
 }
 
 const string ErrorMessages::IdCannotBeNegative = "The id cannot be negative";
-const string ErrorMessages::ValueCannotBeNegative =
-		"The value cannot be negative";
+const string ErrorMessages::ValueCannotBeNegativeOrZero =
+		"The value cannot be negative or zero";
 const string ErrorMessages::ValueCannotBeAboveMaximum =
 		"The value cannot be more than the maximum amount of nodes";
 const string ErrorMessages::IndexCannotBeNegative =
