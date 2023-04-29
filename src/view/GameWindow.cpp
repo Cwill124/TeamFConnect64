@@ -188,6 +188,7 @@ void GameWindow::loadGameBoard() {
 		}
 
 	}
+
 }
 
 void GameWindow::deleteInputBoxes() {
@@ -200,6 +201,7 @@ void GameWindow::deleteInputBoxes() {
 void GameWindow::cb_savePuzzle(Fl_Widget *widget, void *data) {
 	GameWindow *window = (GameWindow*) data;
 	window->setNewNodeValues();
+	window->puzzleNodeManager.setCurrentPuzzleIndex(window->puzzleNumber);
 	window->puzzleNodeManager.saveNodes(Settings::CurrentPuzzleFileName);
 
 }
@@ -207,16 +209,15 @@ void GameWindow::cb_savePuzzle(Fl_Widget *widget, void *data) {
 void GameWindow::loadNextPuzzle() {
 	cout << "In load method" << endl;
 	try {
+		cout << to_string(this->puzzleNodeManager.getCurrentPuzzleIndex()) <<  endl;
 		cout << to_string(this->puzzleNumber) << endl;
 		if (this->puzzleNumber < Settings::NumberOfPuzzles - 1) {
 			this->puzzleNumber += 1;
 			this->puzzle = Settings::PuzzleFileNames[this->puzzleNumber];
-			cout << this->puzzle << endl;
 			this->label(this->puzzle.c_str());
 			this->puzzleNodeManager.resetBoard();
 			this->resetInputBoxes();
 			this->loadGameBoard();
-			cout << this->puzzleNodeManager.toString() << endl;
 		} else {
 			this->hide();
 		}
