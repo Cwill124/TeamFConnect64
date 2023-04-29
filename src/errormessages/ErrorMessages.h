@@ -28,9 +28,9 @@ public:
 	 */
 	const static string IdCannotBeNegative;
 	/**
-	 * The error message for the value being negative
+	 * The error message for the value being negative or zero
 	 */
-	const static string ValueCannotBeNegative;
+	const static string ValueCannotBeNegativeOrZero;
 	/**
 	 * The error message for the value being above the maximum
 	 */
