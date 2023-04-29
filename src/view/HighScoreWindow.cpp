@@ -90,7 +90,7 @@ void HighScoreWindow::loadScoresSortedByTime(ScoreManager manager) {
 	vector<Score*> scores = manager.getScoresSortedByTime();
 	string scoreString = "High Scores: \n";
 	for (Score* score : scores) {
-		string time = std::to_string(score->getTime());
+		string time = Utils::convertIntegerToTimeString(score->getTime());
 		string name = score->getPlayerName();
 		string number = std::to_string(score->getPuzzleNumber());
 		scoreString += "  " + time + " By: " + name + " On Puzzle: " + number + "\n";

@@ -25,6 +25,10 @@ public:
 	 */
 	static constexpr int MaximumHighScores = 10;
 	/**
+	 * The time increment if a hint is viewed
+	 */
+	static constexpr int HintTimeIncrement = 15;
+	/**
 	 * The current puzzle file name
 	 */
 	static const string CurrentPuzzleFileName;
@@ -40,6 +44,10 @@ public:
 	 * The number of Puzzles
 	 */
 	static constexpr int NumberOfPuzzles = 12;
+	/**
+	 * The size of the board
+	 */
+	static constexpr int SizeOfBoard = 8;
 
 };
 }

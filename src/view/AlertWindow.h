@@ -25,7 +25,7 @@ namespace view {
  */
 class AlertWindow: public Fl_Window {
 private:
-	Fl_Box *messege;
+	Fl_Box *message;
 	Fl_Button *closeAlertButton;
 	static void cb_close(Fl_Widget *widget, void *data);
 	void closeWindow();
