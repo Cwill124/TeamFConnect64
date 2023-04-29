@@ -20,9 +20,11 @@ GameWindow::GameWindow(const string puzzle, int puzzleNumber) :
 	this->resetButton = new Fl_Button(170, 300, 70, 30, "Reset");
 	this->saveButton = new Fl_Button(250, 300, 70, 30, "Save");
 	this->pauseButton = new Fl_Button(90, 5, 70, 30, "Pause");
+	this->hintButton = new Fl_Button(250, 5, 70, 30, "Hint");
 	this->pauseButton->callback(cb_pause, this);
 	this->resetButton->callback(cb_resetBoard, this);
 	this->saveButton->callback(cb_savePuzzle, this);
+	this->hintButton->callback(cb_hint, this);
 	this->timer = new Fl_Output(10, 5, 70, 30);
 	Fl::add_timeout(1.0, cb_timer, this);
 	this->puzzle = puzzle;
@@ -49,6 +51,27 @@ void GameWindow::cb_timer(void* data)
     } else {
     	Fl::repeat_timeout(1.0, cb_timer, data);
     }
+}
+
+void GameWindow::cb_hint(Fl_Widget *widget, void *data) {
+	string hintWindowTitle = "Hints";
+	GameWindow* gameWindow = static_cast<GameWindow*>(data);
+	int newPuzzleTime = gameWindow->puzzleNodeManager.getTime() + Settings::HintTimeIncrement;
+	gameWindow->puzzleNodeManager.setTime(newPuzzleTime);
+
+	vector<string> remainingValues = gameWindow->puzzleNodeManager.getRemainingNodeNames();
+	string remainingValuesMessage = "Remaining Values: \n";
+
+	for (string value : remainingValues) {
+		remainingValuesMessage += "  " + value + "\n";
+	}
+
+	ScrollableAlertWindow winningWindow(remainingValuesMessage.c_str(), hintWindowTitle.c_str());
+	winningWindow.set_modal();
+	winningWindow.show();
+	while (winningWindow.shown()) {
+		Fl::wait();
+	}
 }
 
 void GameWindow::cb_pause(Fl_Widget *widget, void *data) {

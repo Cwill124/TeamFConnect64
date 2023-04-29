@@ -82,6 +82,17 @@ void PuzzleNodeManager::setCurrentPuzzleIndex(int index) {
 	this->currentPuzzleIndex = index;
 }
 
+vector<string> PuzzleNodeManager::getRemainingNodeNames() {
+	vector<string> remainingNodes;
+	for (int i = 1; i <= Settings::NumberOfPuzzleNodes; i++) {
+		if (!this->containsValue(i)) {
+			remainingNodes.push_back(std::to_string(i));
+		}
+	}
+
+	return remainingNodes;
+}
+
 void PuzzleNodeManager::replacePuzzleNode(int index, int value) {
 	if (nodes[index] == nullptr) {
 		throw invalid_argument(ErrorMessages::CannotReplaceNullNode);
