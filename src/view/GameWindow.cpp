@@ -96,10 +96,7 @@ bool GameWindow::setNewNodeValues() {
 		const char *value = this->inputBoxes[i]->value();
 		PuzzleNode *node = this->puzzleNodeManager.getPuzzleNodes()[i];
 		if (strlen(value) != 0 || value == nullptr) {
-			cout << "VALUE:" << endl;
-			cout << value << endl;
 			if (node == nullptr) {
-				cout << "null" << endl;
 				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
 					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
 					return false;
@@ -108,7 +105,6 @@ bool GameWindow::setNewNodeValues() {
 							false);
 				}
 			} else {
-				cout << "setting value" << endl;
 				if (this->puzzleNodeManager.containsValue(stoi(value), node)) {
 					this->errorMessageBox->label(ErrorMessages::DuplicateInput);
 					this->puzzleNodeManager.deletePuzzleNode(i);
@@ -190,8 +186,6 @@ void GameWindow::loadGameBoard() {
 	}
 	if (this->puzzle.find(Settings::CurrentPuzzleFileName) != string::npos) {
 		this->puzzleNumber = this->puzzleNodeManager.getCurrentPuzzleIndex();
-		cout << "IN LOADGAMEBOARD RESUME " + to_string(this->puzzleNumber)
-				<< endl;
 	}
 
 }
@@ -224,7 +218,9 @@ void GameWindow::loadNextPuzzle() {
 			this->hide();
 		}
 	} catch (...) {
+#ifdef DIAGNOSTIC_OUTPUT
 		cout << ErrorMessages::PuzzleCouldNotBeFound << endl;
+#endif
 	}
 
 }
