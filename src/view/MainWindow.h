@@ -16,7 +16,8 @@
 #include <iostream>
 #include <fstream>
 #include "ErrorMessages.h"
-
+#include "ColorSettingsWindow.h"
+#include "HighScoreWindow.h"
 #include "GameWindow.h"
 using namespace errormessages;
 using namespace std;
@@ -30,6 +31,7 @@ private:
 	Fl_Button *highScoresButton;
 	Fl_Button *showNewWindowButton;
 	Fl_Button *resumePuzzleButton;
+	Fl_Button *colorSettingsButton;
 	Fl_Choice *puzzleSelector;
 	Fl_Box *errorMessage;
 	static void cb_show(Fl_Widget*, void*);
@@ -37,6 +39,7 @@ private:
 	static void cb_data(Fl_Widget*, void*);
 	static void cb_quit(Fl_Widget*, void*);
 	static void cb_high_scores(Fl_Widget*, void*);
+	static void cb_color_settings(Fl_Widget*, void*);
 	inline void cb_quit_i();
 	void addLevelOptions();
 public:

@@ -6,7 +6,6 @@
  */
 
 #include "MainWindow.h"
-#include "HighScoreWindow.h"
 
 using namespace std;
 
@@ -27,6 +26,8 @@ MainWindow::MainWindow(int width, int height, const char *title) :
 	this->puzzleSelector = new Fl_Choice(150, 20, 50, 20, "Select Puzzle");
 	this->errorMessage = new Fl_Box(50, 40, 200, 30);
 	this->errorMessage->labelcolor(FL_RED);
+	this->colorSettingsButton = new Fl_Button(300, 5, 20, 20, "\u2699");
+	this->colorSettingsButton->callback(cb_color_settings,this);
 	this->addLevelOptions();
 	this->end();
 	this->resizable(this);
@@ -97,8 +98,16 @@ void MainWindow::cb_high_scores(Fl_Widget*, void *data) {
 	window->show();
 }
 
-void MainWindow::cb_data(Fl_Widget*, void *data) {
-
+void MainWindow::cb_color_settings(Fl_Widget*, void *data) {
+	MainWindow *window = (MainWindow*) data;
+	ColorSettingsWindow colorSettingsWindow(300, 300, "Color Settings");
+	colorSettingsWindow.set_modal();
+	colorSettingsWindow.show();
+	while (colorSettingsWindow.shown()) {
+		window->hide();
+		Fl::wait();
+	}
+	window->show();
 }
 
 void MainWindow::cb_quit_i() {
