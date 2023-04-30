@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 #include <FL/fl_draw.H>
 using namespace std;
 namespace fileio {

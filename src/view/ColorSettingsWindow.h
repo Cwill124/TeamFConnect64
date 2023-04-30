@@ -33,6 +33,7 @@ private:
 	static void cb_return(Fl_Widget*, void*);
 	static void cb_setCellColor(Fl_Widget*, void*);
 	static void cb_setTextColor(Fl_Widget*, void*);
+	int* getRGBValues();
 public:
 	ColorSettingsWindow(int width, int height, const char *title);
 	virtual ~ColorSettingsWindow();

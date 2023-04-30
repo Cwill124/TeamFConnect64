@@ -4,8 +4,9 @@
 
 #ifndef SETTINGS_SETTINGS_H_
 #define SETTINGS_SETTINGS_H_
-
+#include <FL/fl_draw.H>
 #include <string>
+#include <FL/Fl.H>
 
 using namespace std;
 

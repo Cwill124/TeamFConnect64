@@ -34,31 +34,33 @@ void ColorSettingsWindow::cb_return(Fl_Widget*, void *data) {
 void ColorSettingsWindow::cb_setCellColor(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
 	ColorSettingsFileIO colorFileIO;
-	float floatR = window->colorChooser->r();
-	float floatG = window->colorChooser->g();
-	float floatB = window->colorChooser->b();
-	int R = floatR * 255;
-	int G = floatG * 255;
-	int B = floatB * 255;
-	cout << R << endl;
-	cout << G << endl;
-	cout << B << endl;
-	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[0], R, G, B);
+	int *RGBValues = window->getRGBValues();
+	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[0],
+			RGBValues[0], RGBValues[1], RGBValues[2]);
 }
 
 void ColorSettingsWindow::cb_setTextColor(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
 	ColorSettingsFileIO colorFileIO;
-	float floatR = window->colorChooser->r();
-	float floatG = window->colorChooser->g();
-	float floatB = window->colorChooser->b();
+
+	int *RGBValues = window->getRGBValues();
+	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[1],
+			RGBValues[0], RGBValues[1], RGBValues[2]);
+	delete[] RGBValues;
+}
+
+int* ColorSettingsWindow::getRGBValues() {
+	int* colorValues = new int[3];
+	float floatR = this->colorChooser->r();
+	float floatG = this->colorChooser->g();
+	float floatB = this->colorChooser->b();
 	int R = floatR * 255;
 	int G = floatG * 255;
 	int B = floatB * 255;
-	cout << R << endl;
-	cout << G << endl;
-	cout << B << endl;
-	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[1], R, G, B);
+	colorValues[0] = R;
+	colorValues[1] = G;
+	colorValues[2] = B;
+	return colorValues;
 }
 
 ColorSettingsWindow::~ColorSettingsWindow() {

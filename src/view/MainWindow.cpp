@@ -27,14 +27,13 @@ MainWindow::MainWindow(int width, int height, const char *title) :
 	this->errorMessage = new Fl_Box(50, 40, 200, 30);
 	this->errorMessage->labelcolor(FL_RED);
 	this->colorSettingsButton = new Fl_Button(300, 5, 20, 20, "\u2699");
-	this->colorSettingsButton->callback(cb_color_settings,this);
+	this->colorSettingsButton->callback(cb_color_settings, this);
 	this->addLevelOptions();
 	this->end();
 	this->resizable(this);
 	this->show();
 
 }
-
 MainWindow::~MainWindow() {
 
 }
@@ -49,9 +48,6 @@ void MainWindow::addLevelOptions() {
 }
 void MainWindow::cb_show(Fl_Widget *o, void *data) {
 	MainWindow *window = (MainWindow*) data;
-
-	cout << window->puzzleSelector->value() << endl;
-	cout << Settings::PuzzleFileNames[window->puzzleSelector->value()] << endl;
 	string puzzle = Settings::PuzzleFileNames[window->puzzleSelector->value()];
 	GameWindow gameWindow(puzzle, window->puzzleSelector->value());
 	gameWindow.set_modal();
@@ -65,8 +61,6 @@ void MainWindow::cb_show(Fl_Widget *o, void *data) {
 void MainWindow::cb_resumePuzzle(Fl_Widget*, void *data) {
 	MainWindow *window = (MainWindow*) data;
 
-	cout << window->puzzleSelector->value() << endl;
-	cout << Settings::PuzzleFileNames[window->puzzleSelector->value()] << endl;
 	string puzzle = Settings::CurrentPuzzleFileName;
 	ifstream file(puzzle);
 	if (file.good()) {

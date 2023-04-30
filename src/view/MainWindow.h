@@ -19,6 +19,7 @@
 #include "ColorSettingsWindow.h"
 #include "HighScoreWindow.h"
 #include "GameWindow.h"
+#include "ColorSettingsFileIO.h"
 using namespace errormessages;
 using namespace std;
 namespace view {

@@ -13,6 +13,7 @@
 #include <Fl/Fl_Timer.H>
 #include <Fl/Fl_Output.H>
 #include <FL/Fl_Scroll.H>
+#include <FL/fl_draw.H>
 #include "OKCancelWindow.h"
 #include "MainWindow.h"
 #include "PuzzleNodeManager.h"
@@ -26,6 +27,8 @@
 #include "InputAlertWindow.h"
 #include "ScrollableAlertWindow.h"
 #include "AlertWindow.h"
+#include "ColorSettingsFileIO.h"
+
 using namespace std;
 using namespace utils;
 namespace view {
@@ -52,7 +55,7 @@ private:
 	static void cb_savePuzzle(Fl_Widget *widget, void *data);
 	static void cb_pause(Fl_Widget *widget, void *data);
 	static void cb_hint(Fl_Widget *widget, void *data);
-	static void cb_timer(void* data);
+	static void cb_timer(void *data);
 	void loadGameBoard();
 	bool setNewNodeValues();
 	void deleteInputBoxes();
