@@ -34,12 +34,13 @@ void ColorSettingsWindow::cb_return(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
 	ColorSettingsFileIO colorFileIO;
 	int combinedRGBValuesSize = 6;
+	int RGBValuesSize = 3;
 	int combinedRGBValues[5];
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < RGBValuesSize; i++) {
 		combinedRGBValues[i] = window->cellRGBValues[i];
 	}
-	for (int i = 0; i < 3; i++) {
-		combinedRGBValues[3 + i] = window->textRGBValues[i];
+	for (int i = 0; i < RGBValuesSize; i++) {
+		combinedRGBValues[RGBValuesSize + i] = window->textRGBValues[i];
 	}
 	colorFileIO.saveColorSettings(Settings::ColorSettingsFileName,
 			combinedRGBValues, combinedRGBValuesSize);
