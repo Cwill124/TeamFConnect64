@@ -53,6 +53,14 @@ public:
 	 * The cell color filename
 	 */
 	static const char *ColorSettingsFileNames[];
+	/**
+	 * The Max value for RGB
+	 */
+	static constexpr int RGBMaxValue = 255;
+	/**
+	 * The Min value for RGB
+	 */
+	static constexpr int RGBMinValue = 0;
 
 };
 }

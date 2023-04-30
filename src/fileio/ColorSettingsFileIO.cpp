@@ -39,13 +39,13 @@ Fl_Color ColorSettingsFileIO::loadColorSettings(const string &filename) {
 
 void ColorSettingsFileIO::saveColorSettings(const string &filename, int R,
 		int G, int B) {
-	if (R < 0 || R > 255) {
+	if (R < Settings::RGBMinValue || R > Settings::RGBMaxValue) {
 		throw new invalid_argument(ErrorMessages::RGBValueInvalid);
 	}
-	if (G < 0 || G > 255) {
+	if (G < Settings::RGBMinValue || G > Settings::RGBMaxValue) {
 		throw new invalid_argument(ErrorMessages::RGBValueInvalid);
 	}
-	if (B < 0 || B > 255) {
+	if (B < Settings::RGBMinValue || B > Settings::RGBMaxValue) {
 		throw new invalid_argument(ErrorMessages::RGBValueInvalid);
 	}
 	std::ofstream outputFile(filename);

@@ -33,9 +33,12 @@ public:
 	/**
 	 * Creates a alert window with custom message
 	 *
-	 * @param message the message that will be displayed
+	 * Precondition: None
+	 * Postcondition: message will be set to the inputed messaged
 	 *
-	 * @postcondition message will be set to the inputed messaged
+	 * Param: message the message that will be displayed
+	 *
+	 *
 	 */
 	AlertWindow(const char *message);
 	virtual ~AlertWindow();

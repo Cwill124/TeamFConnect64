@@ -66,22 +66,34 @@ public:
 	/**
 	 * GameWindow that is a 8x8 grid that loads in a puzzle
 	 *
-	 * @param puzzle the filename of the puzzle to be loaded
-	 * @param puzzleNumber the number of the puzzle to be loaded
+	 * Precondition: None
+	 * Postcondition: None
+	 *
+	 * Param: puzzle the filename of the puzzle to be loaded
+	 * Param: puzzleNumber the number of the puzzle to be loaded
 	 *
 	 *
 	 */
 	GameWindow(const string puzzle, int puzzleNumber);
 	/**
 	 * handles the check button inherited from OKCancelWindow
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	void okHandler();
 	/**
 	 * handles the quit button inherited from OKCancelWindow
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	void cancelHandler();
 	/**
 	 * deconstructor for gamewindow deletes all nodes and labels
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	virtual ~GameWindow();
 };

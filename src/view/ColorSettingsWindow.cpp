@@ -57,9 +57,9 @@ int* ColorSettingsWindow::getRGBValues() {
 	float floatR = this->colorChooser->r();
 	float floatG = this->colorChooser->g();
 	float floatB = this->colorChooser->b();
-	int R = floatR * 255;
-	int G = floatG * 255;
-	int B = floatB * 255;
+	int R = floatR * Settings::RGBMaxValue;
+	int G = floatG * Settings::RGBMaxValue;
+	int B = floatB * Settings::RGBMaxValue;
 	colorValues[0] = R;
 	colorValues[1] = G;
 	colorValues[2] = B;
@@ -68,9 +68,9 @@ int* ColorSettingsWindow::getRGBValues() {
 
 void ColorSettingsWindow::cb_resetColors(Fl_Widget*, void *data) {
 	ColorSettingsFileIO colorFileIO;
-	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[1], 0, 0, 0);
-	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[0], 255, 255,
-			255);
+	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[1],Settings::RGBMinValue, Settings::RGBMinValue,Settings::RGBMinValue);
+	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[0], Settings::RGBMaxValue,Settings::RGBMaxValue,
+			Settings::RGBMaxValue);
 }
 
 ColorSettingsWindow::~ColorSettingsWindow() {

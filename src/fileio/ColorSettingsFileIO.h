@@ -14,7 +14,9 @@
 #include <vector>
 #include <FL/fl_draw.H>
 #include "ErrorMessages.h"
+#include "Settings.h"
 using namespace std;
+using namespace settings;
 using namespace errormessages;
 namespace fileio {
 /**
@@ -33,19 +35,23 @@ public:
 	/**
 	 * loads a color file and returns the color based on the RGB values stored
 	 *
-	 * @Param filename the name of the file
+	 * Precondition: None
+	 * Postcondition: None
 	 *
-	 * @return a Fl_Color object
+	 * Param: filename the name of the file
+	 *
+	 * Returns: a Fl_Color object
 	 */
 	Fl_Color loadColorSettings(const string &filename);
 	/**
 	 * saves RGB values to a file
-	 * @Param R the red color value
-	 * @Param G the green color value
-	 * @Param B the blue color value
 	 *
-	 * @precondition R,G,B must be greater than -1 and less than 256
+	 * Precondition: R,G,B must be greater than -1 and less than 256
+	 * Postcondition: None
 	 *
+	 * Param: R the red color value
+	 * Param: G the green color value
+	 * Param: B the blue color value
 	 *
 	 */
 	void saveColorSettings(const string &filename, int R, int G, int B);

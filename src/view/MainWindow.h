@@ -47,9 +47,12 @@ public:
 	/**
 	 * A mainwindow that allows user to select a puzzle and resume or play
 	 *
-	 * @param width the width of the window
-	 * @param height the height of the window
-	 * @param title the title of the window
+	 * Precondition: None
+	 * Postcondition: None
+	 *
+	 * Param: width the width of the window
+	 * Param: height the height of the window
+	 * Param: title the title of the window
 	 */
 	MainWindow(int width, int height, const char *title);
 	virtual ~MainWindow();
