@@ -103,6 +103,10 @@ public:
 	 * The error message for the Puzzle being null
 	 */
 	const static string PuzzleNameCannotBeNull;
+	/**
+	 * The error message for a invalid RGB value
+	 */
+	const static string RGBValueInvalid;
 };
 }
 

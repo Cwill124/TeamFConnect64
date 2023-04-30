@@ -246,7 +246,6 @@ void GameWindow::loadGameBoard() {
 			this->inputBoxes[i]->value(newInputValue);
 			if (currentPuzzleNode->getIsStarting()) {
 				this->inputBoxes[i]->readonly(true);
-				this->inputBoxes[i]->deactivate();
 			}
 		}
 

@@ -23,19 +23,33 @@
 using namespace settings;
 using namespace fileio;
 namespace view {
-
+/**
+ * Class that is a window for the user to select color's for text and cells
+ */
 class ColorSettingsWindow: public Fl_Window {
 private:
 	Fl_Color_Chooser *colorChooser;
 	Fl_Button *setTextColorButton;
 	Fl_Button *setCellColorButton;
 	Fl_Button *returnToMenuButton;
+	Fl_Button *resetColors;
 	static void cb_return(Fl_Widget*, void*);
 	static void cb_setCellColor(Fl_Widget*, void*);
 	static void cb_setTextColor(Fl_Widget*, void*);
+	static void cb_resetColors(Fl_Widget*, void*);
 	int* getRGBValues();
 public:
+	/**
+	 * constructor for ColorSettingsWindow
+	 *
+	 * @param width the width of the window
+	 * @param height the height of the window
+	 * @param title the title of the window
+	 */
 	ColorSettingsWindow(int width, int height, const char *title);
+	/**
+	 * the deconstructor for the ColorSettingsWindow
+	 */
 	virtual ~ColorSettingsWindow();
 };
 

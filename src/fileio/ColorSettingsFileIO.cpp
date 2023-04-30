@@ -29,7 +29,7 @@ Fl_Color ColorSettingsFileIO::loadColorSettings(const string &filename) {
 		string B;
 		string value;
 		while (std::getline(stream, value, ',')) {
-			cout<<value<<endl;
+			cout << value << endl;
 			RGBValues.push_back(stoi(value));
 		}
 	}
@@ -40,6 +40,15 @@ Fl_Color ColorSettingsFileIO::loadColorSettings(const string &filename) {
 
 void ColorSettingsFileIO::saveColorSettings(const string &filename, int R,
 		int G, int B) {
+	if (R < 0 || R > 255) {
+		throw new invalid_argument(ErrorMessages::RGBValueInvalid);
+	}
+	if (G < 0 || G > 255) {
+		throw new invalid_argument(ErrorMessages::RGBValueInvalid);
+	}
+	if (B < 0 || B > 255) {
+		throw new invalid_argument(ErrorMessages::RGBValueInvalid);
+	}
 	std::ofstream outputFile(filename);
 	outputFile << to_string(R) + "," + to_string(G) + "," + to_string(B)
 			<< endl;
