@@ -39,7 +39,7 @@ public:
 	/**
 	 * The file names for the puzzles
 	 */
-	static const char* PuzzleFileNames[];
+	static const char *PuzzleFileNames[];
 	/**
 	 * The number of Puzzles
 	 */
@@ -48,6 +48,10 @@ public:
 	 * The size of the board
 	 */
 	static constexpr int SizeOfBoard = 8;
+	/**
+	 * The cell color filename
+	 */
+	static const char *ColorSettingsFileNames[];
 
 };
 }

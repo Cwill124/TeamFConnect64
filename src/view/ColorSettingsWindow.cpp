@@ -32,12 +32,33 @@ void ColorSettingsWindow::cb_return(Fl_Widget*, void *data) {
 }
 
 void ColorSettingsWindow::cb_setCellColor(Fl_Widget*, void *data) {
-	//ColorSettingsWindow *window = (ColorSettingsWindow*) data;
-
+	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
+	ColorSettingsFileIO colorFileIO;
+	float floatR = window->colorChooser->r();
+	float floatG = window->colorChooser->g();
+	float floatB = window->colorChooser->b();
+	int R = floatR * 255;
+	int G = floatG * 255;
+	int B = floatB * 255;
+	cout << R << endl;
+	cout << G << endl;
+	cout << B << endl;
+	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[0], R, G, B);
 }
 
 void ColorSettingsWindow::cb_setTextColor(Fl_Widget*, void *data) {
-	//ColorSettingsWindow *window = (ColorSettingsWindow*) data;
+	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
+	ColorSettingsFileIO colorFileIO;
+	float floatR = window->colorChooser->r();
+	float floatG = window->colorChooser->g();
+	float floatB = window->colorChooser->b();
+	int R = floatR * 255;
+	int G = floatG * 255;
+	int B = floatB * 255;
+	cout << R << endl;
+	cout << G << endl;
+	cout << B << endl;
+	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[1], R, G, B);
 }
 
 ColorSettingsWindow::~ColorSettingsWindow() {

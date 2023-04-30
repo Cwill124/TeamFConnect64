@@ -14,9 +14,14 @@
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Color_Chooser.H>
+#include <FL/fl_draw.H>
 #include <iostream>
 #include <fstream>
+#include "Settings.h"
 #include "ErrorMessages.h"
+#include "ColorSettingsFileIO.h"
+using namespace settings;
+using namespace fileio;
 namespace view {
 
 class ColorSettingsWindow: public Fl_Window {

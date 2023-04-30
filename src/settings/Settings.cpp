@@ -9,6 +9,9 @@ const string Settings::CurrentPuzzleFileName = "CurrentPuzzle.txt";
 
 const string Settings::HighScoresFileName = "HighScores.txt";
 
+const char *Settings::ColorSettingsFileNames[] = { "CellColorSettings.txt",
+		"TextColorSettings.txt" };
+
 }
 ;
 
