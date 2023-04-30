@@ -29,7 +29,6 @@ Fl_Color ColorSettingsFileIO::loadColorSettings(const string &filename) {
 		string B;
 		string value;
 		while (std::getline(stream, value, ',')) {
-			cout << value << endl;
 			RGBValues.push_back(stoi(value));
 		}
 	}
