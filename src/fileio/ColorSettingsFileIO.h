@@ -40,21 +40,21 @@ public:
 	 *
 	 * Param: filename the name of the file
 	 *
-	 * Returns: a Fl_Color object
+	 * Returns: a vector of Fl_Color objects
 	 */
-	Fl_Color loadColorSettings(const string &filename);
+	vector<Fl_Color> loadColorSettings(const string &filename);
 	/**
 	 * saves RGB values to a file
 	 *
-	 * Precondition: R,G,B must be greater than -1 and less than 256
+	 * Precondition: RGBArray != nullptr
 	 * Postcondition: None
 	 *
-	 * Param: R the red color value
-	 * Param: G the green color value
-	 * Param: B the blue color value
+	 * Param: filename the file to save the values to
+	 * Param: RGBArray the array that contains the RGB values
+	 * Param: RGBArraySize the size of the array that contains the values
 	 *
 	 */
-	void saveColorSettings(const string &filename, int R, int G, int B);
+	void saveColorSettings(const string &filename, int *RGBArray,int RGBArraySize);
 
 };
 

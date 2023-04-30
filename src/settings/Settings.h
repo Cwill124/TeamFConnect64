@@ -50,9 +50,9 @@ public:
 	 */
 	static constexpr int SizeOfBoard = 8;
 	/**
-	 * The cell color filename
+	 * The color setting filename
 	 */
-	static const char *ColorSettingsFileNames[];
+	static const string ColorSettingsFileName;
 	/**
 	 * The Max value for RGB
 	 */

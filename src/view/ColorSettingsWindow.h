@@ -17,11 +17,16 @@
 #include <FL/fl_draw.H>
 #include <iostream>
 #include <fstream>
+#include <iterator>
+#include <algorithm>
+
+#include <vector>
 #include "Settings.h"
 #include "ErrorMessages.h"
 #include "ColorSettingsFileIO.h"
 using namespace settings;
 using namespace fileio;
+using namespace std;
 namespace view {
 /**
  * Class that is a window for the user to select color's for text and cells
@@ -33,10 +38,13 @@ private:
 	Fl_Button *setCellColorButton;
 	Fl_Button *returnToMenuButton;
 	Fl_Button *resetColors;
+	int *cellRGBValues;
+	int *textRGBValues;
 	static void cb_return(Fl_Widget*, void*);
 	static void cb_setCellColor(Fl_Widget*, void*);
 	static void cb_setTextColor(Fl_Widget*, void*);
 	static void cb_resetColors(Fl_Widget*, void*);
+	vector<int> combineRGBValues();
 	int* getRGBValues();
 public:
 	/**

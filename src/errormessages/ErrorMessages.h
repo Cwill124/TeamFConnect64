@@ -104,9 +104,9 @@ public:
 	 */
 	const static string PuzzleNameCannotBeNull;
 	/**
-	 * The error message for a invalid RGB value
+	 * The error message for a Null RGB array
 	 */
-	const static string RGBValueInvalid;
+	const static string RGBArrayNull;
 };
 }
 

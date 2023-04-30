@@ -17,11 +17,16 @@ ColorSettingsFileIO::~ColorSettingsFileIO() {
 
 }
 
-Fl_Color ColorSettingsFileIO::loadColorSettings(const string &filename) {
+vector<Fl_Color> ColorSettingsFileIO::loadColorSettings(
+		const string &filename) {
 	std::ifstream colorFile(filename);
 	string line;
 	vector<int> RGBValues;
-	Fl_Color color = fl_rgb_color(0, 0, 0);
+	vector<Fl_Color> colors;
+	Fl_Color textColor = fl_rgb_color(Settings::RGBMinValue,
+			Settings::RGBMinValue, Settings::RGBMinValue);
+	Fl_Color cellColor = fl_rgb_color(Settings::RGBMaxValue,
+			Settings::RGBMaxValue, Settings::RGBMaxValue);
 	while (std::getline(colorFile, line)) {
 		std::stringstream stream(line);
 		string R;
@@ -32,25 +37,30 @@ Fl_Color ColorSettingsFileIO::loadColorSettings(const string &filename) {
 			RGBValues.push_back(stoi(value));
 		}
 	}
-	color = fl_rgb_color(RGBValues[0], RGBValues[1], RGBValues[2]);
+	cellColor = fl_rgb_color(RGBValues[0], RGBValues[1], RGBValues[2]);
+	colors.push_back(cellColor);
+	textColor = fl_rgb_color(RGBValues[3], RGBValues[4], RGBValues[5]);
+	colors.push_back(textColor);
 	colorFile.close();
-	return color;
+	return colors;
 }
 
-void ColorSettingsFileIO::saveColorSettings(const string &filename, int R,
-		int G, int B) {
-	if (R < Settings::RGBMinValue || R > Settings::RGBMaxValue) {
-		throw new invalid_argument(ErrorMessages::RGBValueInvalid);
+void ColorSettingsFileIO::saveColorSettings(const string &filename,
+		int *RGBArray, int RGBArraySize) {
+	if (RGBArray == nullptr) {
+		throw new invalid_argument(ErrorMessages::RGBArrayNull);
 	}
-	if (G < Settings::RGBMinValue || G > Settings::RGBMaxValue) {
-		throw new invalid_argument(ErrorMessages::RGBValueInvalid);
-	}
-	if (B < Settings::RGBMinValue || B > Settings::RGBMaxValue) {
-		throw new invalid_argument(ErrorMessages::RGBValueInvalid);
-	}
+
 	std::ofstream outputFile(filename);
-	outputFile << to_string(R) + "," + to_string(G) + "," + to_string(B)
-			<< endl;
+	for (int i = 0; i < RGBArraySize; i++) {
+		if (i == RGBArraySize - 1) {
+			outputFile << to_string(RGBArray[i]);
+		} else {
+			outputFile << to_string(RGBArray[i]) + ",";
+		}
+
+	}
+
 	outputFile.close();
 }
 

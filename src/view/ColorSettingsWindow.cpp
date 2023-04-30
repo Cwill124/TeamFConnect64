@@ -13,6 +13,8 @@ ColorSettingsWindow::ColorSettingsWindow(int width, int height,
 		const char *title) :
 		Fl_Window(width, height, title) {
 	this->begin();
+	this->cellRGBValues = new int[3];
+	this->textRGBValues = new int[3];
 	this->colorChooser = new Fl_Color_Chooser(50, 50, 200, 200);
 	this->setCellColorButton = new Fl_Button(30, 260, 110, 30,
 			"Set Cell Color");
@@ -30,25 +32,39 @@ ColorSettingsWindow::ColorSettingsWindow(int width, int height,
 
 void ColorSettingsWindow::cb_return(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
+	ColorSettingsFileIO colorFileIO;
+	int combinedRGBValuesSize = 6;
+	int combinedRGBValues[5];
+	for (int i = 0; i < 3; i++) {
+		combinedRGBValues[i] = window->cellRGBValues[i];
+	}
+	for (int i = 0; i < 3; i++) {
+		combinedRGBValues[3 + i] = window->textRGBValues[i];
+	}
+	colorFileIO.saveColorSettings(Settings::ColorSettingsFileName,
+			combinedRGBValues, combinedRGBValuesSize);
 	window->hide();
 }
 
 void ColorSettingsWindow::cb_setCellColor(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
 	ColorSettingsFileIO colorFileIO;
+	int RGBValuesSize = 3;
 	int *RGBValues = window->getRGBValues();
-	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[0],
-			RGBValues[0], RGBValues[1], RGBValues[2]);
+	for (int i = 0; i < RGBValuesSize; i++) {
+		window->cellRGBValues[i] = RGBValues[i];
+	}
 	delete[] RGBValues;
 }
 
 void ColorSettingsWindow::cb_setTextColor(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
 	ColorSettingsFileIO colorFileIO;
-
+	int RGBValuesSize = 3;
 	int *RGBValues = window->getRGBValues();
-	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[1],
-			RGBValues[0], RGBValues[1], RGBValues[2]);
+	for (int i = 0; i < RGBValuesSize; i++) {
+		window->textRGBValues[i] = RGBValues[i];
+	}
 	delete[] RGBValues;
 }
 
@@ -67,10 +83,12 @@ int* ColorSettingsWindow::getRGBValues() {
 }
 
 void ColorSettingsWindow::cb_resetColors(Fl_Widget*, void *data) {
-	ColorSettingsFileIO colorFileIO;
-	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[1],Settings::RGBMinValue, Settings::RGBMinValue,Settings::RGBMinValue);
-	colorFileIO.saveColorSettings(Settings::ColorSettingsFileNames[0], Settings::RGBMaxValue,Settings::RGBMaxValue,
-			Settings::RGBMaxValue);
+	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
+	int RGBValuesSize = 3;
+	for (int i = 0; i < RGBValuesSize; i++) {
+		window->cellRGBValues[i] = Settings::RGBMaxValue;
+		window->textRGBValues[i] = Settings::RGBMinValue;
+	}
 }
 
 ColorSettingsWindow::~ColorSettingsWindow() {
@@ -88,6 +106,10 @@ ColorSettingsWindow::~ColorSettingsWindow() {
 
 	this->setTextColorButton = nullptr;
 	delete this->setTextColorButton;
+
+	delete[] this->cellRGBValues;
+
+	delete[] this->textRGBValues;
 }
 
 } /* namespace view */

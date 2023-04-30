@@ -94,10 +94,7 @@ void GameWindow::cb_pause(Fl_Widget *widget, void *data) {
 
 void GameWindow::createBoxes() {
 	ColorSettingsFileIO colorFileIO;
-	Fl_Color cellColor = colorFileIO.loadColorSettings(
-			Settings::ColorSettingsFileNames[0]);
-	Fl_Color textColor = colorFileIO.loadColorSettings(
-			Settings::ColorSettingsFileNames[1]);
+	vector<Fl_Color> colors = colorFileIO.loadColorSettings(Settings::ColorSettingsFileName);
 	int xShift = -5;
 	int yShift = -20;
 	int tileSize = 30;
@@ -108,8 +105,8 @@ void GameWindow::createBoxes() {
 			Fl_Input *input = new Fl_Input(xShift + (X + tileSize),
 					yShift + (Y + tileSize), tileSize, tileSize);
 			input->callback(cb_getValue, this);
-			input->textcolor(textColor);
-			input->color(cellColor);
+			input->textcolor(colors[1]);
+			input->color(colors[0]);
 			input->textfont(FL_BOLD);
 			this->inputBoxes.push_back(input);
 		}
