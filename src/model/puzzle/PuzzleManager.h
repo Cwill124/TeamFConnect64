@@ -7,10 +7,13 @@
 #include <Settings.h>
 
 using namespace std;
-using namespace model;
 using namespace settings;
 
-class PuzzleNodeManager final {
+namespace puzzle {
+/**
+ * The puzzle manager
+ */
+class PuzzleManager final {
 private:
 	int currentPuzzleIndex;
 	int time;
@@ -32,14 +35,14 @@ public:
 	 * Precondition: None
 	 * Postcondition: None
 	 */
-	PuzzleNodeManager();
+	PuzzleManager();
 	/**
 	 * The destructor for the puzzle node manager
 	 *
 	 * Precondition: None
 	 * Postcondition: None
 	 */
-	virtual ~PuzzleNodeManager();
+	virtual ~PuzzleManager();
 
 	/**
 	 * Gets the puzzle nodes
@@ -204,14 +207,7 @@ public:
 	 *	Returns: true if a different node is found with value, false otherwise
 	 */
 	bool containsValue(int value, PuzzleNode *node);
-	/**
-	 * The to string method
-	 *
-	 * Precondition: None
-	 * Postcondition: None
-	 *
-	 * Returns: The string representation of the manager
-	 */
-	string toString();
 };
+}
+
 #endif /* MODEL_PUZZLENODEMANAGER_H_ */

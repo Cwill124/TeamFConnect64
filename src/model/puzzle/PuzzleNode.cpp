@@ -7,8 +7,7 @@ using namespace std;
 using namespace errormessages;
 using namespace settings;
 
-namespace model {
-
+namespace puzzle {
 
 PuzzleNode::PuzzleNode(int index, int value, bool isStarting) {
 	if (index < 0) {
@@ -21,7 +20,7 @@ PuzzleNode::PuzzleNode(int index, int value, bool isStarting) {
 		throw invalid_argument(ErrorMessages::ValueCannotBeAboveMaximum);
 	}
 	this->index = index;
- 	this->value = value;
+	this->value = value;
 	this->isStarting = isStarting;
 }
 

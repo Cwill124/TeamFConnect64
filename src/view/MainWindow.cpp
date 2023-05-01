@@ -28,7 +28,26 @@ MainWindow::MainWindow(int width, int height, const char *title) :
 
 }
 MainWindow::~MainWindow() {
+	this->showNewWindowButton = nullptr;
+	delete this->showNewWindowButton;
 
+	this->resumePuzzleButton = nullptr;
+	delete this->resumePuzzleButton;
+
+	this->highScoresButton = nullptr;
+	delete this->highScoresButton;
+
+	this->quitButton = nullptr;
+	delete this->quitButton;
+
+	this->puzzleSelector = nullptr;
+	delete this->puzzleSelector;
+
+	this->errorMessage = nullptr;
+	delete this->errorMessage;
+
+	this->colorSettingsButton = nullptr;
+	delete this->colorSettingsButton;
 }
 void MainWindow::addLevelOptions() {
 	for (int i = 1; i <= Settings::NumberOfPuzzles; i++) {

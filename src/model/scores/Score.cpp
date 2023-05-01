@@ -1,4 +1,4 @@
-#include <scores/Score.h>
+#include <Score.h>
 #include <stdexcept>
 #include <ErrorMessages.h>
 
@@ -6,7 +6,7 @@ using namespace std;
 using namespace errormessages;
 
 namespace scores {
-Score::Score(int id, const string& playerName, int time, int puzzleNumber) {
+Score::Score(int id, const string &playerName, int time, int puzzleNumber) {
 	if (id < 0) {
 		throw invalid_argument(ErrorMessages::IdCannotBeNegative);
 	}

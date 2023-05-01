@@ -5,15 +5,24 @@
 using namespace std;
 
 namespace errormessages {
+/**
+ * The error messages
+ */
 class ErrorMessages final {
 public:
 	/**
 	 * The constructor for the error messages
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	ErrorMessages();
 
 	/**
 	 * The destructor for the error messages
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	virtual ~ErrorMessages();
 	/**

@@ -1,16 +1,11 @@
 #include "ErrorMessages.h"
 
 namespace errormessages {
-/**
- * The destructor for the error messages
- */
+
 ErrorMessages::ErrorMessages() {
 
 }
 
-/**
- * The constructor for the error messages
- */
 ErrorMessages::~ErrorMessages() {
 
 }

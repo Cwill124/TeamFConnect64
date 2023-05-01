@@ -1,13 +1,16 @@
 #ifndef MODEL_SCORES_SCORE_H_
 #define MODEL_SCORES_SCORE_H_
 
-#include <scores/Score.h>
+#include <Score.h>
 #include <stdexcept>
 #include <ErrorMessages.h>
 
 using namespace std;
 
 namespace scores {
+/**
+ * The score
+ */
 class Score final {
 private:
 	int id;

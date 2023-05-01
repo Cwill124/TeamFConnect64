@@ -7,6 +7,9 @@
 using namespace std;
 
 namespace settings {
+/**
+ * Holds the settings
+ */
 class Settings final {
 public:
 	/**

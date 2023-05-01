@@ -1,10 +1,15 @@
-#ifndef FILEIO_PUZZLENODEMANAGERFILEIO_H_
-#define FILEIO_PUZZLENODEMANAGERFILEIO_H_
+#ifndef FILEIO_PUZZLEMANAGERFILEIO_H_
+#define FILEIO_PUZZLEMANAGERFILEIO_H_
 
-#include <PuzzleNodeManager.h>
+#include <PuzzleManager.h>
+
+using namespace puzzle;
 
 namespace fileio {
-class PuzzleNodeManagerFileIO final {
+/**
+ * The file io for the puzzle manager
+ */
+class PuzzleManagerFileIO final {
 public:
 	/**
 	 * The constructor for the puzzle node manager file io
@@ -12,14 +17,14 @@ public:
 	 * Precondition: None
 	 * Postcondition: None
 	 */
-	PuzzleNodeManagerFileIO();
+	PuzzleManagerFileIO();
 	/**
 	 * The destructor for the puzzle node manager file io
 	 *
 	 * Precondition: None
 	 * Postcondition: None
 	 */
-	virtual ~PuzzleNodeManagerFileIO();
+	virtual ~PuzzleManagerFileIO();
 	/**
 	 * Loads the puzzle nodes
 	 *
@@ -30,7 +35,8 @@ public:
 	 * Param: manager the manager
 	 * Param: nodes the nodes
 	 */
-	void loadPuzzleNodes(const string& filename, PuzzleNodeManager &manager, vector<PuzzleNode*> nodes);
+	void loadPuzzleNodes(const string &filename, PuzzleManager &manager,
+			vector<PuzzleNode*> nodes);
 	/**
 	 * Saves the puzzle nodes
 	 *
@@ -41,8 +47,9 @@ public:
 	 * Param: manager the manager
 	 * Param: nodes the nodes
 	 */
-	void savePuzzleNodes(const string& filename, PuzzleNodeManager &manager, vector<PuzzleNode*> nodes);
+	void savePuzzleNodes(const string &filename, PuzzleManager &manager,
+			vector<PuzzleNode*> nodes);
 };
 
 }
-#endif /* FILEIO_PUZZLENODEMANAGERFILEIO_H_ */
+#endif /* FILEIO_PUZZLEMANAGERFILEIO_H_ */

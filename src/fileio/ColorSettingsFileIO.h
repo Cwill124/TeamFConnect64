@@ -19,10 +19,16 @@ class ColorSettingsFileIO {
 public:
 	/**
 	 * constructor for ColorSettingsFileIO
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	ColorSettingsFileIO();
 	/**
-	 * deconstructor for ColorSettingsFileIO
+	 * destructor for ColorSettingsFileIO
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	virtual ~ColorSettingsFileIO();
 	/**
@@ -47,7 +53,8 @@ public:
 	 * Param: RGBArraySize the size of the array that contains the values
 	 *
 	 */
-	void saveColorSettings(const string &filename, int *RGBArray,int RGBArraySize);
+	void saveColorSettings(const string &filename, int *RGBArray,
+			int RGBArraySize);
 
 };
 
