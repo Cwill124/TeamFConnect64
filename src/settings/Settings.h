@@ -1,11 +1,8 @@
-/*
- * The settings
- */
-
 #ifndef SETTINGS_SETTINGS_H_
 #define SETTINGS_SETTINGS_H_
-
+#include <FL/fl_draw.H>
 #include <string>
+#include <FL/Fl.H>
 
 using namespace std;
 
@@ -39,7 +36,7 @@ public:
 	/**
 	 * The file names for the puzzles
 	 */
-	static const char* PuzzleFileNames[];
+	static const char *PuzzleFileNames[];
 	/**
 	 * The number of Puzzles
 	 */
@@ -48,6 +45,26 @@ public:
 	 * The size of the board
 	 */
 	static constexpr int SizeOfBoard = 8;
+	/**
+	 * The color setting filename
+	 */
+	static const string ColorSettingsFileName;
+	/**
+	 * The Max value for RGB
+	 */
+	static constexpr int RGBMaxValue = 255;
+	/**
+	 * The Min value for RGB
+	 */
+	static constexpr int RGBMinValue = 0;
+	/**
+	 * The size of the RGB array
+	 */
+	static constexpr int RGBValueSize = 3;
+	/**
+	 * The size of the Combined RGB arrays cellColor and textColor
+	 */
+	static constexpr int RGBCombinedSize = 6;
 
 };
 }

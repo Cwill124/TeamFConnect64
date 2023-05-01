@@ -1,10 +1,3 @@
-/*
- * Score.cpp
- *
- *  Created on: Apr 17, 2023
- *      Author: adecesa1
- */
-
 #include <scores/Score.h>
 #include <stdexcept>
 #include <ErrorMessages.h>

@@ -1,10 +1,3 @@
-/*
- * ErrorMessages.h
- *
- *  Created on: Apr 13, 2023
- *      Author: adecesa1
- */
-
 #ifndef ERRORMESSAGES_ERRORMESSAGES_H_
 #define ERRORMESSAGES_ERRORMESSAGES_H_
 
@@ -103,6 +96,10 @@ public:
 	 * The error message for the Puzzle being null
 	 */
 	const static string PuzzleNameCannotBeNull;
+	/**
+	 * The error message for a Null RGB array
+	 */
+	const static string RGBArrayNull;
 };
 }
 

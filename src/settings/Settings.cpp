@@ -9,6 +9,6 @@ const string Settings::CurrentPuzzleFileName = "CurrentPuzzle.txt";
 
 const string Settings::HighScoresFileName = "HighScores.txt";
 
+const string Settings::ColorSettingsFileName = "ColorSettings.txt";
 }
-;
 

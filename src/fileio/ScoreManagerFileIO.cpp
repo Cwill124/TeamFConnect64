@@ -1,10 +1,3 @@
-/*
- * ScoreManagerFileIO.cpp
- *
- *  Created on: Apr 18, 2023
- *      Author: adecesa1
- */
-
 #include <ScoreManagerFileIO.h>
 #include <ScoreManager.h>
 #include <ErrorMessages.h>

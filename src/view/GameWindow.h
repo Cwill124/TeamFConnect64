@@ -1,10 +1,3 @@
-/*
- * GameWindow.h
- *
- *  Created on: Apr 13, 2023
- *      Author: cwill124
- */
-
 #ifndef VIEW_GAMEWINDOW_H_
 #define VIEW_GAMEWINDOW_H_
 #include <Fl/Fl_Input.H>
@@ -13,6 +6,7 @@
 #include <Fl/Fl_Timer.H>
 #include <Fl/Fl_Output.H>
 #include <FL/Fl_Scroll.H>
+#include <FL/fl_draw.H>
 #include "OKCancelWindow.h"
 #include "MainWindow.h"
 #include "PuzzleNodeManager.h"
@@ -26,6 +20,8 @@
 #include "InputAlertWindow.h"
 #include "ScrollableAlertWindow.h"
 #include "AlertWindow.h"
+#include "ColorSettingsFileIO.h"
+
 using namespace std;
 using namespace utils;
 namespace view {
@@ -52,7 +48,7 @@ private:
 	static void cb_savePuzzle(Fl_Widget *widget, void *data);
 	static void cb_pause(Fl_Widget *widget, void *data);
 	static void cb_hint(Fl_Widget *widget, void *data);
-	static void cb_timer(void* data);
+	static void cb_timer(void *data);
 	void loadGameBoard();
 	bool setNewNodeValues();
 	void deleteInputBoxes();
@@ -63,22 +59,34 @@ public:
 	/**
 	 * GameWindow that is a 8x8 grid that loads in a puzzle
 	 *
-	 * @param puzzle the filename of the puzzle to be loaded
-	 * @param puzzleNumber the number of the puzzle to be loaded
+	 * Precondition: None
+	 * Postcondition: None
+	 *
+	 * Param: puzzle the filename of the puzzle to be loaded
+	 * Param: puzzleNumber the number of the puzzle to be loaded
 	 *
 	 *
 	 */
 	GameWindow(const string puzzle, int puzzleNumber);
 	/**
 	 * handles the check button inherited from OKCancelWindow
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	void okHandler();
 	/**
 	 * handles the quit button inherited from OKCancelWindow
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	void cancelHandler();
 	/**
 	 * deconstructor for gamewindow deletes all nodes and labels
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	virtual ~GameWindow();
 };

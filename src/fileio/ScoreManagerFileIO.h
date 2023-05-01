@@ -1,7 +1,3 @@
-/*
- * The file io class for the score manager
- */
-
 #ifndef FILEIO_SCOREMANAGERFILEIO_H_
 #define FILEIO_SCOREMANAGERFILEIO_H_
 

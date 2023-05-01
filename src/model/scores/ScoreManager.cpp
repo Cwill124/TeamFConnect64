@@ -1,10 +1,3 @@
-/*
- * ScoreManager.cpp
- *
- *  Created on: Apr 17, 2023
- *      Author: adecesa1
- */
-
 #include <string>
 #include <algorithm>
 #include <vector>

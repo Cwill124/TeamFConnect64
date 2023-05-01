@@ -1,10 +1,3 @@
-/*
- * AlertWindow.cpp
- *
- *  Created on: Apr 19, 2023
- *      Author: cwill124
- */
-
 #include <AlertWindow.h>
 
 namespace view {

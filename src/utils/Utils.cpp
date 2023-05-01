@@ -1,10 +1,3 @@
-/*
- * Utils.cpp
- *
- *  Created on: Apr 18, 2023
- *      Author: adecesa1
- */
-
 #include "Utils.h"
 
 using namespace utils;

@@ -6,11 +6,9 @@ ScrollableAlertWindow::ScrollableAlertWindow(const char *message, const char *ti
 		Fl_Window(200, 200, title) {
 	begin();
 	this->message = new Fl_Text_Display(5, 5, 180, 150);
-
 	this->buffer = new Fl_Text_Buffer();
 	this->closeAlertButton = new Fl_Button(65, 160, 70, 30, "Close");
 	this->closeAlertButton->callback(cb_close, this);
-
 	this->message->buffer(this->buffer);
 	this->message->buffer()->text(message);
 

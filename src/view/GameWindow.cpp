@@ -1,10 +1,3 @@
-/*
- * GameWindow.cpp
- *
- *  Created on: Apr 13, 2023
- *      Author: cwill124
- */
-
 #include "GameWindow.h"
 #include "ScoreManager.h"
 using namespace errormessages;
@@ -93,6 +86,8 @@ void GameWindow::cb_pause(Fl_Widget *widget, void *data) {
 }
 
 void GameWindow::createBoxes() {
+	ColorSettingsFileIO colorFileIO;
+	vector<Fl_Color> colors = colorFileIO.loadColorSettings(Settings::ColorSettingsFileName);
 	int xShift = -5;
 	int yShift = 10;
 	int tileSize = 30;
@@ -103,6 +98,8 @@ void GameWindow::createBoxes() {
 			Fl_Input *input = new Fl_Input(xShift + (X + tileSize),
 					yShift + (Y + tileSize), tileSize, tileSize);
 			input->callback(cb_getValue, this);
+			input->textcolor(colors[1]);
+			input->color(colors[0]);
 			input->textfont(FL_BOLD);
 			this->inputBoxes.push_back(input);
 		}
@@ -239,7 +236,6 @@ void GameWindow::loadGameBoard() {
 			this->inputBoxes[i]->value(newInputValue);
 			if (currentPuzzleNode->getIsStarting()) {
 				this->inputBoxes[i]->readonly(true);
-				this->inputBoxes[i]->deactivate();
 			}
 		}
 

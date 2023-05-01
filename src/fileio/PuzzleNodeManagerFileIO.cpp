@@ -8,12 +8,12 @@ using namespace std;
 using namespace fileio;
 
 PuzzleNodeManagerFileIO::PuzzleNodeManagerFileIO() {
-	// TODO Auto-generated constructor stub
+
 
 }
 
 PuzzleNodeManagerFileIO::~PuzzleNodeManagerFileIO() {
-	// TODO Auto-generated destructor stub
+
 }
 
 void PuzzleNodeManagerFileIO::loadPuzzleNodes(const string& filename, PuzzleNodeManager& manager, vector<PuzzleNode*> nodes) {

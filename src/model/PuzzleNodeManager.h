@@ -1,7 +1,3 @@
-/*
- * The node manager for the puzzles
- */
-
 #ifndef MODEL_PUZZLENODEMANAGER_H_
 #define MODEL_PUZZLENODEMANAGER_H_
 
@@ -199,13 +195,13 @@ public:
 	 *	Checks to see if the value exists the nodes besides the inputed node
 	 *	used for checking for dupes
 	 *
-	 *	@param value the value that is being searched for
-	 *	@param node the node that contains the value already and is ignored
+	 *	Param: value the value that is being searched for
+	 *	Param: node the node that contains the value already and is ignored
 	 *
-	 *	@precondition none
-	 *	@postcondition none
+	 *	Precondition: none
+	 *	Postcondition: none
 	 *
-	 *	@return true if a different node is found with value, false otherwise
+	 *	Returns: true if a different node is found with value, false otherwise
 	 */
 	bool containsValue(int value, PuzzleNode *node);
 	/**

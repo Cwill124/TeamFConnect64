@@ -1,10 +1,3 @@
-/*
- * ErrorMessages.cpp
- *
- *  Created on: Apr 13, 2023
- *      Author: adecesa1
- */
-
 #include "ErrorMessages.h"
 
 namespace errormessages {
@@ -53,5 +46,6 @@ const string ErrorMessages::PuzzleNumberCannotBeNegative =
 		"The puzzle number cannot be negative";
 const string ErrorMessages::ManagerCannotBeNull = "The manager cannot be null";
 const string ErrorMessages::PuzzleNameCannotBeNull = "Puzzle cannot be null";
+const string ErrorMessages::RGBArrayNull = "RGB array cannot be null";
 
 }
