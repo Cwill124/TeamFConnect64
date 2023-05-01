@@ -207,7 +207,7 @@ void GameWindow::okHandler() {
 				ScoreManager scoreManager = ScoreManager();
 				scoreManager.loadScores();
 				scoreManager.addScore(name, this->puzzleNodeManager.getTime(),
-						this->puzzleNumber);
+						this->puzzleNumber + 1);
 				scoreManager.saveScores();
 				this->loadNextPuzzle();
 			} catch (std::invalid_argument &e) {
