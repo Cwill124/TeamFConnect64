@@ -8,8 +8,6 @@ ColorSettingsWindow::ColorSettingsWindow(int width, int height,
 	this->begin();
 	this->cellRGBValues = new int[3];
 	this->textRGBValues = new int[3];
-	this->RGBValueSize = 3;
-	this->combinedRGBValuesSize = 6;
 	this->colorChooser = new Fl_Color_Chooser(50, 50, 200, 200);
 	this->setCellColorButton = new Fl_Button(30, 260, 110, 30,
 			"Set Cell Color");
@@ -29,14 +27,15 @@ void ColorSettingsWindow::cb_return(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
 	ColorSettingsFileIO colorFileIO;
 	int combinedRGBValues[5];
-	for (int i = 0; i < window->RGBValueSize; i++) {
+	for (int i = 0; i < Settings::RGBValueSize; i++) {
 		combinedRGBValues[i] = window->cellRGBValues[i];
 	}
-	for (int i = 0; i < window->RGBValueSize; i++) {
-		combinedRGBValues[window->RGBValueSize + i] = window->textRGBValues[i];
+	for (int i = 0; i < Settings::RGBValueSize; i++) {
+		combinedRGBValues[Settings::RGBValueSize + i] =
+				window->textRGBValues[i];
 	}
 	colorFileIO.saveColorSettings(Settings::ColorSettingsFileName,
-			combinedRGBValues, window->combinedRGBValuesSize);
+			combinedRGBValues, Settings::RGBCombinedSize);
 	window->hide();
 }
 
@@ -44,7 +43,7 @@ void ColorSettingsWindow::cb_setCellColor(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
 	ColorSettingsFileIO colorFileIO;
 	int *RGBValues = window->getRGBValues();
-	for (int i = 0; i < window->RGBValueSize; i++) {
+	for (int i = 0; i < Settings::RGBValueSize; i++) {
 		window->cellRGBValues[i] = RGBValues[i];
 	}
 	delete[] RGBValues;
@@ -54,7 +53,7 @@ void ColorSettingsWindow::cb_setTextColor(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
 	ColorSettingsFileIO colorFileIO;
 	int *RGBValues = window->getRGBValues();
-	for (int i = 0; i < window->RGBValueSize; i++) {
+	for (int i = 0; i < Settings::RGBValueSize; i++) {
 		window->textRGBValues[i] = RGBValues[i];
 	}
 	delete[] RGBValues;
@@ -76,7 +75,7 @@ int* ColorSettingsWindow::getRGBValues() {
 
 void ColorSettingsWindow::cb_resetColors(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
-	for (int i = 0; i < window->RGBValueSize; i++) {
+	for (int i = 0; i < Settings::RGBValueSize; i++) {
 		window->cellRGBValues[i] = Settings::RGBMaxValue;
 		window->textRGBValues[i] = Settings::RGBMinValue;
 	}

@@ -33,8 +33,6 @@ private:
 	Fl_Button *resetColors;
 	int *cellRGBValues;
 	int *textRGBValues;
-	int RGBValueSize;
-	int combinedRGBValuesSize;
 	static void cb_return(Fl_Widget*, void*);
 	static void cb_setCellColor(Fl_Widget*, void*);
 	static void cb_setTextColor(Fl_Widget*, void*);

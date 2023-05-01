@@ -57,6 +57,14 @@ public:
 	 * The Min value for RGB
 	 */
 	static constexpr int RGBMinValue = 0;
+	/**
+	 * The size of the RGB array
+	 */
+	static constexpr int RGBValueSize = 3;
+	/**
+	 * The size of the Combined RGB arrays cellColor and textColor
+	 */
+	static constexpr int RGBCombinedSize = 6;
 
 };
 }
