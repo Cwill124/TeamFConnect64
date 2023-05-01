@@ -87,7 +87,8 @@ void GameWindow::cb_pause(Fl_Widget *widget, void *data) {
 
 void GameWindow::createBoxes() {
 	ColorSettingsFileIO colorFileIO;
-	vector<Fl_Color> colors = colorFileIO.loadColorSettings(Settings::ColorSettingsFileName);
+	vector<Fl_Color> colors = colorFileIO.loadColorSettings(
+			Settings::ColorSettingsFileName);
 	int xShift = -5;
 	int yShift = 10;
 	int tileSize = 30;
@@ -113,7 +114,7 @@ void GameWindow::cb_getValue(Fl_Widget *widget, void *data) {
 	window->gameOutcomeLabel->label("");
 	const char *value = input->value();
 	regex pattern("^[^a-zA-Z]*$");
-	regex patternNumbers("([1-5]?[1-9]|6[0-4])");
+	regex patternNumbers("([1-5]?[0-9]|6[0-4])");
 	if (strlen(value) == 0) {
 		if (!window->setNewNodeValues()) {
 			return;
@@ -152,13 +153,14 @@ bool GameWindow::setNewNodeValues() {
 	try {
 		this->errorMessageBox->label("");
 		this->gameOutcomeLabel->label("");
-		for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size(); i++) {
+		for (vector<Fl_Input*>::size_type i = 0; i < this->inputBoxes.size();
+				i++) {
 			const char *value = this->inputBoxes[i]->value();
 			PuzzleNode *node = this->puzzleNodeManager.getPuzzleNodes()[i];
 			if (strlen(value) != 0 || value == nullptr) {
 				if (node == nullptr) {
 					this->puzzleNodeManager.addPuzzleNode(i, stoi(value),
-								false);
+							false);
 				} else {
 					node->setValue(stoi(value));
 				}
@@ -167,14 +169,14 @@ bool GameWindow::setNewNodeValues() {
 					this->puzzleNodeManager.deletePuzzleNode(i);
 					return false;
 				} catch (...) {
-					#ifdef DIAGNOSTIC_OUTPUT
+#ifdef DIAGNOSTIC_OUTPUT
 					cout << "" << endl;
 					#endif
 				}
 			}
 		}
 		return true;
-	} catch (const std::invalid_argument& e) {
+	} catch (const std::invalid_argument &e) {
 		this->gameOutcomeLabel->label("");
 		this->errorMessageBox->label(e.what());
 	}
@@ -209,7 +211,7 @@ void GameWindow::okHandler() {
 				scoreManager.saveScores();
 				this->loadNextPuzzle();
 			} catch (std::invalid_argument &e) {
-				#ifdef DIAGNOSTIC_OUTPUT
+#ifdef DIAGNOSTIC_OUTPUT
 					cout << e << endl;
 				#endif
 			}

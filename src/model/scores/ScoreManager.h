@@ -3,11 +3,14 @@
 
 #include <string>
 #include <vector>
-#include <scores/Score.h>
+#include <Score.h>
 
 using namespace std;
 
 namespace scores {
+/**
+ * The score manager
+ */
 class ScoreManager final {
 private:
 	vector<Score*> scores;
@@ -36,7 +39,7 @@ public:
 	 * Param: time the time
 	 * Param: puzzle the puzzle
 	 */
-	void addScore(string& playerName, int time, int puzzle);
+	void addScore(string &playerName, int time, int puzzle);
 	/**
 	 * Removes a score from the score manager
 	 *
@@ -104,7 +107,7 @@ public:
  * Param firstScore the first score
  * Param secondScore the second score
  */
-bool compareByTimeAscending(Score* firstScore, Score* secondScore);
+bool compareByTimeAscending(Score *firstScore, Score *secondScore);
 
 /**
  * Compares scores by time descending
@@ -115,7 +118,7 @@ bool compareByTimeAscending(Score* firstScore, Score* secondScore);
  * Param firstScore the first score
  * Param secondScore the second score
  */
-bool compareByTimeDescending(Score* firstScore, Score* secondScore);
+bool compareByTimeDescending(Score *firstScore, Score *secondScore);
 /**
  * Compares scores by puzzle number
  *
@@ -125,6 +128,6 @@ bool compareByTimeDescending(Score* firstScore, Score* secondScore);
  * Param firstScore the first score
  * Param secondScore the second score
  */
-bool compareByPuzzleNumber(Score* firstScore, Score* secondScore);
+bool compareByPuzzleNumber(Score *firstScore, Score *secondScore);
 }
 #endif /* MODEL_SCORES_SCOREMANAGER_H_ */

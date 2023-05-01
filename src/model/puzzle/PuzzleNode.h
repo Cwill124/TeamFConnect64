@@ -1,7 +1,10 @@
 #ifndef MODEL_PUZZLENODE_H_
 #define MODEL_PUZZLENODE_H_
 
-namespace model {
+namespace puzzle {
+/**
+ * The puzzle node
+ */
 class PuzzleNode final {
 private:
 	int value;

@@ -54,7 +54,10 @@ public:
 	 */
 	ColorSettingsWindow(int width, int height, const char *title);
 	/**
-	 * the deconstructor for the ColorSettingsWindow
+	 * the destructor for the ColorSettingsWindow
+	 *
+	 * Precondition: None
+	 * Postcondition: None
 	 */
 	virtual ~ColorSettingsWindow();
 };

@@ -1,14 +1,15 @@
-#include <PuzzleNodeManager.h>
 #include <ErrorMessages.h>
+#include <PuzzleManager.h>
+#include <PuzzleManagerFileIO.h>
 #include <stdexcept>
 #include <algorithm>
-#include <PuzzleNodeManagerFileIO.h>
 
 using namespace std;
 using namespace errormessages;
 using namespace fileio;
 
-PuzzleNodeManager::PuzzleNodeManager() {
+namespace puzzle {
+PuzzleManager::PuzzleManager() {
 	this->time = 0;
 	this->currentPuzzleIndex = 0;
 	for (int i = 0; i < Settings::NumberOfPuzzleNodes; i++) {
@@ -16,19 +17,19 @@ PuzzleNodeManager::PuzzleNodeManager() {
 	}
 }
 
-PuzzleNodeManager::~PuzzleNodeManager() {
+PuzzleManager::~PuzzleManager() {
 	this->resetBoard();
 }
 
-vector<PuzzleNode*> PuzzleNodeManager::getPuzzleNodes() {
+vector<PuzzleNode*> PuzzleManager::getPuzzleNodes() {
 	return this->nodes;
 }
 
-void PuzzleNodeManager::incrementTime() {
+void PuzzleManager::incrementTime() {
 	this->time++;
 }
 
-void PuzzleNodeManager::setTime(int time) {
+void PuzzleManager::setTime(int time) {
 	if (time < 0) {
 		throw new invalid_argument(ErrorMessages::TimeCannotBeNegative);
 	}
@@ -36,17 +37,17 @@ void PuzzleNodeManager::setTime(int time) {
 	this->time = time;
 }
 
-int PuzzleNodeManager::getTime() {
+int PuzzleManager::getTime() {
 	return this->time;
 }
 
-bool PuzzleNodeManager::isValidNextPath(int neighborNodeValueToCheck,
+bool PuzzleManager::isValidNextPath(int neighborNodeValueToCheck,
 		int currentNodeValueToCheck) {
 	return neighborNodeValueToCheck == (currentNodeValueToCheck - 1)
 			|| neighborNodeValueToCheck == (currentNodeValueToCheck + 1);
 }
 
-void PuzzleNodeManager::addPuzzleNode(int index, int value, bool isStarting) {
+void PuzzleManager::addPuzzleNode(int index, int value, bool isStarting) {
 	if (this->containsValue(value)) {
 		throw invalid_argument(ErrorMessages::CannotAddNodeIfAlreadyPresent);
 	}
@@ -54,7 +55,7 @@ void PuzzleNodeManager::addPuzzleNode(int index, int value, bool isStarting) {
 	nodes[index] = new PuzzleNode(index, value, isStarting);
 }
 
-bool PuzzleNodeManager::containsValue(int value) {
+bool PuzzleManager::containsValue(int value) {
 	for (PuzzleNode *node : this->nodes) {
 		if (node != nullptr && node->getValue() == value) {
 			return true;
@@ -64,25 +65,25 @@ bool PuzzleNodeManager::containsValue(int value) {
 	return false;
 }
 
-PuzzleNode& PuzzleNodeManager::getPuzzleNode(int index) {
+PuzzleNode& PuzzleManager::getPuzzleNode(int index) {
 	if (index < 0) {
 		throw invalid_argument(ErrorMessages::IndexCannotBeNegative);
 	}
 	return *nodes[index];
 }
 
-int PuzzleNodeManager::getCurrentPuzzleIndex() {
+int PuzzleManager::getCurrentPuzzleIndex() {
 	return this->currentPuzzleIndex;
 }
 
-void PuzzleNodeManager::setCurrentPuzzleIndex(int index) {
+void PuzzleManager::setCurrentPuzzleIndex(int index) {
 	if (index < 0) {
 		throw invalid_argument(ErrorMessages::IndexCannotBeNegative);
 	}
 	this->currentPuzzleIndex = index;
 }
 
-vector<string> PuzzleNodeManager::getRemainingNodeNames() {
+vector<string> PuzzleManager::getRemainingNodeNames() {
 	vector<string> remainingNodes;
 	for (int i = 1; i <= Settings::NumberOfPuzzleNodes; i++) {
 		if (!this->containsValue(i)) {
@@ -93,7 +94,7 @@ vector<string> PuzzleNodeManager::getRemainingNodeNames() {
 	return remainingNodes;
 }
 
-void PuzzleNodeManager::replacePuzzleNode(int index, int value) {
+void PuzzleManager::replacePuzzleNode(int index, int value) {
 	if (nodes[index] == nullptr) {
 		throw invalid_argument(ErrorMessages::CannotReplaceNullNode);
 	}
@@ -109,7 +110,7 @@ void PuzzleNodeManager::replacePuzzleNode(int index, int value) {
 	nodes[index] = new PuzzleNode(index, value, false);
 }
 
-void PuzzleNodeManager::deletePuzzleNode(int index) {
+void PuzzleManager::deletePuzzleNode(int index) {
 	if (nodes[index] == nullptr) {
 		throw invalid_argument(ErrorMessages::CannotDeleteNullNode);
 	}
@@ -124,7 +125,7 @@ void PuzzleNodeManager::deletePuzzleNode(int index) {
 	delete nodes[index];
 }
 
-void PuzzleNodeManager::resetBoard() {
+void PuzzleManager::resetBoard() {
 	this->time = 0;
 	for (int i = 0; i < Settings::NumberOfPuzzleNodes; i++) {
 		nodes[i] = nullptr;
@@ -132,7 +133,7 @@ void PuzzleNodeManager::resetBoard() {
 	}
 }
 
-bool PuzzleNodeManager::isSolved() {
+bool PuzzleManager::isSolved() {
 	vector<PuzzleNode*> visitedNodes;
 	for (PuzzleNode *node : this->nodes) {
 		if (node != nullptr && node->getValue() == 1) {
@@ -143,7 +144,7 @@ bool PuzzleNodeManager::isSolved() {
 	return false;
 }
 
-bool PuzzleNodeManager::isSolved(PuzzleNode &node,
+bool PuzzleManager::isSolved(PuzzleNode &node,
 		vector<PuzzleNode*> &visitedNodes) {
 	if (node.getValue() == Settings::NumberOfPuzzleNodes) {
 		return true;
@@ -179,7 +180,7 @@ bool PuzzleNodeManager::isSolved(PuzzleNode &node,
 	return false;
 }
 
-bool PuzzleNodeManager::isCompleted() {
+bool PuzzleManager::isCompleted() {
 	for (PuzzleNode *node : this->nodes) {
 		if (node == nullptr) {
 			return false;
@@ -189,7 +190,7 @@ bool PuzzleNodeManager::isCompleted() {
 	return true;
 }
 
-PuzzleNode* PuzzleNodeManager::getBottomPuzzleNode(int index) {
+PuzzleNode* PuzzleManager::getBottomPuzzleNode(int index) {
 	int lastRowIndex = Settings::NumberOfPuzzleNodes
 			- Settings::MaximumRowAmount;
 	if (index >= lastRowIndex) {
@@ -199,7 +200,7 @@ PuzzleNode* PuzzleNodeManager::getBottomPuzzleNode(int index) {
 	return node;
 }
 
-PuzzleNode* PuzzleNodeManager::getTopPuzzleNode(int index) {
+PuzzleNode* PuzzleManager::getTopPuzzleNode(int index) {
 	int topRowIndex = Settings::MaximumRowAmount;
 	if (index < topRowIndex) {
 		return nullptr;
@@ -208,45 +209,45 @@ PuzzleNode* PuzzleNodeManager::getTopPuzzleNode(int index) {
 	return nodes[index - Settings::MaximumRowAmount];
 }
 
-PuzzleNode* PuzzleNodeManager::getLeftPuzzleNode(int index) {
+PuzzleNode* PuzzleManager::getLeftPuzzleNode(int index) {
 	if (((index + 1) % Settings::MaximumRowAmount) - 1 == 0) {
 		return nullptr;
 	}
 	return nodes[index - 1];
 }
 
-PuzzleNode* PuzzleNodeManager::getRightPuzzleNode(int index) {
+PuzzleNode* PuzzleManager::getRightPuzzleNode(int index) {
 	if (((index + 1) % Settings::MaximumRowAmount) == 0) {
 		return nullptr;
 	}
 	return nodes[index + 1];
 }
 
-void PuzzleNodeManager::saveNodes(const string &fileToSaveTo) {
-	PuzzleNodeManagerFileIO fileIo = PuzzleNodeManagerFileIO();
+void PuzzleManager::saveNodes(const string &fileToSaveTo) {
+	PuzzleManagerFileIO fileIo = PuzzleManagerFileIO();
 	fileIo.savePuzzleNodes(fileToSaveTo, *this, nodes);
 }
 
-void PuzzleNodeManager::loadNodes(const string &fileToLoadFrom) {
+void PuzzleManager::loadNodes(const string &fileToLoadFrom) {
 	for (int i = 0; i < Settings::NumberOfPuzzleNodes; i++) {
 		nodes[i] = nullptr;
 		delete nodes[i];
 	}
-	PuzzleNodeManagerFileIO fileIo = PuzzleNodeManagerFileIO();
+	PuzzleManagerFileIO fileIo = PuzzleManagerFileIO();
 	fileIo.loadPuzzleNodes(fileToLoadFrom, *this, nodes);
 }
 
-void PuzzleNodeManager::loadNewPuzzle() {
+void PuzzleManager::loadNewPuzzle() {
 	for (int i = 0; i < Settings::NumberOfPuzzleNodes; i++) {
 		nodes[i] = nullptr;
 	}
-	PuzzleNodeManagerFileIO fileIo = PuzzleNodeManagerFileIO();
+	PuzzleManagerFileIO fileIo = PuzzleManagerFileIO();
 	string currentFile = Settings::PuzzleFileNames[this->currentPuzzleIndex];
 	fileIo.loadPuzzleNodes(currentFile, *this, nodes);
 	this->currentPuzzleIndex++;
 }
 
-bool PuzzleNodeManager::containsValue(int value, PuzzleNode *puzzleNode) {
+bool PuzzleManager::containsValue(int value, PuzzleNode *puzzleNode) {
 	for (PuzzleNode *node : this->nodes) {
 		if ((node != nullptr && node->getValue() == value)
 				&& puzzleNode != node) {
@@ -256,61 +257,5 @@ bool PuzzleNodeManager::containsValue(int value, PuzzleNode *puzzleNode) {
 
 	return false;
 }
-
-//TODO This is temporary and for testing
-string PuzzleNodeManager::toString() {
-	string managerString = "A puzzle with completed being: "
-			+ std::to_string(this->isCompleted()) + " And solved being: "
-			+ std::to_string(this->isSolved()) + "\n";
-
-	for (PuzzleNode *node : nodes) {
-		if (node != nullptr) {
-			managerString += "A node with value: "
-					+ std::to_string(node->getValue()) + " Is Starting: "
-					+ std::to_string(node->getIsStarting()) + " Index: "
-					+ std::to_string(node->getIndex());
-			if (this->getTopPuzzleNode(node->getIndex()) != nullptr) {
-				managerString +=
-						" Top Node: "
-								+ std::to_string(
-										this->getTopPuzzleNode(node->getIndex())->getValue());
-			} else {
-				managerString += " Top Node: NULL";
-			}
-			if (this->getRightPuzzleNode(node->getIndex()) != nullptr) {
-				managerString +=
-						" Right Node: "
-								+ std::to_string(
-										this->getRightPuzzleNode(
-												node->getIndex())->getValue());
-			} else {
-				managerString += " Right Node: NULL";
-			}
-			if (this->getBottomPuzzleNode(node->getIndex()) != nullptr) {
-				managerString +=
-						" Bottom Node: "
-								+ std::to_string(
-										this->getBottomPuzzleNode(
-												node->getIndex())->getValue());
-			} else {
-				managerString += " Bottom Node: NULL";
-			}
-			if (this->getLeftPuzzleNode(node->getIndex()) != nullptr) {
-				managerString +=
-						" Left Node: "
-								+ std::to_string(
-										this->getLeftPuzzleNode(
-												node->getIndex())->getValue());
-			} else {
-				managerString += " Left Node: NULL";
-			}
-		} else {
-			managerString += "A null node ";
-		}
-
-		managerString += "\n";
-	}
-
-	return managerString;
 }
 

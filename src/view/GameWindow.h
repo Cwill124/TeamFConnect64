@@ -7,9 +7,9 @@
 #include <Fl/Fl_Output.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/fl_draw.H>
+#include <PuzzleManager.h>
 #include "OKCancelWindow.h"
 #include "MainWindow.h"
-#include "PuzzleNodeManager.h"
 #include "Settings.h"
 #include "PuzzleNode.h"
 #include "ErrorMessages.h"
@@ -19,11 +19,12 @@
 #include <regex>
 #include "InputAlertWindow.h"
 #include "ScrollableAlertWindow.h"
-#include "AlertWindow.h"
 #include "ColorSettingsFileIO.h"
 
 using namespace std;
 using namespace utils;
+using namespace puzzle;
+
 namespace view {
 /**
  * creates a gamewindow with a 8x8 grid
@@ -41,7 +42,7 @@ private:
 	bool isPaused;
 	string puzzle;
 	int puzzleNumber;
-	PuzzleNodeManager puzzleNodeManager;
+	PuzzleManager puzzleNodeManager;
 	static void cb_getValue(Fl_Widget*, void *data);
 	void createBoxes();
 	static void cb_resetBoard(Fl_Widget *widget, void *data);
@@ -64,8 +65,6 @@ public:
 	 *
 	 * Param: puzzle the filename of the puzzle to be loaded
 	 * Param: puzzleNumber the number of the puzzle to be loaded
-	 *
-	 *
 	 */
 	GameWindow(const string puzzle, int puzzleNumber);
 	/**
@@ -83,7 +82,7 @@ public:
 	 */
 	void cancelHandler();
 	/**
-	 * deconstructor for gamewindow deletes all nodes and labels
+	 * destructor for gamewindow deletes all nodes and labels
 	 *
 	 * Precondition: None
 	 * Postcondition: None

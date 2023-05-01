@@ -6,6 +6,9 @@
 using namespace scores;
 
 namespace fileio {
+/**
+ * The file io for the score manager
+ */
 class ScoreManagerFileIO final {
 public:
 	/**
@@ -28,14 +31,14 @@ public:
 	 * Precondition: None
 	 * Postcondition: The manager has the scores from the file
 	 */
-	void loadScores(const string& filename, ScoreManager& manager);
+	void loadScores(const string &filename, ScoreManager &manager);
 	/**
 	 * Saves the scores
 	 *
 	 * Precondition: None
 	 * Postcondition: None
 	 */
-	void saveScores(const string& filename, ScoreManager& manager);
+	void saveScores(const string &filename, ScoreManager &manager);
 };
 
 }

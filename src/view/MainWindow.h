@@ -17,7 +17,7 @@ using namespace errormessages;
 using namespace std;
 namespace view {
 /**
- * creates a MainWindow
+ * the main window
  */
 class MainWindow: public Fl_Window {
 private:
@@ -38,7 +38,7 @@ private:
 	void addLevelOptions();
 public:
 	/**
-	 * A mainwindow that allows user to select a puzzle and resume or play
+	 * A main window that allows user to select a puzzle and resume or play
 	 *
 	 * Precondition: None
 	 * Postcondition: None
@@ -48,6 +48,12 @@ public:
 	 * Param: title the title of the window
 	 */
 	MainWindow(int width, int height, const char *title);
+	/**
+	 * The destructor for the main window
+	 *
+	 * Precondition: None
+	 * Postcondition: None
+	 */
 	virtual ~MainWindow();
 };
 

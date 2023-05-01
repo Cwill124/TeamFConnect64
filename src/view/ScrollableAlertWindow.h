@@ -6,9 +6,9 @@
 #include <Fl/Fl_Button.H>
 #include <Fl/Fl_Text_Display.H>
 #include <FL/Fl_Scroll.H>
+#include <PuzzleManager.h>
 #include "OKCancelWindow.h"
 #include "MainWindow.h"
-#include "PuzzleNodeManager.h"
 #include "Settings.h"
 #include "PuzzleNode.h"
 #include "ErrorMessages.h"
@@ -24,7 +24,7 @@ private:
 	Fl_Text_Display *message;
 	Fl_Scroll *scroll;
 	Fl_Button *closeAlertButton;
-	Fl_Text_Buffer* buffer;
+	Fl_Text_Buffer *buffer;
 	static void cb_close(Fl_Widget *widget, void *data);
 	void closeWindow();
 public:

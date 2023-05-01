@@ -2,7 +2,8 @@
 
 namespace view {
 
-ScrollableAlertWindow::ScrollableAlertWindow(const char *message, const char *title) :
+ScrollableAlertWindow::ScrollableAlertWindow(const char *message,
+		const char *title) :
 		Fl_Window(200, 200, title) {
 	begin();
 	this->message = new Fl_Text_Display(5, 5, 180, 150);
