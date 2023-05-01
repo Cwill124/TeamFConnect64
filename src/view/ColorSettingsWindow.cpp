@@ -6,8 +6,8 @@ ColorSettingsWindow::ColorSettingsWindow(int width, int height,
 		const char *title) :
 		Fl_Window(width, height, title) {
 	this->begin();
-	this->cellRGBValues = new int[3];
-	this->textRGBValues = new int[3];
+	this->cellRGBValues = new int[Settings::RGBValueSize];
+	this->textRGBValues = new int[Settings::RGBValueSize];
 	this->colorChooser = new Fl_Color_Chooser(50, 50, 200, 200);
 	this->setCellColorButton = new Fl_Button(30, 260, 110, 30,
 			"Set Cell Color");
@@ -26,7 +26,7 @@ ColorSettingsWindow::ColorSettingsWindow(int width, int height,
 void ColorSettingsWindow::cb_return(Fl_Widget*, void *data) {
 	ColorSettingsWindow *window = (ColorSettingsWindow*) data;
 	ColorSettingsFileIO colorFileIO;
-	int combinedRGBValues[5];
+	int combinedRGBValues[Settings::RGBCombinedSize - 1];
 	for (int i = 0; i < Settings::RGBValueSize; i++) {
 		combinedRGBValues[i] = window->cellRGBValues[i];
 	}
@@ -60,7 +60,7 @@ void ColorSettingsWindow::cb_setTextColor(Fl_Widget*, void *data) {
 }
 
 int* ColorSettingsWindow::getRGBValues() {
-	int *colorValues = new int[3];
+	int *colorValues = new int[Settings::RGBValueSize];
 	float floatR = this->colorChooser->r();
 	float floatG = this->colorChooser->g();
 	float floatB = this->colorChooser->b();
