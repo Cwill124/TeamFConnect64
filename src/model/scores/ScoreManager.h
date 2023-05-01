@@ -1,7 +1,3 @@
-/*
- * The score manager
- */
-
 #ifndef MODEL_SCORES_SCOREMANAGER_H_
 #define MODEL_SCORES_SCOREMANAGER_H_
 

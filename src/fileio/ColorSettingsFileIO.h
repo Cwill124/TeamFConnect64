@@ -1,10 +1,3 @@
-/*
- * ColorSettingsFileIO.h
- *
- *  Created on: Apr 29, 2023
- *      Author: cwill124
- */
-
 #ifndef FILEIO_COLORSETTINGSFILEIO_H_
 #define FILEIO_COLORSETTINGSFILEIO_H_
 #include <sstream>

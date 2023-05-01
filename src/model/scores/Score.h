@@ -1,10 +1,3 @@
-/*
- * Score.h
- *
- *  Created on: Apr 17, 2023
- *      Author: adecesa1
- */
-
 #ifndef MODEL_SCORES_SCORE_H_
 #define MODEL_SCORES_SCORE_H_
 

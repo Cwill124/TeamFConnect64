@@ -1,10 +1,3 @@
-/*
- * GameWindow.cpp
- *
- *  Created on: Apr 13, 2023
- *      Author: cwill124
- */
-
 #include "GameWindow.h"
 #include "ScoreManager.h"
 using namespace errormessages;

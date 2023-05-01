@@ -1,10 +1,3 @@
-/*
- * ColorSettingsFileIO.cpp
- *
- *  Created on: Apr 29, 2023
- *      Author: cwill124
- */
-
 #include <ColorSettingsFileIO.h>
 
 namespace fileio {

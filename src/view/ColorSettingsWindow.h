@@ -1,10 +1,3 @@
-/*
- * ColorSettingsWindow.h
- *
- *  Created on: Apr 29, 2023
- *      Author: cwill124
- */
-
 #ifndef VIEW_COLORSETTINGSWINDOW_H_
 #define VIEW_COLORSETTINGSWINDOW_H_
 #include <FL/Fl.H>
@@ -40,6 +33,8 @@ private:
 	Fl_Button *resetColors;
 	int *cellRGBValues;
 	int *textRGBValues;
+	int RGBValueSize;
+	int combinedRGBValuesSize;
 	static void cb_return(Fl_Widget*, void*);
 	static void cb_setCellColor(Fl_Widget*, void*);
 	static void cb_setTextColor(Fl_Widget*, void*);

@@ -1,10 +1,3 @@
-/*
- * MainWindow.cpp
- *
- *  Created on: Apr 12, 2023
- *      Author: cwill124
- */
-
 #include "MainWindow.h"
 
 using namespace std;

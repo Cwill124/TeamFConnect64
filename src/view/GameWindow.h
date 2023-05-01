@@ -1,10 +1,3 @@
-/*
- * GameWindow.h
- *
- *  Created on: Apr 13, 2023
- *      Author: cwill124
- */
-
 #ifndef VIEW_GAMEWINDOW_H_
 #define VIEW_GAMEWINDOW_H_
 #include <Fl/Fl_Input.H>

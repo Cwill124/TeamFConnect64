@@ -1,10 +1,3 @@
-/*
- * AlertWindow.h
- *
- *  Created on: Apr 19, 2023
- *      Author: cwill124
- */
-
 #ifndef VIEW_ALERTWINDOW_H_
 #define VIEW_ALERTWINDOW_H_
 #include <Fl/Fl_Input.H>

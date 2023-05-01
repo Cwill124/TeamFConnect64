@@ -1,10 +1,3 @@
-/*
- * MainWindow.h
- *
- *  Created on: Apr 12, 2023
- *      Author: cwill124
- */
-
 #ifndef VIEW_MAINWINDOW_H_
 #define VIEW_MAINWINDOW_H_
 #include <FL/Fl.H>

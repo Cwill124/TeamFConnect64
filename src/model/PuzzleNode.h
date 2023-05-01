@@ -1,7 +1,3 @@
-/*
- * Holds the node information
- */
-
 #ifndef MODEL_PUZZLENODE_H_
 #define MODEL_PUZZLENODE_H_
 

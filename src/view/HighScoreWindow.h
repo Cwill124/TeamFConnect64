@@ -1,10 +1,3 @@
-/*
- * HighScoreWindow.h
- *
- *  Created on: Apr 24, 2023
- *      Author: adecesa1
- */
-
 #ifndef VIEW_HIGHSCOREWINDOW_H_
 #define VIEW_HIGHSCOREWINDOW_H_
 

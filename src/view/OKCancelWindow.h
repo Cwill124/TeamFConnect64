@@ -7,9 +7,9 @@
 namespace view
 {
 
-//
-// Abstract class that can be used for any window that needs Ok and Cancel buttons on it.
-//
+/**
+* Abstract class that can be used for any window that needs Ok and Cancel buttons on it.
+*/
 class OKCancelWindow : public Fl_Window
 {
 public:

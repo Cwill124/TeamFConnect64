@@ -1,10 +1,3 @@
-/*
- * ErrorMessages.cpp
- *
- *  Created on: Apr 13, 2023
- *      Author: adecesa1
- */
-
 #include "ErrorMessages.h"
 
 namespace errormessages {

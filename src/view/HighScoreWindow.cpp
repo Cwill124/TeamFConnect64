@@ -1,10 +1,3 @@
-/*
- * HighScoreWindow.cpp
- *
- *  Created on: Apr 24, 2023
- *      Author: adecesa1
- */
-
 #include <HighScoreWindow.h>
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>

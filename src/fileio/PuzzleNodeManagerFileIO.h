@@ -1,7 +1,3 @@
-/*
- * The file io for the puzzle node manager
- */
-
 #ifndef FILEIO_PUZZLENODEMANAGERFILEIO_H_
 #define FILEIO_PUZZLENODEMANAGERFILEIO_H_
 

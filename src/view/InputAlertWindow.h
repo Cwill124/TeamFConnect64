@@ -1,10 +1,3 @@
-/*
- * InputAlertWindow.h
- *
- *  Created on: Apr 25, 2023
- *      Author: adecesa1
- */
-
 #ifndef VIEW_INPUTALERTWINDOW_H_
 #define VIEW_INPUTALERTWINDOW_H_
 

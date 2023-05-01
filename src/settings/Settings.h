@@ -1,7 +1,3 @@
-/*
- * The settings
- */
-
 #ifndef SETTINGS_SETTINGS_H_
 #define SETTINGS_SETTINGS_H_
 #include <FL/fl_draw.H>

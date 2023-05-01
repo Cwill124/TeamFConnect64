@@ -1,10 +1,3 @@
-/*
- * Utils.h
- *
- *  Created on: Apr 18, 2023
- *      Author: adecesa1
- */
-
 #ifndef UTILS_UTILS_H_
 #define UTILS_UTILS_H_
 
@@ -25,7 +18,7 @@ public:
 	 */
 	Utils();
 	/**
-	 * deconstructor for the utility class
+	 * destructor for the utility class
 	 */
 	virtual ~Utils();
 	/**

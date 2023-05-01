@@ -1,10 +1,3 @@
-/*
- * ErrorMessages.h
- *
- *  Created on: Apr 13, 2023
- *      Author: adecesa1
- */
-
 #ifndef ERRORMESSAGES_ERRORMESSAGES_H_
 #define ERRORMESSAGES_ERRORMESSAGES_H_
 

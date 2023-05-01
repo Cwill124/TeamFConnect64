@@ -1,7 +1,3 @@
-/*
- * The node manager for the puzzles
- */
-
 #ifndef MODEL_PUZZLENODEMANAGER_H_
 #define MODEL_PUZZLENODEMANAGER_H_
 
